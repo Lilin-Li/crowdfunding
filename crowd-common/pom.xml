@@ -22,5 +22,13 @@
             <artifactId>mybatis</artifactId>
             <version>3.5.1</version>
         </dependency>
+
+        <!-- JDBC驅動 for MariaDB  https://mariadb.com/kb/en/about-mariadb-connector-j/#java-compatibility   -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <!--  實作JDBC 4.2  支援Java 8/11  -->
+            <version>2.6.2</version>
+        </dependency>
     </dependencies>
 </project>
