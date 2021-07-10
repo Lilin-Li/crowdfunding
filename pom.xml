@@ -14,6 +14,7 @@
 
     <modules>
         <module>crowd-admin</module>
+        <module>crowd-common</module>
     </modules>
 
 </project>
