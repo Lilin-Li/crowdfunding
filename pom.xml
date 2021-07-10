@@ -15,6 +15,7 @@
     <modules>
         <module>crowd-admin</module>
         <module>crowd-common</module>
+        <module>crowd-reverseTool</module>
     </modules>
 
 </project>

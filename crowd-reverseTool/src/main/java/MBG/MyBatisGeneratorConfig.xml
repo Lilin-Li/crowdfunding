@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!--
+官方文件：
+http://mybatis.org/generator/
+-->
+
+<generatorConfiguration>
+
+    <context id="crowd-reverseTool:src-main-java-MBG-MyBatisGeneratorConfig" defaultModelType="flat"
+             targetRuntime="MyBatis3Simple">
+
+        <plugin type="MBG.LombokPlugin">
+            <property name="hasLombok" value="true"/>
+        </plugin>
+
+        <!--生成mapper.xml時覆蓋原檔案-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+        <!-- 自定义注释生成器 -->
+        <commentGenerator type="MBG.MySQLCommentGenerator">
+        </commentGenerator>
+
+        <!-- 數據庫連線 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://mysql-lottery-uat.co:3306/3rd_party_lottery?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Taipei"
+                        userId=""
+                        password="mX9y5VkK">
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <!--  forceBigDecimals屬性可以控制是否強制DECIMAL和NUMERIC類型的字段轉換為Java類型的java.math.BigDecimal,默認值為false，一般不需要配置。-->
+            <!--  默認情況下的轉換規則為：-->
+            <!--  如果精度>0或者長度>18，就會使用java.math.BigDecimal-->
+            <!--  如果精度=0並且10<=長度<=18，就會使用java.lang.Long-->
+            <!--  如果精度=0並且5<=長度<=9，就會使用java.lang.Integer-->
+            <!--  如果精度=0並且長度<5，就會使用java.lang.Short-->
+
+            <!--  如果設置為true，那麼一定會使用java.math.BigDecimal-->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- entity 的生成路徑與規則 -->
+        <javaModelGenerator targetPackage="MBG.entity"
+                            targetProject="crowd-reverseTool/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- mapper xml的生成路徑與規則 -->
+        <sqlMapGenerator targetPackage="MBG.xml"
+                         targetProject="crowd-reverseTool/src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- mapper介面 的生成路徑與規則 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="MBG.interface"
+                             targetProject="crowd-reverseTool/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--生成此URL中所有資料庫中的所有表 -->
+        <table tableName="%"/>
+
+    </context>
+</generatorConfiguration>
