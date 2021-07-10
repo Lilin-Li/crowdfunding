@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.33.10:3306/crowd_admin
+    driver-class-name: org.mariadb.jdbc.Driver
+
+server:
+  port: 7000
