@@ -14,6 +14,7 @@
     <orderEntry type="module" module-name="crowd-common" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.18" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mariadb.jdbc:mariadb-java-client:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis.generator:mybatis-generator-core:1.3.7" level="project" />
   </component>
 </module>

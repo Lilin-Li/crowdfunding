@@ -23,20 +23,17 @@
             <version>3.5.1</version>
         </dependency>
 
-        <!-- JDBC驅動 for MariaDB  https://mariadb.com/kb/en/about-mariadb-connector-j/#java-compatibility   -->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <!--  實作JDBC 4.2  支援Java 8/11  -->
-            <version>2.6.2</version>
+            <artifactId>mariadb-java-client</artifactId><!-- JDBC驅動 for MariaDB  https://mariadb.com/kb/en/about-mariadb-connector-j/#java-compatibility   -->
+            <version>2.6.2</version> <!--  實作JDBC 4.2  支援Java 8/11  -->
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
-            <!-- 伺服器有，打包時不用帶      -->
-            <scope>provided</scope>
+            <scope>provided</scope><!-- 伺服器有，打包時不用帶   -->
         </dependency>
     </dependencies>
 </project>
