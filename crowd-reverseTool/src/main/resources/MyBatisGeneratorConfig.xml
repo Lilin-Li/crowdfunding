@@ -25,10 +25,10 @@ http://mybatis.org/generator/
         </commentGenerator>
 
         <!-- 數據庫連線 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://mysql-lottery-uat.co:3306/3rd_party_lottery?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Taipei"
-                        userId=""
-                        password="mX9y5VkK">
+        <jdbcConnection driverClass="org.mariadb.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.33.10:3306/crowd_admin"
+                        userId="root"
+                        password="root">
             <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
 
@@ -46,21 +46,21 @@ http://mybatis.org/generator/
 
         <!-- entity 的生成路徑與規則 -->
         <javaModelGenerator targetPackage="MBG.entity"
-                            targetProject="crowd-reverseTool/src/main/java">
+                            targetProject="crowd-reverseTool/src/main/">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- mapper xml的生成路徑與規則 -->
         <sqlMapGenerator targetPackage="MBG.xml"
-                         targetProject="crowd-reverseTool/src/main/resources">
+                         targetProject="crowd-reverseTool/src/main/">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- mapper介面 的生成路徑與規則 -->
         <javaClientGenerator type="XMLMAPPER"
                              targetPackage="MBG.interface"
-                             targetProject="crowd-reverseTool/src/main/java">
+                             targetProject="crowd-reverseTool/src/main/">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
