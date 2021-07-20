@@ -45,21 +45,21 @@ http://mybatis.org/generator/
         </javaTypeResolver>
 
         <!-- entity 的生成路徑與規則 -->
-        <javaModelGenerator targetPackage="MBG.entity"
+        <javaModelGenerator targetPackage="MBG"
                             targetProject="crowd-reverseTool/src/main/">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- mapper xml的生成路徑與規則 -->
-        <sqlMapGenerator targetPackage="MBG.xml"
+        <sqlMapGenerator targetPackage="MBG"
                          targetProject="crowd-reverseTool/src/main/">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- mapper介面 的生成路徑與規則 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="MBG.interface"
+                             targetPackage="MBG"
                              targetProject="crowd-reverseTool/src/main/">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>

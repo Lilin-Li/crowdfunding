@@ -17,16 +17,15 @@ public class MySQLCommentGenerator extends EmptyCommentGenerator {
     public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         // 获取表注释
         String remarks = introspectedTable.getRemarks();
-        remarks = remarks.trim().length() == 0 ? "資料庫未在此table定義描述。": remarks + "。";
+        remarks = remarks.trim().length() == 0 ? "": remarks + "。";
 
         topLevelClass.addAnnotation("/**");
-        topLevelClass.addAnnotation("* Table描述：" + remarks);
+        topLevelClass.addAnnotation("* " + remarks);
         topLevelClass.addAnnotation("* ");
-        topLevelClass.addAnnotation("* 請注意，請文件由代碼產生器(myBatisGenerator)產生");
-        topLevelClass.addAnnotation("* 任何修改都會在下次產生代碼時，被覆蓋。");
+        topLevelClass.addAnnotation("* 請文件由代碼產生器(myBatisGenerator)產生，任何修改都會在下次產生代碼時被覆蓋。");
         topLevelClass.addAnnotation("* ");
         topLevelClass.addAnnotation("* @Data = Getter/Setter + ToString + Equals + HashCode");
-        topLevelClass.addAnnotation("* @Builder = 使你可以 「此ClassName.builder().id(1).name(\"Join\").build(); 」new物件並設值。");
+        topLevelClass.addAnnotation("* @Builder = 「此ClassName.builder().id(1).name(\"Join\").build(); 」");
         topLevelClass.addAnnotation("* ");
         topLevelClass.addAnnotation("*/");
     }

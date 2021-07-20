@@ -33,33 +33,28 @@ public class GeneratorRun {
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(resourceAsStream);
 
-        System.out.println("===== Clean：正在刪除以下目錄內的所有目錄與檔案。 （裡面是產生器上次所產內容）=====");
+        System.out.println("===== Clean：正在刪除以下目錄內檔案。 （刪除產生器前次所產內容）=====");
         deleteEarlyFile(config);
         System.out.println("===== 清理完畢 =====");
 
 
-        System.out.println("==========產生器正在產生code..需要一點時間。 (log相關ERROR會被自動處理)==========");
+        System.out.println("==========產生器正在產code(log ERROR 可忽略)==========");
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);
-        System.out.println("==========code產生完成==========");
+        System.out.println("==========產生完成==========");
 
         System.out.println("==========驗證程序==========");
-        System.out.println("掃描非以英文開頭的Table Name 所產的Code。");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("為什麼這麼做？ Ans：以名稱5ABC的Table為例，其產生5ABC.java檔 會因'5'讓專案build不起來。");
-        System.out.println("因此：產生器不會產生非英文開頭的Table Name的code。");
-        System.out.println("建議處理方式：修改Table Name，讓其以英文開頭 或著 這些Table的code 手動撰寫 不要用代碼產生器。");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("掃描結果如下： （若有，則顯示並刪除。若沒有，則不另行通知。）");
+        System.out.println("掃描非以英文開頭的Table Name 所產的Code。(以名稱5ABC的Table為例，其產生5ABC.java檔 會因'5'讓專案build不起來。)");
+        System.out.println("掃描結果如下： （若有則顯示並刪除。若沒有不另行通知。）");
         dropIllIllegaFile(config);
 
-        System.out.println("==========在每包中建立說明防錯文件==========");
+        System.out.println("==========每包中建立說明文件==========");
         createDummyFileFlow(config);
         System.out.println("==========建立完成==========");
 
 
-        System.out.println("==========除了驗證程序所掃瞄出的檔案外，其他Table對應的entity與mapper均已產生完成。==========");
+        System.out.println("==========除驗證程序所掃出的檔案外，其他均已產生完成。==========");
     }
 
     private void createDummyFileFlow(Configuration config) throws Exception {
@@ -80,11 +75,6 @@ public class GeneratorRun {
         File dummyFile = new File( path+ fileName1);
         dummyFile.createNewFile();
         System.out.println("建立防錯檔案" + path + fileName1);
-
-        String fileName = "-此包目前僅供私人評估使用，有些部分還在觀察，請暫勿使用。";
-        dummyFile = new File(path + fileName);
-        dummyFile.createNewFile();
-        System.out.println("建立防錯檔案" + path + fileName);
     }
 
 

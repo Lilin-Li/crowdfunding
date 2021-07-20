@@ -43,9 +43,7 @@ public class LombokPlugin extends PluginAdapter {
     public boolean clientGenerated(Interface anInterface, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         //Mapper文件的注释
         anInterface.addJavaDocLine("/**");
-        anInterface.addJavaDocLine(" * 此class由 MybatisGenerator產生");
-        anInterface.addJavaDocLine(" * ");
-        anInterface.addJavaDocLine(" * 請注意：任何修改都會在下一次產生器產生code時被覆蓋");
+        anInterface.addJavaDocLine(" * 此class由 MybatisGenerator產生，任何修改都會在下一次產生器產生code時被覆蓋");
         anInterface.addJavaDocLine(" */");
         return true;
     }
