@@ -27,6 +27,9 @@
                     <resource>
                         <directory>src/main/java/inc/lilin/crowd/admin/database/mysql</directory>
                     </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/admin/config</directory>
+                    </resource>
                 </resources>
             </build>
         </profile>
