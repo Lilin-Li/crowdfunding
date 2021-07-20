@@ -1,4 +1,4 @@
-package inc.lilin.crowd.admin.domain;
+package inc.lilin.crowd.admin.domain.test;
 
 import java.io.Serializable;
 import lombok.AllArgsConstructor;

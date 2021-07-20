@@ -18,11 +18,27 @@
             <version>2.5</version>
             <scope>provided</scope><!-- 伺服器有，打包時不用帶   -->
         </dependency>
+
+        <!-- JDBC驅動 for MariaDB  https://mariadb.com/kb/en/about-mariadb-connector-j/#java-compatibility   -->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId><!-- JDBC驅動 for MariaDB  https://mariadb.com/kb/en/about-mariadb-connector-j/#java-compatibility   -->
+            <artifactId>mariadb-java-client</artifactId>
             <version>2.6.2</version> <!--  實作JDBC 4.2  支援Java 8/11  -->
         </dependency>
+
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.6</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
