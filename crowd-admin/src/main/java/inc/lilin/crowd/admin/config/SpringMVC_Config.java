@@ -13,9 +13,8 @@ public class SpringMVC_Config implements WebMvcConfigurer {
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
-//        sample code：
-//        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/index.html","/","/user/login");
         registry.addInterceptor(new CharacterEncodingInterceptors()).addPathPatterns("/**");
+//      HiddenHttpMethodFilter (boot之自動配置已配好)
     }
 }
 
