@@ -1,21 +1,28 @@
 package inc.lilin.crowd;
 
 import inc.lilin.crowd.admin.AdminApplication;
-import inc.lilin.crowd.admin.domain.test.TestMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+
+@Slf4j
 @SpringBootTest(classes = AdminApplication.class)
 class DatabaseTest {
 
     @Autowired
-    TestMapper dataSource;
+    DataSource dataSource;
+
 
     @Transactional
     @Test
-    void contextLoads() throws Exception{
-        dataSource.insert(new inc.lilin.crowd.admin.domain.test.Test("aa"));
+    void connectionTest() throws Exception {
+        try (Connection connection = dataSource.getConnection()) {
+            log.debug("已連線到資料庫:" + connection.getCatalog());
+        }
     }
 }

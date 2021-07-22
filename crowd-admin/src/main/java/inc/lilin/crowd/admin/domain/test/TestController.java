@@ -8,8 +8,12 @@ import java.util.Map;
 @Controller
 public class TestController {
 
-    @RequestMapping("/test")
+
+    @RequestMapping("/")
     public String test(Map<String,Object> map) throws Exception{
-        return "index";
+        System.out.println("/ ");
+        throw new Exception();
+
+//        return "index";
     }
 }
