@@ -9,9 +9,7 @@ import java.util.Map;
 public class TestController {
 
     @RequestMapping("/")
-    public String test(Map<String,Object> map){
-        map.put("hello","AA");
-        System.out.println(22);
-        return "index";
+    public String test(Map<String,Object> map) throws Exception{
+        throw new Exception();
     }
 }
