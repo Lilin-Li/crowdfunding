@@ -1,4 +1,4 @@
-package inc.lilin.crowd.admin.config;
+package inc.lilin.crowd.common.config;
 
 
 import org.apache.ibatis.session.ExecutorType;

@@ -30,6 +30,9 @@
                     <resource>
                         <directory>src/main/java/inc/lilin/crowd/admin/config</directory>
                     </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/common/config</directory>
+                    </resource>
                 </resources>
             </build>
         </profile>
@@ -39,40 +42,6 @@
             <groupId>inc.lilin.crowd</groupId>
             <artifactId>crowd-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>  <!--  Boot配置文件提示 -->
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>   <!--  熱部屬插件 -->
-            <version>2.5.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>    <!--  內置 Spring 交易管理器     -->
-        </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>4.0.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
     </dependencies>
 
