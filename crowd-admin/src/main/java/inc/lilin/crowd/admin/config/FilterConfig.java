@@ -1,7 +1,7 @@
 package inc.lilin.crowd.admin.config;
 
-import inc.lilin.crowd.admin.Interceptors.CharacterEncodingInterceptors;
-import inc.lilin.crowd.admin.Interceptors.ResponseTimeLoggingInterceptors;
+import inc.lilin.crowd.admin.interceptors.CharacterEncodingInterceptors;
+import inc.lilin.crowd.admin.interceptors.ResponseTimeLoggingInterceptors;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
