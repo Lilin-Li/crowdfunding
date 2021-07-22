@@ -1,7 +1,9 @@
 package inc.lilin.crowd.admin.config;
 
 import inc.lilin.crowd.admin.Interceptors.CharacterEncodingInterceptors;
+import inc.lilin.crowd.admin.Interceptors.ResponseTimeLoggingInterceptors;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -10,7 +12,8 @@ public class FilterConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CharacterEncodingInterceptors()).addPathPatterns("/**");
-//      HiddenHttpMethodFilter (boot之自動配置已配好)
+        registry.addInterceptor(new CharacterEncodingInterceptors()).addPathPatterns("/**").order(Ordered.HIGHEST_PRECEDENCE);
+        registry.addInterceptor(new ResponseTimeLoggingInterceptors()).addPathPatterns("/**");
+//      HiddenHttpMethodFilter (boot自動配置已配好)
     }
 }
