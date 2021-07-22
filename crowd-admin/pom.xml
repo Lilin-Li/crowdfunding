@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>   <!--  熱部暑插件 -->
+            <artifactId>spring-boot-devtools</artifactId>   <!--  熱部屬插件 -->
             <version>2.5.2</version>
         </dependency>
 
