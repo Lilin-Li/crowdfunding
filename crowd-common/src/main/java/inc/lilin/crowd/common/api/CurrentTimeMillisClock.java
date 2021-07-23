@@ -3,9 +3,18 @@ package inc.lilin.crowd.common.api;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-// How to use:
-// @Bean 裝配 CurrentTimeMillisClock.getInstance();
-// 之後以此指標 call now() 取得時間。
+/*
+ Why do this:
+ 解決system call的瓶頸。
+
+ What did this do:
+ 每毫秒 cache 時間鐘。
+
+ How to use:
+ @Bean 裝配 CurrentTimeMillisClock.getInstance();
+ 之後以此指標 call now() 取得時間。
+*/
+
 public class CurrentTimeMillisClock {
     private volatile long now;
 
