@@ -16,6 +16,21 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
+    <profiles>
+        <profile>
+            <id>local</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/common/config</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>

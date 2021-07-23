@@ -23,25 +23,20 @@ import java.util.Map;
 @Slf4j
 @Aspect
 @Component
-public class ControllerAspect {
+public class ControllerLoggingAspect {
 
     @Autowired
     CurrentTimeMillisClock clock;
 
-    /**
-     * web層切點
-     * 1. @Pointcut("execution(public * com.hyh.web.*.*(..))")  web層的所有方法
-     * 2. @Pointcut("@annotation(com.hyh.annotation.Log)")      Log註解標註的方法
-     */
-    @Pointcut("execution(public * inc.lilin.crowd.admin.web.*.*(..))")
-    public void interceptorsLog() {
+    @Pointcut("execution(public * inc.lilin.crowd.*.web.*.*(..))")
+    public void controllerLog() {
     }
 
     /**
      * 環繞通知
      */
-    @Around("interceptorsLog()")
-    public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("controllerLog()")
+    public Object doAroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         //獲取請求物件
         ServletRequestAttributes servletReqAttributes = getRequest();
         HttpServletRequest request = servletReqAttributes.getRequest();
@@ -75,7 +70,6 @@ public class ControllerAspect {
         }
         return result;
     }
-
 
     /**
      * 獲取引數 params:{"name":"天喬巴夏"}
