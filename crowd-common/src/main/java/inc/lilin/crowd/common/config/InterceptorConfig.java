@@ -2,17 +2,26 @@ package inc.lilin.crowd.common.config;
 
 
 import inc.lilin.crowd.common.interceptors.CharacterEncodingInterceptors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public  class InterceptorConfig implements WebMvcConfigurer {
+public class InterceptorConfig implements WebMvcConfigurer {
+
+    @Autowired
+    CharacterEncodingInterceptors characterEncodingInterceptors;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CharacterEncodingInterceptors()).addPathPatterns("/**").order(Ordered.HIGHEST_PRECEDENCE);
-//      HiddenHttpMethodFilter (boot自動配置已配好)
+        // 須用autowired方式才能取得動態代理的指標
+        registry.addInterceptor(characterEncodingInterceptors).addPathPatterns("/**")
+                .excludePathPatterns("/static/**")
+                .order(Ordered.HIGHEST_PRECEDENCE);
+
+
+        // HiddenHttpMethodFilter(boot自動配置已配好)
     }
 }

@@ -1,7 +1,7 @@
 package inc.lilin.crowd.common.aop;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import inc.lilin.crowd.common.api.CurrentTimeMillisClock;
+import inc.lilin.crowd.common.systemcall.CurrentTimeMillisClock;
 import lombok.Data;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +49,6 @@ public class ControllerLoggingAspect {
             result = joinPoint.proceed();
             //=================返回通知=====================
             long timeCost = clock.now() - start;
-            // 獲取Log註解
 
             webLog.setTimeCost((int) timeCost);
             webLog.setStartTime(start);
