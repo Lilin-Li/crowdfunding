@@ -19,7 +19,7 @@ public class OurExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public ModelAndView handleException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        log.debug("經過例外統一處理層ExceptionHandler.handleException");
+        log.debug("經過例外統一處理層 " + getClass().getSimpleName() + " 執行 " + Thread.currentThread().getStackTrace()[1].getMethodName());
         ex.printStackTrace();
         return commonResolve(SystemConstant.EXCEPTION_VIEW, ex, request, response);
     }
@@ -31,6 +31,7 @@ public class OurExceptionHandler {
         // 如果是Ajax請求
         if (isThis_a_JSON_Request) {
             RestResultDTO<Object> resultEntity = RestResultDTO.failed(exception.getMessage());
+
             String json = new ObjectMapper().writeValueAsString(resultEntity);
             response.getWriter().write(json);    // 將JSON字串作為響應體返回給瀏覽器
             // 由於上面已經通過原生的response對像返回了響應，所以不提供ModelAndView對像

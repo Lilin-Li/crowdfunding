@@ -1,13 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="../frontend/bootstrap/css/bootstrap.min.css"
+          th:href="@{/frontend/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../frontend/css/font-awesome.min.css" th:href="@{/frontend/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../frontend/css/login.css" th:href="@{/frontend/css/login.css}">
+    <script src="../frontend/jquery/jquery-2.1.1.min.js" th:src="@{/frontend/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="../frontend/bootstrap/js/bootstrap.min.js"
+            th:src="@{/frontend/bootstrap/js/bootstrap.min.js}"></script>
+    <script>
+        $(function () {
+            $("button").click(function () {
+                window.history.back();
+            });
+        });
+    </script>
+
+
+    <style>
+
+    </style>
 </head>
 <body>
 
-客製化內部exception 的錯誤頁。  (可以接住例外內容，取出要對客戶端展示的訊息)
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <div><a class="navbar-brand" href="../templates/index.html" th:href="@{/}" style="font-size:32px;">群眾募資後台管理系統</a>
+            </div>
+        </div>
+    </div>
+</nav>
 
+<div class="container">
 
+    <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 系統訊息</h2>
+    <h3 th:text="${exception.getMessage()}"></h3>
+    <button>返回上一頁</button>
+</div>
 </body>
 </html>

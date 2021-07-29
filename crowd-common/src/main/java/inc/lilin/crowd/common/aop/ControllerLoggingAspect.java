@@ -44,10 +44,8 @@ public class ControllerLoggingAspect {
         WebLog webLog = new WebLog();
         Object result = null;
         try {
-            //=================前置通知=====================
             long start = clock.now();
             result = joinPoint.proceed();
-            //=================返回通知=====================
             long timeCost = clock.now() - start;
 
             webLog.setTimeCost((int) timeCost);
@@ -61,11 +59,9 @@ public class ControllerLoggingAspect {
 
             log.debug("{}",  new ObjectMapper().writeValueAsString(webLog));
         } catch (Throwable e) {
-            //==================異常通知=====================
             log.debug("訪問 " + request.getRequestURI() + " 時出例外");
             throw new Throwable(e);
         }finally {
-            //=================後置通知=====================
         }
         return result;
     }

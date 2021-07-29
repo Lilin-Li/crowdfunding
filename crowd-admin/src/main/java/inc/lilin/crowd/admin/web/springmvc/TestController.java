@@ -10,7 +10,7 @@ public class TestController {
 
     @RequestMapping("/")
     public String test(Map<String,Object> map) throws Exception{
-//        throw new Exception();
-        return "admin-login";
+       throw new Exception("例外abc");
+        // return "exception";
     }
 }
