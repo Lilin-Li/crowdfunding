@@ -1,4 +1,4 @@
-package inc.lilin.crowd;
+package inc.lilin.crowd.admintest;
 
 import inc.lilin.crowd.admin.AdminApplication;
 import lombok.extern.slf4j.Slf4j;

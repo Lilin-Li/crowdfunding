@@ -25,7 +25,7 @@
                         <directory>src/main/resources</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/java/inc/lilin/crowd/admin/database/mysql</directory>
+                        <directory>src/main/java/inc/lilin/crowd/admin/database/mysql/mybatis</directory>
                     </resource>
                     <resource>
                         <directory>src/main/java/inc/lilin/crowd/admin/config</directory>

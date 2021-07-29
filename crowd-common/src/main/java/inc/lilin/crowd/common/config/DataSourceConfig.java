@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @Configuration
-@MapperScan(basePackages = {"inc.lilin.crowd.admin.domain"}, sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(basePackages = {"inc.lilin.crowd.admin.service"}, sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfig {
 
     @Bean("sqlSessionFactory")

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class InterceptorsLoggingAspect implements HandlerInterceptor {
 
-    @Pointcut("execution(public * inc.lilin.crowd.*.interceptors.*.preHandle(..))")
+    @Pointcut("execution(public * inc.lilin.crowd.*.interceptors.*.*(..))")
     public void interceptorsLog() {
     }
 
