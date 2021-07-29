@@ -19,8 +19,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         // 須用autowired方式才能取得動態代理的指標
         registry.addInterceptor(characterEncodingInterceptors).addPathPatterns("/**")
                 .excludePathPatterns("/static/**")
+                .excludePathPatterns("/favicon.ico")
                 .order(Ordered.HIGHEST_PRECEDENCE);
-
 
         // HiddenHttpMethodFilter(boot自動配置已配好)
     }

@@ -19,6 +19,4 @@ public class CommonExceptionHandler {
         ExceptionsHandlingTools.printStack(ex);
         return ExceptionsHandlingTools.resolve(SystemConstant.EXCEPTION_VIEW, ex, request, response);
     }
-
-
 }

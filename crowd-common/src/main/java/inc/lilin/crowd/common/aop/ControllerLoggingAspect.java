@@ -28,7 +28,7 @@ public class ControllerLoggingAspect {
     @Autowired
     CurrentTimeMillisClock clock;
 
-    @Pointcut("execution(public * inc.lilin.crowd.*.web.*.*(..))")
+    @Pointcut("execution(public * inc.lilin.crowd.*.web.springmvc.*.*(..))")
     public void controllerLog() {
     }
 
@@ -60,7 +60,7 @@ public class ControllerLoggingAspect {
             log.debug("{}",  new ObjectMapper().writeValueAsString(webLog));
         } catch (Throwable e) {
             log.debug("訪問 " + request.getRequestURI() + " 時出例外");
-            throw new Throwable(e);
+            throw e;
         }finally {
         }
         return result;

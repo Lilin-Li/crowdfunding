@@ -3,22 +3,30 @@ package inc.lilin.crowd.common.web.springmvc.exceptionhandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inc.lilin.crowd.common.web.springmvc.requestTools.RequestHeadTools;
 import inc.lilin.crowd.common.web.springmvc.responseTools.RestResultDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ExceptionsHandlingTools {
-    @Autowired
-    private static Environment env;
+@Component
+public class ExceptionsHandlingTools implements EnvironmentAware {
+
+    public static Environment env;
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        env = environment;
+    }
 
     public static void printStack(Exception ex){
-        if(env.getProperty("debug.mode").equals("on")) {
+        if(env.getProperty("myDev.mode").equals("on")) {
             ex.printStackTrace();
         }
+
     }
 
     // 對JSON 與 Web請求，分別處理。
