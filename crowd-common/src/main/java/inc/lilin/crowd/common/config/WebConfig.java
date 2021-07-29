@@ -21,6 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/frontend/font/**").addResourceLocations("classpath:/frontend/font/");
         registry.addResourceHandler("/frontend/img/**").addResourceLocations("classpath:/frontend/img/");
         registry.addResourceHandler("/frontend/jquery/**").addResourceLocations("classpath:/frontend/jquery/");
+        registry.addResourceHandler("/frontend/layer/**").addResourceLocations("classpath:/frontend/layer/");
         registry.addResourceHandler("/frontend/script/**").addResourceLocations("classpath:/frontend/script/");
         registry.addResourceHandler("/frontend/ztree/**").addResourceLocations("classpath:/frontend/ztree/");
     }
