@@ -13,7 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class ExceptionHandlerAspect implements HandlerInterceptor {
 
-    @Pointcut("execution(public * inc.lilin.crowd.*.web.springmvc.exceptionhandler.*.*(..)) && !execution(public * inc.lilin.crowd.common.web.springmvc.exceptionhandler.CommonResolve.*(..))")
+    @Pointcut("execution(public * inc.lilin.crowd.*.web.springmvc.exceptionhandler.*.*(..)) && !execution(public * inc.lilin.crowd.common.web.springmvc.exceptionhandler.ExceptionsHandlingTools.*(..))")
     public void asept() {
     }
 
@@ -23,7 +23,7 @@ public class ExceptionHandlerAspect implements HandlerInterceptor {
         Object result = null;
         try {
             //=================前置通知=====================
-            log.debug("經過例外統一處理層 " + getClass().getSimpleName() + " 執行 " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            log.debug("經過例外統一處理層 " + joinPoint.getTarget().getClass().getSimpleName() + " 執行 " + joinPoint.getSignature().getName());
             result = joinPoint.proceed();
             //=================返回通知=====================
         } catch (Throwable e) {

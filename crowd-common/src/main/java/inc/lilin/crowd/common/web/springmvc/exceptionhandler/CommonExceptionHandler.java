@@ -12,12 +12,12 @@ import java.io.IOException;
 
 @Slf4j
 @ControllerAdvice
-public class OurExceptionHandler {
+public class CommonExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public ModelAndView handleException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ex.printStackTrace();
-        return CommonResolve.resolve(SystemConstant.EXCEPTION_VIEW, ex, request, response);
+        ExceptionsHandlingTools.printStack(ex);
+        return ExceptionsHandlingTools.resolve(SystemConstant.EXCEPTION_VIEW, ex, request, response);
     }
 
 

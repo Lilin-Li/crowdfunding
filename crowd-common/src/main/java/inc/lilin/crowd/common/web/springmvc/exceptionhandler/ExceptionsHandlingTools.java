@@ -3,18 +3,29 @@ package inc.lilin.crowd.common.web.springmvc.exceptionhandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inc.lilin.crowd.common.web.springmvc.requestTools.RequestHeadTools;
 import inc.lilin.crowd.common.web.springmvc.responseTools.RestResultDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CommonResolve {
+public class ExceptionsHandlingTools {
+    @Autowired
+    private static Environment env;
+
+    public static void printStack(Exception ex){
+        if(env.getProperty("debug.mode").equals("on")) {
+            ex.printStackTrace();
+        }
+    }
+
     // 對JSON 與 Web請求，分別處理。
     public static ModelAndView resolve(String viewName, Exception exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
         boolean isThis_a_JSON_Request = RequestHeadTools.isThis_a_JSON_Request(request);
 
-        // 如果是Ajax請求
+        // 如果是JSON請求
         if (isThis_a_JSON_Request) {
             RestResultDTO<Object> resultEntity = RestResultDTO.failed(exception.getMessage());
 
