@@ -11,6 +11,6 @@ public class TestController {
     @RequestMapping("/")
     public String test(Map<String,Object> map) throws Exception{
 //        throw new Exception();
-        return "index";
+        return "admin-login";
     }
 }
