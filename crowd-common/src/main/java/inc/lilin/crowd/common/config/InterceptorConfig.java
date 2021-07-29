@@ -1,7 +1,7 @@
 package inc.lilin.crowd.common.config;
 
 
-import inc.lilin.crowd.common.interceptors.CharacterEncodingInterceptors;
+import inc.lilin.crowd.common.web.springmvc.interceptors.CharacterEncodingInterceptors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

@@ -4,12 +4,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /*
- Why do this:
- 解決system call的瓶頸。
-
- What did this do:
- 每毫秒 cache 時間鐘。
-
  How to use:
  @Bean 裝配 CurrentTimeMillisClock.getInstance();
  之後以此指標 call now() 取得時間。
@@ -26,7 +20,7 @@ public class CurrentTimeMillisClock {
     private void scheduleTick() {
         new ScheduledThreadPoolExecutor(1, runnable -> {
             Thread thread = new Thread(runnable, "current-time-millis");
-            thread.setDaemon(true); // Java 中的守護線程不會阻止 JVM 退出。具體來說，當只剩下守護線程時，JVM 將退出。
+            thread.setDaemon(true); // Java 中的守護線程不會阻止 JVM 退出。具體來說當只剩下守護線程時JVM 將退出。
             return thread;
         }).scheduleAtFixedRate(() -> {
             now = System.currentTimeMillis();
