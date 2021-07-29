@@ -1,9 +1,9 @@
-package inc.lilin.crowd.common.web.springmvc.request;
+package inc.lilin.crowd.common.web.springmvc.requestTools;
 
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RequestHeadUtil {
+public class RequestHeadTools {
 
     /**
      * 判斷目前請求是否為Ajax請求

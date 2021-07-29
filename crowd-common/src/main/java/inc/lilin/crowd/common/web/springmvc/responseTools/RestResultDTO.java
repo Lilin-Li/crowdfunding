@@ -1,6 +1,4 @@
-package inc.lilin.crowd.common.web.springmvc.response;
-
-package com.atguigu.crowd.util;
+package inc.lilin.crowd.common.web.springmvc.responseTools;
 
 /**
  * 統一整個專案中Ajax請求返回的結果

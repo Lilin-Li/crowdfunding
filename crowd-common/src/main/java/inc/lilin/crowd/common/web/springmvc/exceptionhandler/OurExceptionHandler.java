@@ -1,8 +1,9 @@
 package inc.lilin.crowd.common.web.springmvc.exceptionhandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import inc.lilin.crowd.common.web.springmvc.response.RestResultDTO;
-import inc.lilin.crowd.common.web.springmvc.request.RequestHeadUtil;
+import inc.lilin.crowd.common.core.system_constant.SystemConstant;
+import inc.lilin.crowd.common.web.springmvc.requestTools.RequestHeadTools;
+import inc.lilin.crowd.common.web.springmvc.responseTools.RestResultDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,18 +15,18 @@ import java.io.IOException;
 
 @Slf4j
 @ControllerAdvice
-public class crowdExceptionHandler {
+public class OurExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public ModelAndView handleException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.debug("經過例外統一處理層ExceptionHandler.handleException");
         ex.printStackTrace();
-        return commonResolve("exception", ex, request, response);
+        return commonResolve(SystemConstant.EXCEPTION_VIEW, ex, request, response);
     }
 
     // 對JSON 與 Web請求，分別處理。
     private ModelAndView commonResolve(String viewName, Exception exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        boolean isThis_a_JSON_Request = RequestHeadUtil.isThis_a_JSON_Request(request);
+        boolean isThis_a_JSON_Request = RequestHeadTools.isThis_a_JSON_Request(request);
 
         // 如果是Ajax請求
         if (isThis_a_JSON_Request) {
