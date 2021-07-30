@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @Configuration
-@MapperScan(basePackages = {"inc.lilin.crowd.admin.core"}, sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(basePackages = {"inc.lilin.crowd.admin.database.mysql.mybatis"}, sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfig {
 
     @Bean("sqlSessionFactory")
@@ -52,7 +52,7 @@ public class DataSourceConfig {
 
         // 匹配多个 MapperConfig.xml, 使用mappingLocation属性
         String[] locationPatterns = {
-                "classpath*:mapper/*Mapper.xml"
+                "classpath*:*Mapper.xml"
         };
         sqlSessionFactoryBean.setMapperLocations(getResources(locationPatterns));
         return sqlSessionFactoryBean.getObject();

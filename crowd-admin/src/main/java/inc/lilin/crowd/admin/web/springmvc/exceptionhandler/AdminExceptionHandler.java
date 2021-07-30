@@ -18,6 +18,6 @@ public class AdminExceptionHandler {
     @ExceptionHandler({LoginFailedException.class})
     public ModelAndView handleLoginFailedException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ExceptionsHandlingTools.printStack(ex);
-        return ExceptionsHandlingTools.resolve("admin-login", ex, request, response);
+        return ExceptionsHandlingTools.resolve("index", ex, request, response);
     }
 }

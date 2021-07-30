@@ -1,16 +1,31 @@
 package inc.lilin.crowd.admin.web.springmvc;
 
-import inc.lilin.crowd.admin.core.exception.LoginFailedException;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import inc.lilin.crowd.admin.core.service.LoginService;
+import inc.lilin.crowd.admin.database.mysql.mybatis.AdminT;
+import inc.lilin.crowd.common.core.SystemConstant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 public class GuestController {
-    @RequestMapping("/gusetLogin")
-    public String gusetLogin(Map<String,Object> map) throws Exception{
-        throw new LoginFailedException("例外abc");
-        // return "exception";
+
+    @Autowired
+    LoginService loginService;
+
+    @PostMapping("/guestLogin")
+    public String gusetLogin(@RequestParam("loginAcct") String loginAcct,
+                             @RequestParam("userPswd") String userPswd,
+                             HttpSession session) throws Exception {
+
+        System.out.println(123);
+        AdminT admin = loginService.getAdminByLoginAcct(loginAcct, userPswd);
+
+        session.setAttribute(SystemConstant.SESSION_LOGIN_ADMIN, admin);
+
+        return "admin-main";
     }
 }

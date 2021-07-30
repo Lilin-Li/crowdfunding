@@ -1,6 +1,6 @@
 package inc.lilin.crowd.common.web.springmvc.exceptionhandler;
 
-import inc.lilin.crowd.common.core.system_constant.SystemConstant;
+import inc.lilin.crowd.common.core.SystemConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
