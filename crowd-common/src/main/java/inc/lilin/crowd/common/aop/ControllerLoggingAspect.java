@@ -3,6 +3,7 @@ package inc.lilin.crowd.common.aop;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inc.lilin.crowd.common.systemcall.CurrentTimeMillisClock;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,6 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -69,7 +71,7 @@ public class ControllerLoggingAspect {
     /**
      * 獲取引數 params:{"name":"天喬巴夏"}
      */
-    private Object getParams(ProceedingJoinPoint joinPoint) {
+    private Map<String, Object> getParams(ProceedingJoinPoint joinPoint) {
         // 引數名
         String[] paramNames = getMethodSignature(joinPoint).getParameterNames();
         // 引數值
@@ -83,6 +85,13 @@ public class ControllerLoggingAspect {
                 MultipartFile file = (MultipartFile) value;
                 value = file.getOriginalFilename();
             }
+
+            // TODO 當參數為物件時，會報錯，但Interger等包裝物件卻不會
+            // 暫時先這樣fix ，其他物件的錯誤等遇到時，再混合實驗 看要怎麼修。
+            if (value instanceof HttpSession){
+                value = "object";
+            }
+
             params.put(paramNames[i], value);
         }
         return params;
@@ -99,6 +108,7 @@ public class ControllerLoggingAspect {
     }
 
     @Data
+    @NoArgsConstructor
     @ToString
     public static class WebLog {
 
@@ -121,7 +131,7 @@ public class ControllerLoggingAspect {
         private String ipAddress;
 
         // 請求引數
-        private Object params;
+        private Map<String, Object> params;
 
         // 請求返回的結果
         private Object result;
