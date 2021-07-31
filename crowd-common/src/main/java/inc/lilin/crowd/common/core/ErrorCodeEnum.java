@@ -6,7 +6,8 @@ public enum ErrorCodeEnum {
     LOGIN_FAILED_ACCT_NOT_EXIST(10002, "帳號不存在"),
     LOGIN_FAILED_ACCT_NOT_UNIQUE(10003, "帳號不唯一"),
     LOGIN_FAILED_RESULT_NULL(10004, "查出結果為null"),
-    LOGIN_PASSWORD_ERROR(10005, "密碼比對不吻合");
+    LOGIN_PASSWORD_ERROR(10005, "密碼比對不吻合"),
+    ACCESS_FORBIDDEN(10006, "未登入禁止訪問");
 
     private final int errorCode;
     private final String errorMeg;

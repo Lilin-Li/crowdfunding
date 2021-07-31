@@ -18,7 +18,7 @@ public class InterceptorsLoggingAspect implements HandlerInterceptor {
     }
 
     @Around("interceptorsLog()")
-    public Object doAroundAdvice(ProceedingJoinPoint joinPoint) {
+    public Object doAroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable{
 
         Object result = null;
         try {
@@ -28,6 +28,7 @@ public class InterceptorsLoggingAspect implements HandlerInterceptor {
             //=================返回通知=====================
         } catch (Throwable e) {
             //==================異常通知=====================
+            throw e;
         } finally {
             //=================後置通知=====================
         }

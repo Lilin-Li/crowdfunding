@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.configjava;
+package inc.lilin.crowd.common.config;
 
 import inc.lilin.crowd.common.systemcall.CurrentTimeMillisClock;
 import org.springframework.context.annotation.Bean;

@@ -1,5 +1,6 @@
 package inc.lilin.crowd.admin.web.springmvc.exceptionhandler;
 
+import inc.lilin.crowd.admin.core.exception.AccessForbiddenException;
 import inc.lilin.crowd.admin.core.exception.LoginFailedException;
 import inc.lilin.crowd.common.web.springmvc.exceptionhandler.ExceptionsHandlingTools;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,12 @@ public class AdminExceptionHandler {
 
     @ExceptionHandler({LoginFailedException.class})
     public ModelAndView handleLoginFailedException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ExceptionsHandlingTools.printStack(ex);
+        return ExceptionsHandlingTools.resolve("index", ex, request, response);
+    }
+
+    @ExceptionHandler({AccessForbiddenException.class})
+    public ModelAndView handleAccessForbiddenException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ExceptionsHandlingTools.printStack(ex);
         return ExceptionsHandlingTools.resolve("index", ex, request, response);
     }

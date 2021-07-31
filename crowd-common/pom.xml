@@ -25,7 +25,7 @@
                         <directory>src/main/resources</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/java/inc/lilin/crowd/common/config</directory>
+                        <directory>src/main/java/inc/lilin/crowd/common/config/properties</directory>
                     </resource>
                 </resources>
             </build>

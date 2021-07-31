@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.configjava;
+package inc.lilin.crowd.common.config;
 
 import org.springframework.context.annotation.Configuration;
 

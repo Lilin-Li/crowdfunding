@@ -1,13 +1,13 @@
 package inc.lilin.crowd.admin.web.springmvc;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 public class AdminController {
-    @PostMapping("admin/logout")
+    @GetMapping("admin/logout")
     public String gusetLogin(HttpSession session) throws Exception {
         session.invalidate();
         return "index";

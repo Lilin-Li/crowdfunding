@@ -1,5 +1,4 @@
-package inc.lilin.crowd.common.configjava;
-
+package inc.lilin.crowd.common.config;
 
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.LocalCacheScope;
