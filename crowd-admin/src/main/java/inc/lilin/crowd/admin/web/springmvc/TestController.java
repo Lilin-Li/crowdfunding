@@ -8,9 +8,10 @@ import java.util.Map;
 @Controller
 public class TestController {
 
+
     @RequestMapping("/test")
     public String test(Map<String,Object> map) throws Exception{
-       throw new Exception("例外abc");
-        // return "exception";
+
+        return "index";
     }
 }
