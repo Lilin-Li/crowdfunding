@@ -32,10 +32,11 @@ public class LoginServiceImp implements LoginService{
             throw new LoginFailedException(ErrorCodeEnum.LOGIN_FAILED_RESULT_NULL.getErrorCodeAndMes());
         }
 
-        String userPswdDB = admin.getUserPswd();
-        String userPswdForm = new BCryptPasswordEncoder().encode(userPswd);
 
-        if(!userPswdDB.equals(userPswdForm)) {
+        String userPswdDB = admin.getUserPswd();
+        boolean pswdMatch = new BCryptPasswordEncoder().matches(userPswd, userPswdDB);
+
+        if(!pswdMatch) {
             throw new LoginFailedException(ErrorCodeEnum.LOGIN_PASSWORD_ERROR.getErrorCodeAndMes());
         }
 
