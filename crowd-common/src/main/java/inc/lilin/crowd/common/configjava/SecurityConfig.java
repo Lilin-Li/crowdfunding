@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.config;
+package inc.lilin.crowd.common.configjava;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

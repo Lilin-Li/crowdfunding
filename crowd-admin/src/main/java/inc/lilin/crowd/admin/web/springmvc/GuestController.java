@@ -20,12 +20,10 @@ public class GuestController {
     public String gusetLogin(@RequestParam("loginAcct") String loginAcct,
                              @RequestParam("userPswd") String userPswd,
                              HttpSession session) throws Exception {
-
-        System.out.println(123);
         AdminT admin = loginService.getAdminByLoginAcct(loginAcct, userPswd);
 
         session.setAttribute(SystemConstant.SESSION_LOGIN_ADMIN, admin);
-
-        return "admin-main";
+        return "index";
+        // return "redirect:/admin-main";
     }
 }

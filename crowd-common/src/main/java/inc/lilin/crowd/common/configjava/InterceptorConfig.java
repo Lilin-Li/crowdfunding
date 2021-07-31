@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.config;
+package inc.lilin.crowd.common.configjava;
 
 
 import inc.lilin.crowd.common.web.springmvc.interceptors.CharacterEncodingInterceptors;

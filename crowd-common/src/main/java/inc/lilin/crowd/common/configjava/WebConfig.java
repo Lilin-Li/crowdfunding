@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.config;
+package inc.lilin.crowd.common.configjava;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -11,7 +11,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
-        registry.addViewController("/admin-login.html").setViewName("admin-login");
+        registry.addViewController("/admin-main").setViewName("admin-main");
+
     }
 
     @Override
