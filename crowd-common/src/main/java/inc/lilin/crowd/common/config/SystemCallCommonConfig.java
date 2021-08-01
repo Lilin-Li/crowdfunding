@@ -7,7 +7,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @EnableAspectJAutoProxy
 @Configuration
-public class SystemCallConfig {
+public class SystemCallCommonConfig {
 
     @Bean
     public CurrentTimeMillisClock currentTimeMillisClock() {

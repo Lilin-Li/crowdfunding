@@ -1,25 +1,27 @@
 package inc.lilin.crowd.common.config;
 
+import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.LocalCacheScope;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
-
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Properties;
 
 @Configuration
-@MapperScan(basePackages = {"inc.lilin.crowd.admin.database.mysql.mybatis"}, sqlSessionFactoryRef = "sqlSessionFactory")
-public class DataSourceConfig {
+@MapperScan(basePackages = {"inc.lilin.crowd.*.database.mysql.mybatis"}, sqlSessionFactoryRef = "sqlSessionFactory")
+public class DataSourceCommonConfig {
 
     @Bean("sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory( DataSource dataSource) throws Exception {
@@ -48,6 +50,9 @@ public class DataSourceConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setConfiguration(configuration);
+        // 设置MyBatis分页插件
+        PageInterceptor pageInterceptor = this.initPageInterceptor();
+        sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});
 
         // 匹配多个 MapperConfig.xml, 使用mappingLocation属性
         String[] locationPatterns = {
@@ -56,6 +61,17 @@ public class DataSourceConfig {
         sqlSessionFactoryBean.setMapperLocations(getResources(locationPatterns));
         return sqlSessionFactoryBean.getObject();
     }
+
+    public PageInterceptor initPageInterceptor(){
+        PageInterceptor pageInterceptor = new PageInterceptor();
+        Properties properties = new Properties();
+        properties.setProperty("helperDialect", "mysql");
+        properties.setProperty("offsetAsPageNum", "true");
+        properties.setProperty("rowBoundsWithCount", "true");
+        pageInterceptor.setProperties(properties);
+        return pageInterceptor;
+    }
+
     private Resource[] getResources(String[] locationPatterns) throws Exception {
         ArrayList<Resource> resourceList = new ArrayList<>();
 
@@ -63,7 +79,6 @@ public class DataSourceConfig {
             Resource[] resource1 = new PathMatchingResourcePatternResolver().getResources(locationPattern);
             resourceList.addAll(Arrays.asList(resource1));
         }
-
 
         return resourceList.toArray(new Resource[resourceList.size()]);
     }
