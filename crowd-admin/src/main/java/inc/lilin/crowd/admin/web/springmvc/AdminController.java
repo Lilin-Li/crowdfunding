@@ -12,4 +12,9 @@ public class AdminController {
         session.invalidate();
         return "index";
     }
+
+    @GetMapping("/user")
+    public String getUsers(HttpSession session) throws Exception {
+        return "user";
+    }
 }
