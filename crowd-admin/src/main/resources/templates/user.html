@@ -105,15 +105,16 @@
 					<h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 數據列表</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-inline" role="form" style="float:left;">
-						<div class="form-group has-feedback">
-							<div class="input-group">
-								<div class="input-group-addon">查詢條件</div>
-								<input class="form-control has-success" type="text" placeholder="請輸入查詢條件">
-							</div>
-						</div>
-						<button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查詢</button>
-					</form>
+	<form action="/users" METHOD="get" class="form-inline" role="form" style="float:left;">
+		<div class="form-group has-feedback">
+			<div class="input-group">
+				<div class="input-group-addon">查詢條件</div>
+				<input name="keyword" class="form-control has-success" type="text" placeholder="請輸入查詢條件">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}">
+			</div>
+		</div>
+		<button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查詢</button>
+	</form>
 					<button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 刪除</button>
 					<button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
 					<br>

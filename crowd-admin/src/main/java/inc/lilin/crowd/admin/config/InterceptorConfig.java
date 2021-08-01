@@ -18,7 +18,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         // 須用autowired方式才能取得動態代理的指標
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/")    //首頁
+                // 以下是免登入就能訪問的網址
+                .excludePathPatterns("/")               //首頁
                 .excludePathPatterns("/guestLogin")    //登入controller
                 .excludePathPatterns("/admin/logout")  //登出controller
                 .excludePathPatterns("/static/**")
