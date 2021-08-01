@@ -45,4 +45,18 @@
     FROM admin_t
     WHERE login_acct = #{acct}
   </select>
+
+  <select id="selectAdminByKeyword" resultType="inc.lilin.crowd.admin.database.mysql.mybatis.AdminT">
+    SELECT  id,
+            login_acct,
+            user_pswd,
+            user_name,
+            email,
+            create_time
+    FROM admin_t
+    WHERE
+        login_acct like concat("%",#{keyword},"%") or
+        user_name like concat("%",#{keyword},"%") or
+        email like concat("%",#{keyword},"%")
+  </select>
 </mapper>

@@ -17,4 +17,6 @@ public interface AdminTMapper {
     int updateByPrimaryKey(AdminT record);
 
     List<AdminT> selectByAcct(@Param("acct") String loginAcct);
+
+    List<AdminT> selectAdminByKeyword(String keyword);
 }
