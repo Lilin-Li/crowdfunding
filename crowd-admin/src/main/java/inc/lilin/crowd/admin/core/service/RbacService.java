@@ -7,4 +7,6 @@ import inc.lilin.crowd.admin.database.mysql.mybatis.AdminT;
 public interface RbacService {
 
     PageInfo<AdminT> getUsers(String keyword, Integer pageNum, Integer pageSize);
+
+    void deleteUser(Integer adminId);
 }

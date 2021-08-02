@@ -22,4 +22,9 @@ public class RbacServiceImp implements RbacService {
 
         return new PageInfo<>(list);
     }
+
+    @Override
+    public void deleteUser(Integer adminId) {
+        adminMapper.deleteByPrimaryKey(adminId);
+    }
 }
