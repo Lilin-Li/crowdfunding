@@ -43,6 +43,7 @@ public class AdminController {
                          @PathVariable(value = "keyword", required = false) String keyword,
                          HttpSession session) throws Exception {
 
+        // 若delete的帳號是目前登入帳號 => 拋例外
         Integer sessionAdminId = ((AdminT) session.getAttribute(SystemConstant.SESSION_LOGIN_ADMIN)).getId();
         if (adminId.equals(sessionAdminId)) {
             throw new DeleteAdminFailedException(ErrorCodeEnum.DELETA_ADMIN_FAILED.getErrorCodeAndMes());
