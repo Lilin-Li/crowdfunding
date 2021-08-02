@@ -116,7 +116,8 @@
 		<button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查詢</button>
 	</form>
 					<button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 刪除</button>
-					<button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+<!--					<button type="button" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增</button>-->
+					<a href="admin/add" type="button" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增</a>
 					<br>
 					<hr style="clear:both;">
 					<div class="table-responsive">
@@ -148,8 +149,7 @@
 								<td>
 									<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
 									<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-									<a th:href = "@{/user/delete/} + ${admin.id} + '/' + ${pageInfo.pageNum} + '/' + (${param.keyword == null} ? '':${param.keyword})  "  type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>
-<!--									<a th:href =  "@{/user/delete/{adminId}/{pageNum}/{keyword}(adminId=${admin.id} ,pageNum=${pageInfo.pageNum},keyword=${param.keyword == null} ? '':${param.keyword})}"  type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>-->
+									<a th:href =  "@{/user/delete/{adminId}/{pageNum}/{keyword}(adminId=${admin.id} ,pageNum=${pageInfo.pageNum},keyword=${param.keyword == null} ? '':${param.keyword})}"  type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>
 
 								</td>
 							</tr>

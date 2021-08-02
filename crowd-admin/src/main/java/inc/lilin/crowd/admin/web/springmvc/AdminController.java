@@ -38,7 +38,7 @@ public class AdminController {
     }
 
     @GetMapping({"/user/delete/{adminId}/{pageNum}/{keyword}", "/user/delete/{adminId}/{pageNum}/"})
-    public String remove(@PathVariable("adminId") Integer adminId,
+    public String deleteUser(@PathVariable("adminId") Integer adminId,
                          @PathVariable(value = "pageNum") Integer pageNum,
                          @PathVariable(value = "keyword", required = false) String keyword,
                          HttpSession session) throws Exception {
@@ -54,5 +54,10 @@ public class AdminController {
             keyword = "";
         }
         return "redirect:/users?pageNum=" + pageNum + "&keyword=" + keyword;
+    }
+    @GetMapping("/admin/create")
+    public String createUser() throws Exception {
+
+        return "";
     }
 }

@@ -1,200 +1,111 @@
 <!DOCTYPE html>
-<html lang="GB18030">
-  <head>
-    <meta charset="GB18030">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keys" content="">
+	<meta name="author" content="">
 
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/doc.min.css">
+	<link rel="stylesheet" href="../frontend/bootstrap/css/bootstrap.min.css" th:href="@{/frontend/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" href="../frontend/css/font-awesome.min.css" th:href="@{/frontend/css/font-awesome.min.css}">
+	<link rel="stylesheet" href="../frontend/css/main.css" th:href="@{/frontend/css/main.css}">
+	<link rel="stylesheet" href="../frontend/css/doc.min.css" th:href="@{/frontend/css/doc.min.css}">
+	<script src="../frontend/jquery/jquery-2.1.1.min.js" th:src= "@{/frontend/jquery/jquery-2.1.1.min.js}"></script>
+	<script src="../frontend/bootstrap/js/bootstrap.min.js" th:src= "@{/frontend/bootstrap/js/bootstrap.min.js}"></script>
 	<style>
-	.tree li {
-        list-style-type: none;
-		cursor:pointer;
-	}
+		.tree li {
+			list-style-type: none;
+			cursor:pointer;
+		}
 	</style>
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-            <div><a class="navbar-brand" style="font-size:32px;" href="user.html">ÖÚ³ïÆ½Ì¨ - ÓÃ»§Î¬»¤</a></div>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li style="padding-top:8px;">
-				<div class="btn-group">
-				  <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
-					<i class="glyphicon glyphicon-user"></i> ÕÅÈı <span class="caret"></span>
-				  </button>
-					  <ul class="dropdown-menu" role="menu">
-						<li><a href="#"><i class="glyphicon glyphicon-cog"></i> ¸öÈËÉèÖÃ</a></li>
-						<li><a href="#"><i class="glyphicon glyphicon-comment"></i> ÏûÏ¢</a></li>
-						<li class="divider"></li>
-						<li><a href="login.html"><i class="glyphicon glyphicon-off"></i> ÍË³öÏµÍ³</a></li>
-					  </ul>
-			    </div>
-			</li>
-            <li style="margin-left:10px;padding-top:8px;">
-				<button type="button" class="btn btn-default btn-danger">
-				  <span class="glyphicon glyphicon-question-sign"></span> °ïÖú
-				</button>
-			</li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
+<div th:insert="~{common-navbar::navbar}"></div>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-			<div class="tree">
-				<ul style="padding-left:0px;" class="list-group">
-					<li class="list-group-item tree-closed" >
-						<a href="main.html"><i class="glyphicon glyphicon-dashboard"></i> ¿ØÖÆÃæ°å</a> 
-					</li>
-					<li class="list-group-item">
-						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> È¨ÏŞ¹ÜÀí <span class="badge" style="float:right">3</span></span> 
-						<ul style="margin-top:10px;">
-							<li style="height:30px;">
-								<a href="user.html" style="color:red;"><i class="glyphicon glyphicon-user"></i> ÓÃ»§Î¬»¤</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="role.html"><i class="glyphicon glyphicon-certificate"></i> ½ÇÉ«Î¬»¤</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="permission.html"><i class="glyphicon glyphicon-lock"></i> ²Ëµ¥Î¬»¤</a> 
-							</li>
-						</ul>
-					</li>
-					<li class="list-group-item tree-closed">
-						<span><i class="glyphicon glyphicon-ok"></i> ÒµÎñÉóºË <span class="badge" style="float:right">3</span></span> 
-						<ul style="margin-top:10px;display:none;">
-							<li style="height:30px;">
-								<a href="auth_cert.html"><i class="glyphicon glyphicon-check"></i> ÊµÃûÈÏÖ¤ÉóºË</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="auth_adv.html"><i class="glyphicon glyphicon-check"></i> ¹ã¸æÉóºË</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="auth_project.html"><i class="glyphicon glyphicon-check"></i> ÏîÄ¿ÉóºË</a> 
-							</li>
-						</ul>
-					</li>
-					<li class="list-group-item tree-closed">
-						<span><i class="glyphicon glyphicon-th-large"></i> ÒµÎñ¹ÜÀí <span class="badge" style="float:right">7</span></span> 
-						<ul style="margin-top:10px;display:none;">
-							<li style="height:30px;">
-								<a href="cert.html"><i class="glyphicon glyphicon-picture"></i> ×ÊÖÊÎ¬»¤</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="type.html"><i class="glyphicon glyphicon-equalizer"></i> ·ÖÀà¹ÜÀí</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="process.html"><i class="glyphicon glyphicon-random"></i> Á÷³Ì¹ÜÀí</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="advertisement.html"><i class="glyphicon glyphicon-hdd"></i> ¹ã¸æ¹ÜÀí</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="message.html"><i class="glyphicon glyphicon-comment"></i> ÏûÏ¢Ä£°å</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="project_type.html"><i class="glyphicon glyphicon-list"></i> ÏîÄ¿·ÖÀà</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="tag.html"><i class="glyphicon glyphicon-tags"></i> ÏîÄ¿±êÇ©</a> 
-							</li>
-						</ul>
-					</li>
-					<li class="list-group-item tree-closed" >
-						<a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> ²ÎÊı¹ÜÀí</a> 
-					</li>
-				</ul>
-			</div>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<ol class="breadcrumb">
-				  <li><a href="#">Ê×Ò³</a></li>
-				  <li><a href="#">Êı¾İÁĞ±í</a></li>
-				  <li class="active">ĞÂÔö</li>
-				</ol>
+<div class="container-fluid">
+	<div class="row">
+		<div th:insert="~{common-sidebar::sidebar}"></div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<ol class="breadcrumb">
+				<li><a href="/admin-main">é¦–é </a></li>
+				<li><a href="/users">æ•¸æ“šåˆ—è¡¨</a></li>
+				<li class="active">æ–°å¢</li>
+			</ol>
 			<div class="panel panel-default">
-              <div class="panel-heading">±íµ¥Êı¾İ<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
-			  <div class="panel-body">
-				<form role="form">
-				  <div class="form-group">
-					<label for="exampleInputPassword1">µÇÂ½ÕËºÅ</label>
-					<input type="text" class="form-control" id="exampleInputPassword1" placeholder="ÇëÊäÈëµÇÂ½ÕËºÅ">
-				  </div>
-				  <div class="form-group">
-					<label for="exampleInputPassword1">ÓÃ»§Ãû³Æ</label>
-					<input type="text" class="form-control" id="exampleInputPassword1" placeholder="ÇëÊäÈëÓÃ»§Ãû³Æ">
-				  </div>
-				  <div class="form-group">
-					<label for="exampleInputEmail1">ÓÊÏäµØÖ·</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="ÇëÊäÈëÓÊÏäµØÖ·">
-					<p class="help-block label label-warning">ÇëÊäÈëºÏ·¨µÄÓÊÏäµØÖ·, ¸ñÊ½Îª£º xxxx@xxxx.com</p>
-				  </div>
-				  <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> ĞÂÔö</button>
-				  <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> ÖØÖÃ</button>
-				</form>
-			  </div>
+				<div class="panel-heading">è¡¨å–®æ•¸æ“š<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+				<div class="panel-body">
+					<form action="admin/create" method="post" role="form">
+						<div class="form-group">
+							<label for="exampleInputPassword1">ç™»éŒ„è³¬è™Ÿ</label>
+							<input name="loginAcct" type="text" class="form-control" id="exampleInputPassword1" placeholder="è«‹è¼¸å…¥ç™»é™¸è³¬è™Ÿ">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">ç™»éŒ„å¯†ç¢¼</label>
+							<input name="userPswd" type="text" class="form-control" id="exampleInputPassword1" placeholder="è«‹è¼¸å…¥ç™»é™¸è³¬è™Ÿ">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">ä½¿ç”¨è€…åç¨±</label>
+							<input name="userName" type="text" class="form-control" id="exampleInputPassword1" placeholder="è«‹è¼¸å…¥ä½¿ç”¨è€…åç¨±">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">éƒµç®±åœ°å€</label>
+							<input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="è«‹è¼¸å…¥éƒµç®±åœ°å€">
+							<p class="help-block label label-warning">è«‹è¼¸å…¥åˆæ³•çš„éƒµç®±åœ°å€, æ ¼å¼ç‚ºï¼š xxxx@xxxx.com</p>
+						</div>
+						<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> æ–°å¢</button>
+						<button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> é‡ç½®</button>
+					</form>
+				</div>
 			</div>
-        </div>
-      </div>
-    </div>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			<h4 class="modal-title" id="myModalLabel">°ïÖú</h4>
-		  </div>
-		  <div class="modal-body">
-			<div class="bs-callout bs-callout-info">
-				<h4>²âÊÔ±êÌâ1</h4>
-				<p>²âÊÔÄÚÈİ1£¬²âÊÔÄÚÈİ1£¬²âÊÔÄÚÈİ1£¬²âÊÔÄÚÈİ1£¬²âÊÔÄÚÈİ1£¬²âÊÔÄÚÈİ1</p>
-			  </div>
-			<div class="bs-callout bs-callout-info">
-				<h4>²âÊÔ±êÌâ2</h4>
-				<p>²âÊÔÄÚÈİ2£¬²âÊÔÄÚÈİ2£¬²âÊÔÄÚÈİ2£¬²âÊÔÄÚÈİ2£¬²âÊÔÄÚÈİ2£¬²âÊÔÄÚÈİ2</p>
-			  </div>
-		  </div>
-		  <!--
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary">Save changes</button>
-		  </div>
-		  -->
 		</div>
-	  </div>
 	</div>
-    <script src="jquery/jquery-2.1.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="script/docs.min.js"></script>
-        <script type="text/javascript">
-            $(function () {
-			    $(".list-group-item").click(function(){
-				    if ( $(this).find("ul") ) {
-						$(this).toggleClass("tree-closed");
-						if ( $(this).hasClass("tree-closed") ) {
-							$("ul", this).hide("fast");
-						} else {
-							$("ul", this).show("fast");
-						}
-					}
-				});
-            });
-        </script>
-  </body>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">å¹«åŠ©</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bs-callout bs-callout-info">
+					<h4>æ¸¬è©¦æ¨™é¡Œ1</h4>
+					<p>æ¸¬è©¦å…§å®¹1ï¼Œæ¸¬è©¦å…§å®¹1ï¼Œæ¸¬è©¦å…§å®¹1ï¼Œæ¸¬è©¦å…§å®¹1ï¼Œæ¸¬è©¦å…§å®¹1ï¼Œæ¸¬è©¦å…§å®¹1</p>
+				</div>
+				<div class="bs-callout bs-callout-info">
+					<h4>æ¸¬è©¦æ¨™é¡Œ2</h4>
+					<p>æ¸¬è©¦å…§å®¹2ï¼Œæ¸¬è©¦å…§å®¹2ï¼Œæ¸¬è©¦å…§å®¹2ï¼Œæ¸¬è©¦å…§å®¹2ï¼Œæ¸¬è©¦å…§å®¹2ï¼Œæ¸¬è©¦å…§å®¹2</p>
+				</div>
+			</div>
+			<!--
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            -->
+		</div>
+	</div>
+</div>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$(".list-group-item").click(function(){
+			if ( $(this).find("ul") ) {
+				$(this).toggleClass("tree-closed");
+				if ( $(this).hasClass("tree-closed") ) {
+					$("ul", this).hide("fast");
+				} else {
+					$("ul", this).show("fast");
+				}
+			}
+		});
+	});
+</script>
+</body>
 </html>
