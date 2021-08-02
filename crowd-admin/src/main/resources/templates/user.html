@@ -120,6 +120,8 @@
 					<br>
 					<hr style="clear:both;">
 					<div class="table-responsive">
+						<P style="color:red;" th:if = "${param.exceptionMsg}" th:text = "系統訊息： + ${param.exceptionMsg}">紅色
+						</p>
 						<tr th:if = "!${pageInfo}">
 							目前資料庫中暫無數據！
 						</tr>
@@ -146,7 +148,9 @@
 								<td>
 									<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
 									<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-									<a th:href = "@{/user/delete/} + ${admin.id} + '/' + ${pageInfo.pageNum} + '/' + ${param.keyword}"  type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>
+									<a th:href = "@{/user/delete/} + ${admin.id} + '/' + ${pageInfo.pageNum} + '/' + (${param.keyword == null} ? '':${param.keyword})  "  type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>
+<!--									<a th:href =  "@{/user/delete/{adminId}/{pageNum}/{keyword}(adminId=${admin.id} ,pageNum=${pageInfo.pageNum},keyword=${param.keyword == null} ? '':${param.keyword})}"  type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>-->
+
 								</td>
 							</tr>
 							</tr>

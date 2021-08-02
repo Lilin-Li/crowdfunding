@@ -41,7 +41,7 @@
   </select>
 
   <select id="selectByAcct" resultType="inc.lilin.crowd.admin.database.mysql.mybatis.AdminT">
-    SELECT login_acct, user_pswd
+    SELECT id, login_acct, user_pswd,user_name,email,create_time
     FROM admin_t
     WHERE login_acct = #{acct}
   </select>
