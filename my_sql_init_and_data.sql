@@ -1,3 +1,4 @@
+CREATE DATABASE  if not exists crowd_admin;
 use crowd_admin;
 drop table if exists admin_t;
 
@@ -14,7 +15,7 @@ create table admin_t
 
 INSERT INTO crowd_admin.admin_t
 (id, login_acct, user_pswd, user_name, email, create_time)
-VALUES("1","eaybh","$2a$10$ZsdW2i19OOZDSw0osSrf2u9NcL2dKxhP7ZrkdArO8.z304efC5eZa","qmante","newell.hahn@example.net","2010/6/29"),
+VALUES("1","admin","$2a$10$ZsdW2i19OOZDSw0osSrf2u9NcL2dKxhP7ZrkdArO8.z304efC5eZa","qmante","newell.hahn@example.net","2010/6/29"),
       ("2","ucxzx","$2a$10$ZsdW2i19OOZDSw0osSrf2u9NcL2dKxhP7ZrkdArO8.z304efC5eZa","harvey.spencer","marta29@example.net","2009/1/19"),
       ("3","ynpwj","$2a$10$ZsdW2i19OOZDSw0osSrf2u9NcL2dKxhP7ZrkdArO8.z304efC5eZa","saufderhar","ashleigh56@example.net","1980/10/20"),
       ("4","uqtag","$2a$10$ZsdW2i19OOZDSw0osSrf2u9NcL2dKxhP7ZrkdArO8.z304efC5eZa","jude.steuber","badams@example.org","1997/8/13"),

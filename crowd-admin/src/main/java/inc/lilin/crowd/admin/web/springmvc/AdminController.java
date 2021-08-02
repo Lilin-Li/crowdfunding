@@ -38,7 +38,7 @@ public class AdminController {
                          @PathVariable(value = "pageNum") Integer pageNum,
                          @PathVariable(value = "keyword") String keyword) {
         rbacService.deleteUser(adminId);
-        keyword = keyword == null ? "":keyword;
+        keyword = (keyword.equals("null")) ? "":keyword;
         return "redirect:/users?pageNum="+pageNum+"&keyword="+keyword;
     }
 }

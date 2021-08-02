@@ -33,11 +33,11 @@
         <input type="hidden" name="_csrf" th:value="${_csrf.token}">
         <p th:if = "${exception != null}" th:text = "${exception.getMessage()}">111</p>
         <div class="form-group has-success has-feedback">
-            <input type="text" name="loginAcct" class="form-control" id="inputSuccess4" placeholder="請輸入登錄賬號" autofocus>
+            <input value="admin" type="text" name="loginAcct" class="form-control" id="inputSuccess4" placeholder="請輸入登錄賬號" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="text" name="userPswd" class="form-control" id="inputSuccess4" placeholder="請輸入登錄密碼" style="margin-top:10px;">
+            <input value="admin" type="text" name="userPswd" class="form-control" id="inputSuccess4" placeholder="請輸入登錄密碼" style="margin-top:10px;">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <button type="submit" class="btn btn-lg btn-success btn-block">登錄</button>
