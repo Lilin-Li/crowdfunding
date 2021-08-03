@@ -19,7 +19,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
                 // 以下是免登入就能訪問的網址
-                .excludePathPatterns("/")               //首頁
+                .excludePathPatterns("/")  //首頁
                 .excludePathPatterns("/guestLogin")    //登入controller
                 .excludePathPatterns("/admin/logout")  //登出controller
                 .excludePathPatterns("/static/**")

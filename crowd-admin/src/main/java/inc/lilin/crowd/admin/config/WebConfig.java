@@ -13,7 +13,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/admin-main").setViewName("admin-main");
         registry.addViewController("/admin/add").setViewName("add");
-
     }
 
     @Override
