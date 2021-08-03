@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<link rel="stylesheet" href="../frontend/bootstrap/css/bootstrap.min.css" th:href="@{/frontend/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" href="../frontend/css/font-awesome.min.css" th:href="@{/frontend/css/font-awesome.min.css}">
+	<link rel="stylesheet" href="../frontend/css/main.css" th:href="@{/frontend/css/main.css}">
+	<link rel="stylesheet" href="../frontend/css/doc.min.css" th:href="@{/frontend/css/doc.min.css}">
+	<style>
+		.tree li {
+			list-style-type: none;
+			cursor:pointer;
+		}
+	</style>
+</head>
+
+<body>
+
+<div th:insert="~{common-navbar::navbar}"></div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div th:insert="~{common-sidebar::sidebar}"></div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<ol class="breadcrumb">
+				<li><a href="/admin-main">首頁</a></li>
+				<li><a href="/users">數據列表</a></li>
+				<li class="active">修改</li>
+			</ol>
+			<div class="panel panel-default">
+				<div class="panel-heading">表單數據<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+				<div class="panel-body">
+					<form action="/user/edit" method="post" role="form">
+						<input th:value="${adminId}" name="id" type="hidden"/>
+						<input th:value="${pageNum}" name="pageNum" type="hidden"/>
+						<input th:value="${keyword}" name="keyword" type="hidden"/>
+						<div class="form-group">
+							<label for="exampleInputPassword1">登陸賬號</label>
+							<input th:value="${admin.getLoginAcct()}" name="loginAcct" type="text" class="form-control" id="exampleInputPassword1" value="test">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">使用者名稱</label>
+							<input th:value="${admin.getUserName()}" name="userName" type="text" class="form-control" id="exampleInputPassword1" value="測試使用者">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">郵箱地址</label>
+							<input th:value="${admin.getEmail()}" name="email" type="email" class="form-control" id="exampleInputEmail1" value="xxxx@xxxx.com">
+							<p class="help-block label label-warning">請輸入合法的郵箱地址, 格式為： xxxx@xxxx.com</p>
+						</div>
+						<button type="subbit" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
+						<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+						<input type="hidden" name="_csrf" th:value="${_csrf.token}">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">幫助</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bs-callout bs-callout-info">
+					<h4>測試標題1</h4>
+					<p>測試內容1，測試內容1，測試內容1，測試內容1，測試內容1，測試內容1</p>
+				</div>
+				<div class="bs-callout bs-callout-info">
+					<h4>測試標題2</h4>
+					<p>測試內容2，測試內容2，測試內容2，測試內容2，測試內容2，測試內容2</p>
+				</div>
+			</div>
+			<!--
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            -->
+		</div>
+	</div>
+</div>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$(".list-group-item").click(function(){
+			if ( $(this).find("ul") ) {
+				$(this).toggleClass("tree-closed");
+				if ( $(this).hasClass("tree-closed") ) {
+					$("ul", this).hide("fast");
+				} else {
+					$("ul", this).show("fast");
+				}
+			}
+		});
+	});
+</script>
+</body>
+</html>

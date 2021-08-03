@@ -12,4 +12,8 @@ public interface AdminService {
 
 
     void createAdmin(AdminT admin);
+
+    AdminT getAdminByID(Integer adminId);
+
+    void update(AdminT admin);
 }

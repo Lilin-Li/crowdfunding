@@ -39,4 +39,18 @@ public class AdminServiceImp implements AdminService {
         admin.setCreateTime(formatter.format(LocalDateTime.now()));
         adminMapper.insert(admin);
     }
+
+    @Override
+    public AdminT getAdminByID(Integer adminId) {
+        return adminMapper.selectByPrimaryKey(adminId);
+    }
+
+    @Override
+    public void update(AdminT admin) {
+        AdminT adminFromDB = adminMapper.selectByPrimaryKey(admin.getId());
+        admin.setUserPswd(adminFromDB.getUserPswd());
+        admin.setCreateTime(adminFromDB.getCreateTime());
+
+        adminMapper.updateByPrimaryKey(admin);
+    }
 }

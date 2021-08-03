@@ -31,9 +31,9 @@ public class AdminController {
 
     @GetMapping("/users")
     public String getAdmins(@RequestParam(value = "keyword", defaultValue = "") String keyword,
-                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                           @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, Map<String, Object> map,
-                           @RequestParam(value = "exceptionMsg", defaultValue = "") String exceptionMsg) throws Exception {
+                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, Map<String, Object> map,
+                            @RequestParam(value = "exceptionMsg", defaultValue = "") String exceptionMsg) throws Exception {
 
         PageInfo<AdminT> pageInfo = adminService.getAdmins(keyword, pageNum, pageSize);
         map.put("pageInfo", pageInfo);
@@ -42,29 +42,57 @@ public class AdminController {
 
     @GetMapping({"/user/delete/{adminId}/{pageNum}/{keyword}", "/user/delete/{adminId}/{pageNum}/"})
     public String deleteAdmin(@PathVariable("adminId") Integer adminId,
-                         @PathVariable(value = "pageNum") Integer pageNum,
-                         @PathVariable(value = "keyword", required = false) String keyword,
-                         HttpSession session) throws Exception {
+                              @PathVariable(value = "pageNum") Integer pageNum,
+                              @PathVariable(value = "keyword", required = false) String keyword,
+                              HttpSession session) throws Exception {
 
         // 若delete的帳號是目前登入帳號 => 拋例外
         Integer sessionAdminId = ((AdminT) session.getAttribute(SystemConstant.SESSION_LOGIN_ADMIN)).getId();
         if (adminId.equals(sessionAdminId)) {
             throw new DeleteAdminFailedException(ErrorCodeEnum.DELETA_ADMIN_FAILED.getErrorCodeAndMes());
-        };
+        }
+        ;
 
         adminService.deleteAdmin(adminId);
-        if(keyword == null){
+        if (keyword == null) {
             keyword = "";
         }
         return "redirect:/users?pageNum=" + pageNum + "&keyword=" + keyword;
     }
+
     @PostMapping("/admin/create")
     public String createAdmin(AdminT admin) throws Exception {
         try {
             adminService.createAdmin(admin);
-        }catch (DuplicateKeyException duplicateKeyException){
+        } catch (DuplicateKeyException duplicateKeyException) {
             throw new DuplicateAcctOrEmailException(ErrorCodeEnum.DUPLICATE_ACCT_OR_EMAIL.getErrorCodeAndMes());
         }
         return "redirect:/users";
+    }
+
+    @GetMapping({"/user/toEditPage/{adminId}/{pageNum}/{keyword}", "/user/toEditPage/{adminId}/{pageNum}/"})
+    public String toEditPage(@PathVariable(value = "adminId") Integer adminId,
+                             @PathVariable(value = "pageNum") Integer pageNum,
+                             @PathVariable(value = "keyword", required = false) String keyword,
+                             Map<String, Object> map) throws Exception {
+
+        AdminT admin = adminService.getAdminByID(adminId);
+        map.put("admin", admin);
+        map.put("adminId", adminId);
+        map.put("pageNum", pageNum);
+        map.put("keyword", keyword);
+        return "edit";
+    }
+
+    @PostMapping("/user/edit")
+    public String toEditPage(@RequestParam(value = "pageNum") Integer pageNum,
+                             @RequestParam(value = "keyword", required = false) String keyword,
+                             AdminT admin) throws Exception {
+        try {
+            adminService.update(admin);
+        } catch (DuplicateKeyException duplicateKeyException) {
+            throw new Exception("DuplicateKeyException  這在/admin/create 新建使用者時處理過，導向例外處理層後 讓使用者回到同一頁面 並顯示錯誤訊息，這裡不重複demo了");
+        }
+        return "redirect:/users?pageNum=" + pageNum + "&keyword=" + keyword;
     }
 }
