@@ -8,7 +8,8 @@ public enum ErrorCodeEnum {
     LOGIN_FAILED_RESULT_NULL(10004, "查出結果為null"),
     LOGIN_PASSWORD_ERROR(10005, "密碼比對不吻合"),
     ACCESS_FORBIDDEN(10006, "未登入禁止訪問"),
-    DELETA_ADMIN_FAILED(10007,"不可以在後台刪除自己的帳號");
+    DELETA_ADMIN_FAILED(10007,"不可以在後台刪除自己的帳號"),
+    DUPLICATE_ACCT_OR_EMAIL(10008,"帳號或email已被使用。");
 
     private final int errorCode;
     private final String errorMeg;

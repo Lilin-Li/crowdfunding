@@ -38,6 +38,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">表單數據<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
 				<div class="panel-body">
+					<P style="color:red;" th:if = "${param.exceptionMsg}" th:text = "系統訊息： + ${param.exceptionMsg}">紅色
 					<form action="/admin/create" method="post" role="form">
 						<div class="form-group">
 							<label for="exampleInputPassword1">登錄賬號</label>

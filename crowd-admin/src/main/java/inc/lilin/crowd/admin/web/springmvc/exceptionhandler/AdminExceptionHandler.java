@@ -2,6 +2,7 @@ package inc.lilin.crowd.admin.web.springmvc.exceptionhandler;
 
 import inc.lilin.crowd.admin.core.exception.AccessForbiddenException;
 import inc.lilin.crowd.admin.core.exception.DeleteAdminFailedException;
+import inc.lilin.crowd.admin.core.exception.DuplicateAcctOrEmailException;
 import inc.lilin.crowd.admin.core.exception.LoginFailedException;
 import inc.lilin.crowd.common.web.springmvc.exceptionhandler.ExceptionsHandlingTools;
 import lombok.extern.slf4j.Slf4j;
@@ -35,4 +36,10 @@ public class AdminExceptionHandler {
         ExceptionsHandlingTools.printStack(ex);
         return ExceptionsHandlingTools.resolve("redirect:/users?exceptionMsg=" + URLEncoder.encode(ex.getMessage(),"UTF-8"), ex, request, response);
     }
+    @ExceptionHandler({DuplicateAcctOrEmailException.class})
+    public ModelAndView handleDuplicateAcctOrEmailException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ExceptionsHandlingTools.printStack(ex);
+        return ExceptionsHandlingTools.resolve("redirect:/admin/add?exceptionMsg=" + URLEncoder.encode(ex.getMessage(),"UTF-8"), ex, request, response);
+    }
+
 }

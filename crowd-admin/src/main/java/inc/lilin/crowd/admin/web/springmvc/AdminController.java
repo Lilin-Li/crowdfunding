@@ -2,11 +2,13 @@ package inc.lilin.crowd.admin.web.springmvc;
 
 import com.github.pagehelper.PageInfo;
 import inc.lilin.crowd.admin.core.exception.DeleteAdminFailedException;
+import inc.lilin.crowd.admin.core.exception.DuplicateAcctOrEmailException;
 import inc.lilin.crowd.admin.core.service.AdminService;
 import inc.lilin.crowd.admin.database.mysql.mybatis.AdminT;
 import inc.lilin.crowd.common.core.ErrorCodeEnum;
 import inc.lilin.crowd.common.core.SystemConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,7 +60,11 @@ public class AdminController {
     }
     @PostMapping("/admin/create")
     public String createAdmin(AdminT admin) throws Exception {
-        adminService.createAdmin(admin);
+        try {
+            adminService.createAdmin(admin);
+        }catch (DuplicateKeyException duplicateKeyException){
+            throw new DuplicateAcctOrEmailException(ErrorCodeEnum.DUPLICATE_ACCT_OR_EMAIL.getErrorCodeAndMes());
+        }
         return "redirect:/users";
     }
 }

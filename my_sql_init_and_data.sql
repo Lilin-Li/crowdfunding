@@ -2,16 +2,17 @@ CREATE DATABASE  if not exists crowd_admin;
 use crowd_admin;
 drop table if exists admin_t;
 
-create table admin_t
-(
-    id int not null auto_increment, # 主鍵
-    login_acct varchar(255) not null, # 登錄賬號
-    user_pswd char(100) not null, # 登錄密碼
-    user_name varchar(255) not null, # 昵稱
-    email varchar(255) not null, # 郵件地址
-    create_time char(19), # 建立時間
-    primary key (id)
-);
+CREATE TABLE `admin_t` (
+                           `id` int(11) NOT NULL AUTO_INCREMENT,
+                           `login_acct` varchar(255) NOT NULL,
+                           `user_pswd` char(100) NOT NULL,
+                           `user_name` varchar(255) NOT NULL,
+                           `email` varchar(255) NOT NULL,
+                           `create_time` char(19) DEFAULT NULL,
+                           PRIMARY KEY (`id`),
+                           UNIQUE KEY `admin_t_UN` (`login_acct`),
+                           UNIQUE KEY `admin_t_UNB` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=10005 DEFAULT CHARSET=utf8
 
 INSERT INTO crowd_admin.admin_t
 (id, login_acct, user_pswd, user_name, email, create_time)
