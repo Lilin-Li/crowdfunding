@@ -14,10 +14,13 @@ CREATE TABLE `admin_t` (
                            PRIMARY KEY (`id`),
                            UNIQUE KEY `admin_t_UN` (`login_acct`),
                            UNIQUE KEY `admin_t_UNB` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10005 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10005 DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `role_t` ( `id` INT NOT NULL, `name` CHAR(100), PRIMARY KEY(`id`) );
-ALTER TABLE `role_t` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+CREATE TABLE `role_t` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `name` CHAR(100),
+     PRIMARY KEY(`id`)
+) DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO crowd_admin.admin_t
 (id, login_acct, user_pswd, user_name, email, create_time)

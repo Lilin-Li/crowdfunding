@@ -1,5 +1,7 @@
 package inc.lilin.crowd.admin.database.mysql.mybatis;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface RoleTMapper {
@@ -12,4 +14,6 @@ public interface RoleTMapper {
     List<RoleT> selectAll();
 
     int updateByPrimaryKey(RoleT record);
+
+    List<RoleT> selectRoleByKeyword(@Param("keyword") String keyword);
 }
