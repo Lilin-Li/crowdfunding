@@ -5,4 +5,6 @@ import inc.lilin.crowd.admin.database.mysql.mybatis.RoleT;
 
 public interface RoleService {
     PageInfo<RoleT> getPageInfo(Integer pageNum, Integer pageSize, String keyword);
+
+    void saveRole(RoleT role);
 }

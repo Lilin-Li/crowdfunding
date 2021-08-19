@@ -22,4 +22,9 @@ public class RoleServiceImpl implements RoleService {
 
         return new PageInfo<>(roleList);
     }
+
+    @Override
+    public void saveRole(RoleT role) {
+        roleDAO.insert(role);
+    }
 }

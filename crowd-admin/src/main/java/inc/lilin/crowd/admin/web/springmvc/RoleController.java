@@ -26,4 +26,11 @@ public class RoleController {
 
         return RestResultDTO.successWithData(pageInfo);
     }
+
+    @ResponseBody
+    @PostMapping("/role/save.json")
+    public RestResultDTO<String> saveRole(RoleT role) {
+        roleService.saveRole(role);
+        return RestResultDTO.successWithoutData();
+    }
 }

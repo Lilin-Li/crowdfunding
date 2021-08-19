@@ -62,8 +62,7 @@ function fillTableBody(pageInfo) {
     $("#Pagination").empty();
 
     // 判斷pageInfo 對象是否有效
-    if(pageInfo == null || pageInfo == undefined || pageInfo.list == null || pageInfo.list.length
-        == 0) {
+    if(pageInfo == null || pageInfo == undefined || pageInfo.list == null || pageInfo.list.length == 0) {
         $("#rolePageBody").append("<tr><td colspan='4' align='center'>抱歉！沒有查詢到您搜索的數據！</td></tr>");
 
     return ;
