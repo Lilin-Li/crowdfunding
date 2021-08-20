@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--	CSRF -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+<!--    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="css/font-awesome.min.css">-->
+<!--    <link rel="stylesheet" href="css/main.css">-->
+<!--    <link rel="stylesheet" href="css/doc.min.css">-->
+    <link rel="stylesheet" href="ztree/zTreeStyle.css">
+
+<!--    <script src="jquery/jquery-2.1.1.min.js"></script>-->
+<!--    <script src="bootstrap/js/bootstrap.min.js"></script>-->
+<!--    <script src="script/docs.min.js"></script>-->
+    <script src="ztree/jquery.ztree.all-3.5.min.js"></script>
+
+    <link rel="stylesheet" href="../frontend/bootstrap/css/bootstrap.min.css" th:href="@{/frontend/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../frontend/css/font-awesome.min.css" th:href="@{/frontend/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../frontend/css/main.css" th:href="@{/frontend/css/main.css}">
+    <script src="../frontend/script/docs.min.js" th:src="@{/frontend/script/docs.min.js}"></script>
+
+
+    <script src="../frontend/jquery/jquery-2.1.1.min.js" th:src="@{/frontend/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="../frontend/bootstrap/js/bootstrap.min.js" th:src="@{/frontend/bootstrap/js/bootstrap.min.js}"></script>
+
+
+
+
+    <!--	供本頁使用的自己的js-->
+    <script type="text/javascript" src="../frontend/script/my-role.js" th:src="@{/frontend/script/my-role.js}"></script>
+    <script type="text/javascript" src="../frontend/script/role.js" th:src="@{/frontend/script/role.js}"></script>
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background: #F4F4F4;
+        }
+
+        table tbody td:nth-child(even) {
+            color: #C00;
+        }
+    </style>
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+</body>
+</html>
