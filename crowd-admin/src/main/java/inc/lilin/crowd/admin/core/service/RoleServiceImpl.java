@@ -27,4 +27,9 @@ public class RoleServiceImpl implements RoleService {
     public void saveRole(RoleT role) {
         roleDAO.insert(role);
     }
+
+    @Override
+    public void updateRole(RoleT role) {
+        roleDAO.updateByPrimaryKey(role);
+    }
 }

@@ -82,7 +82,7 @@ function fillTableBody(pageInfo) {
         var roleNameTd = "<td>"+roleName+"</td>";
 
         var checkBtn = "<button type='button' class='btn btn-success btn-xs'><i class='glyphicon glyphicon-check'></i></button>";
-        var pencilBtn = "<button type='button' class='btn btn-primary btn-xs'><i class='glyphicon glyphicon-pencil'></i></button>";
+        var pencilBtn = "<button id='"+ roleId+"' type='button' class='btn btn-primary btn-xs pencilBtn'><i class=' glyphicon glyphicon-pencil'></i></button>";
         var removeBtn = "<button type='button' class='btn btn-danger btn-xs'><i class='glyphicon glyphicon-remove'></i></button>";
 
         var buttonTd = "<td>"+checkBtn+" "+pencilBtn+" "+removeBtn+"</td>";
