@@ -8,56 +8,40 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
-<!--    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">-->
-<!--    <link rel="stylesheet" href="css/font-awesome.min.css">-->
-<!--    <link rel="stylesheet" href="css/main.css">-->
-<!--    <link rel="stylesheet" href="css/doc.min.css">-->
-    <link rel="stylesheet" href="ztree/zTreeStyle.css">
-
-<!--    <script src="jquery/jquery-2.1.1.min.js"></script>-->
-<!--    <script src="bootstrap/js/bootstrap.min.js"></script>-->
-<!--    <script src="script/docs.min.js"></script>-->
-    <script src="ztree/jquery.ztree.all-3.5.min.js"></script>
+    <!-- ztree   -->
+    <link rel="stylesheet" href="../frontend/ztree/zTreeStyle.css" th:href="@{/frontend/ztree/zTreeStyle.css}">
+    <script src="../frontend/ztree/jquery.ztree.all-3.5.min.js" th:src="@{/frontend/ztree/jquery.ztree.all-3.5.min.js}"></script>
 
     <link rel="stylesheet" href="../frontend/bootstrap/css/bootstrap.min.css" th:href="@{/frontend/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../frontend/css/font-awesome.min.css" th:href="@{/frontend/css/font-awesome.min.css}">
     <link rel="stylesheet" href="../frontend/css/main.css" th:href="@{/frontend/css/main.css}">
     <script src="../frontend/script/docs.min.js" th:src="@{/frontend/script/docs.min.js}"></script>
-
-
     <script src="../frontend/jquery/jquery-2.1.1.min.js" th:src="@{/frontend/jquery/jquery-2.1.1.min.js}"></script>
     <script src="../frontend/bootstrap/js/bootstrap.min.js" th:src="@{/frontend/bootstrap/js/bootstrap.min.js}"></script>
 
-
-
-
-    <!--	供本頁使用的自己的js-->
-    <script type="text/javascript" src="../frontend/script/my-role.js" th:src="@{/frontend/script/my-role.js}"></script>
-    <script type="text/javascript" src="../frontend/script/role.js" th:src="@{/frontend/script/role.js}"></script>
     <style>
         .tree li {
             list-style-type: none;
             cursor: pointer;
         }
-
-        table tbody tr:nth-child(odd) {
-            background: #F4F4F4;
-        }
-
-        table tbody td:nth-child(even) {
-            color: #C00;
-        }
     </style>
-
-
-
-
-
-
-
-
 </head>
 <body>
+<div th:insert="~{common-navbar::navbar}"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div th:insert="~{common-sidebar::sidebar}"></div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="glyphicon glyphicon-th-list"></i> 許可權菜單列表 <div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+                <div class="panel-body">
+                    <ul id="treeDemo" class="ztree"><li id="treeDemo_1" class="level0" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_1_switch" title="" class="button level0 switch root_open" treenode_switch=""></span><a id="treeDemo_1_a" class="level0" treenode_a="" onclick="" target="_blank" style="" title="系統許可權菜單" href="javascript:;"><span id="treeDemo_1_ico" title="" treenode_ico="" class="fa fa-fw fa-sitemap" style="background:url(fa fa-sitemap) 0 0 no-repeat;"></span><span id="treeDemo_1_span">系統許可權菜單</span></a><ul id="treeDemo_1_ul" class="level0 " style="display:block"><li id="treeDemo_2" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_2_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><a id="treeDemo_2_a" class="level1" treenode_a="" onclick="" href="javascript:;" target="_blank" style="" title="控制面板"><span id="treeDemo_2_ico" title="" treenode_ico="" class="fa fa-fw fa-desktop" style="background:url(fa fa-desktop) 0 0 no-repeat;"></span><span id="treeDemo_2_span">控制面板</span></a></li><li id="treeDemo_3" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_3_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><a id="treeDemo_3_a" class="level1" treenode_a="" onclick="" href="javascript:;" target="_blank" style="" title="訊息管理"><span id="treeDemo_3_ico" title="" treenode_ico="" class="fa fa-fw fa-weixin" style="background:url(fa fa-weixin) 0 0 no-repeat;"></span><span id="treeDemo_3_span">訊息管理</span></a></li><li id="treeDemo_4" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_4_switch" title="" class="button level1 switch center_open" treenode_switch=""></span><a id="treeDemo_4_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="許可權管理"><span id="treeDemo_4_ico" title="" treenode_ico="" class="fa fa-fw fa-cogs" style="background:url(fa fa-cogs) 0 0 no-repeat;"></span><span id="treeDemo_4_span">許可權管理</span></a><ul id="treeDemo_4_ul" class="level1 line" style="display:block"><li id="treeDemo_5" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_5_switch" title="" class="button level2 switch center_docu" treenode_switch=""></span><a id="treeDemo_5_a" class="level2" treenode_a="" onclick="" href="user/index.htm" target="_blank" style="" title="使用者管理"><span id="treeDemo_5_ico" title="" treenode_ico="" class="fa fa-fw fa-user" style="background:url(fa fa-user) 0 0 no-repeat;"></span><span id="treeDemo_5_span">使用者管理</span></a></li><li id="treeDemo_6" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_6_switch" title="" class="button level2 switch center_docu" treenode_switch=""></span><a id="treeDemo_6_a" class="level2" treenode_a="" onclick="" href="role/index.htm" target="_blank" style="" title="角色管理"><span id="treeDemo_6_ico" title="" treenode_ico="" class="fa fa-fw fa-graduation-cap" style="background:url(fa fa-graduation-cap) 0 0 no-repeat;"></span><span id="treeDemo_6_span">角色管理</span></a></li><li id="treeDemo_7" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_7_switch" title="" class="button level2 switch bottom_docu" treenode_switch=""></span><a id="treeDemo_7_a" class="level2" treenode_a="" onclick="" href="permission/index.htm" target="_blank" style="" title="許可管理"><span id="treeDemo_7_ico" title="" treenode_ico="" class="fa fa-fw fa-check-square-o" style="background:url(fa fa-check-square-o) 0 0 no-repeat;"></span><span id="treeDemo_7_span">許可管理</span></a></li></ul></li><li id="treeDemo_8" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_8_switch" title="" class="button level1 switch center_open" treenode_switch=""></span><a id="treeDemo_8_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="資質管理"><span id="treeDemo_8_ico" title="" treenode_ico="" class="fa fa-fw fa-certificate" style="background:url(fa fa-certificate) 0 0 no-repeat;"></span><span id="treeDemo_8_span">資質管理</span></a><ul id="treeDemo_8_ul" class="level1 line" style="display:block"><li id="treeDemo_9" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_9_switch" title="" class="button level2 switch center_docu" treenode_switch=""></span><a id="treeDemo_9_a" class="level2" treenode_a="" onclick="" href="cert/type.htm" target="_blank" style="" title="分類管理"><span id="treeDemo_9_ico" title="" treenode_ico="" class="fa fa-fw fa-th-list" style="background:url(fa fa-th-list) 0 0 no-repeat;"></span><span id="treeDemo_9_span">分類管理</span></a></li><li id="treeDemo_10" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_10_switch" title="" class="button level2 switch bottom_docu" treenode_switch=""></span><a id="treeDemo_10_a" class="level2" treenode_a="" onclick="" href="cert/index.htm" target="_blank" style="" title="資質管理"><span id="treeDemo_10_ico" title="" treenode_ico="" class="fa fa-fw fa-certificate" style="background:url(fa fa-certificate) 0 0 no-repeat;"></span><span id="treeDemo_10_span">資質管理</span></a></li></ul></li><li id="treeDemo_11" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_11_switch" title="" class="button level1 switch center_docu" treenode_switch=""></span><a id="treeDemo_11_a" class="level1" treenode_a="" onclick="" href="javascript:;" target="_blank" style="" title="流程管理"><span id="treeDemo_11_ico" title="" treenode_ico="" class="fa fa-fw fa-random" style="background:url(fa fa-random) 0 0 no-repeat;"></span><span id="treeDemo_11_span">流程管理</span></a></li><li id="treeDemo_12" class="level1" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_12_switch" title="" class="button level1 switch bottom_open" treenode_switch=""></span><a id="treeDemo_12_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="審覈管理" href="javascript:;"><span id="treeDemo_12_ico" title="" treenode_ico="" class="fa fa-fw fa-check-square" style="background:url(fa fa-check-square) 0 0 no-repeat;"></span><span id="treeDemo_12_span">審覈管理</span></a><ul id="treeDemo_12_ul" class="level1 " style="display:block"><li id="treeDemo_13" class="level2" tabindex="0" hidefocus="true" treenode=""><span id="treeDemo_13_switch" title="" class="button level2 switch bottom_docu" treenode_switch=""></span><a id="treeDemo_13_a" class="level2" treenode_a="" onclick="" href="javascript:;" target="_blank" style="" title="實名認證人工審覈"><span id="treeDemo_13_ico" title="" treenode_ico="" class="fa fa-fw fa-check-circle-o" style="background:url(fa fa-check-circle-o) 0 0 no-repeat;"></span><span id="treeDemo_13_span">實名認證人工審覈</span></a></li></ul></li></ul></li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
