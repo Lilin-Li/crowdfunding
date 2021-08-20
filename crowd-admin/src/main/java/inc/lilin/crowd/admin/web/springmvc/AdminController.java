@@ -91,7 +91,7 @@ public class AdminController {
         try {
             adminService.update(admin);
         } catch (DuplicateKeyException duplicateKeyException) {
-            throw new Exception("DuplicateKeyException  這在/admin/create 新建使用者時處理過，導向例外處理層後 讓使用者回到同一頁面 並顯示錯誤訊息，這裡不重複demo了");
+            throw new Exception("DuplicateKeyException  這在/admin/create 新建使用者時處理過，不重複demo了");
         }
         return "redirect:/users?pageNum=" + pageNum + "&keyword=" + keyword;
     }
