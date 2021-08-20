@@ -1,4 +1,4 @@
-<div th:fragment="modal-role-add"  id="addModal" class="modal fade" tabindex="-1" role="dialog">
+<div th:fragment="modal-role-confirm"  id="confirmModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,16 +9,11 @@
                 <h4 class="modal-title">尚籌網系統彈窗</h4>
             </div>
             <div class="modal-body">
-                <form class="form-signin" role="form">
-                    <div class="form-group has-success has-feedback">
-                        <input
-                                type="text" name="roleName"
-                                class="form-control" id="inputSuccess4" placeholder="請輸入角色名稱" autofocus>
-                    </div>
-                </form>
+                <h4> 請確認是否要刪除下列角色： </h4>
+                <div id="roleNameDiv" style="text-alignt: center;"></div>
             </div>
             <div class="modal-footer">
-                <button id="saveRoleBtn" type="button" class="btn btn-primary"> 儲存
+                <button id="removeRoleBtn" type="button" class="btn btn-primary"> 確認刪除
                 </button>
             </div>
         </div>

@@ -77,17 +77,17 @@ function fillTableBody(pageInfo) {
 
         var roleName = role.name;
 
-        var numberTd = "<td>"+(i+1)+"</td>";
-        var checkboxTd = "<td><input type='checkbox'></td>";
-        var roleNameTd = "<td>"+roleName+"</td>";
+        var numberTd = "<td>" + (i + 1) + "</td>";
+        var checkboxTd = "<td><input id='" + roleId + "' class='itemBox' type='checkbox'></td>";
+        var roleNameTd = "<td>" + roleName + "</td>";
 
         var checkBtn = "<button type='button' class='btn btn-success btn-xs'><i class='glyphicon glyphicon-check'></i></button>";
-        var pencilBtn = "<button id='"+ roleId+"' type='button' class='btn btn-primary btn-xs pencilBtn'><i class=' glyphicon glyphicon-pencil'></i></button>";
-        var removeBtn = "<button type='button' class='btn btn-danger btn-xs'><i class='glyphicon glyphicon-remove'></i></button>";
+        var pencilBtn = "<button id='" + roleId + "' type='button' class='btn btn-primary btn-xs pencilBtn'><i class=' glyphicon glyphicon-pencil'></i></button>";
+        var removeBtn = "<button id='" + roleId + "' type='button' class='btn btn-danger btn-xs removeBtn'><i class=' glyphicon glyphicon-remove'></i></button>";
 
-        var buttonTd = "<td>"+checkBtn+" "+pencilBtn+" "+removeBtn+"</td>";
+        var buttonTd = "<td>" + checkBtn + " " + pencilBtn + " " + removeBtn + "</td>";
 
-        var tr = "<tr>"+numberTd+checkboxTd+roleNameTd+buttonTd+"</tr>";
+        var tr = "<tr>" + numberTd + checkboxTd + roleNameTd + buttonTd + "</tr>";
 
         $("#rolePageBody").append(tr);
     }
@@ -129,5 +129,31 @@ function paginationCallBack(pageIndex, jQuery) {
 
     // 取消頁碼超鏈接的預設行為
     return false;
+
+}
+
+// 聲明專門的函式顯示確認模態框
+function showConfirmModal(roleArray) {
+
+    // 打開模態框
+    $("#confirmModal").modal("show");
+
+    // 清除舊的數據
+    $("#roleNameDiv").empty();
+
+    // 在全域性變數範圍建立陣列用來存放角色id
+    window.roleIdArray = [];
+
+    // 遍歷roleArray 陣列
+    for(var i = 0; i < roleArray.length; i++) {
+        var role = roleArray[i];
+        var roleName = role.roleName;
+        $("#roleNameDiv").append(roleName+"<br/>");
+
+        var roleId = role.roleId;
+
+        // 呼叫陣列對象的push()方法存入新元素
+        window.roleIdArray.push(roleId);
+    }
 
 }

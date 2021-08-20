@@ -27,177 +27,11 @@
 
     <!--	分頁外掛-->
     <link rel="stylesheet" href="../frontend/css/pagination.css" th:href="@{/frontend/css/pagination.css}">
-    </script>
-    <script type="text/javascript" src="../frontend/jquery/jquery.pagination.js"
-            th:src="@{/frontend/jquery/jquery.pagination.js}"></script>
+    <script type="text/javascript" src="../frontend/jquery/jquery.pagination.js" th:src="@{/frontend/jquery/jquery.pagination.js}"></script>
 
-    <!--	ajax 讀取後端角色資料-->
+    <!--	供本頁使用的自己的js-->
     <script type="text/javascript" src="../frontend/script/my-role.js" th:src="@{/frontend/script/my-role.js}"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            window.pageNum = 1;
-            window.pageSize = 5;
-            window.keyword = "";
-
-            generatePage();
-
-            $("#searchBtn").click(function () {
-                window.keyword = $("#keywordInput").val();
-                generatePage();
-
-            });
-
-            $("tbody .btn-success").click(function () {
-                window.location.href = "assignPermission.html";
-            });
-
-            $("#showAddModalBtn").click(function () {
-                $("#addModal").modal("show");
-            });
-
-            // 給新增模態框中的儲存按鈕繫結單擊響應函式
-            $("#saveRoleBtn").click(function () {
-
-                // ①獲取使用者在文字框中輸入的角色名稱
-                // #addModal 表示找到整個模態框
-                // 空格表示在後代元素中繼續查詢
-                // [name=roleName]表示匹配name 屬性等於roleName 的元素
-                var roleName = $.trim($("#addModal [name=roleName]").val());
-
-                var token = $("meta[name='_csrf']").attr("content");
-                var header = $("meta[name='_csrf_header']").attr("content");
-                // 呼叫$.ajax()函式發送請求並接受$.ajax()函式的返回值
-                // ②發送Ajax 請求
-                $.ajax({
-                    "url": "/role/save.json",
-                    "type": "post",
-                    "data": {
-                        "name": roleName
-                    },
-                    "dataType": "json",
-                    "beforeSend": function (xhr) {
-                        xhr.setRequestHeader(header, token);
-                    },
-                    "success": function (response) {
-
-                        var result = response.result;
-
-                        if (result == "SUCCESS") {
-                            layer.msg("操作成功！");
-
-                            // 將頁碼定位到第一頁
-                            window.pageNum = 1;
-
-                            // 重新載入分頁數據
-                            generatePage();
-                        }
-                        if (result == "FAILED") {
-                            layer.msg("操作失敗！" + response.message);
-                        }
-
-                    },
-                    "error": function (response) {
-                        layer.msg(response.status + " " + response.statusText);
-                    }
-                });
-
-                // 關閉模態框
-                $("#addModal").modal("hide");
-
-                // 清理模態框
-                $("#addModal [name=roleName]").val("");
-            });
-
-            // 給頁面上的「鉛筆」按鈕繫結單擊響應函式，目的是打開模態框
-            // 傳統的事件繫結方式只能在第一個頁面有效，翻頁后失效了
-            // $(".pencilBtn").click(function(){
-            // alert("aaaa...");
-            // });
-            // 使用jQuery 對象的on()函式可以解決上面問題
-            // ①首先找到所有「動態產生」的元素所附著的「靜態」元素
-            // ②on()函式的第一個參數是事件型別
-            // ③on()函式的第二個參數是找到真正要繫結事件的元素的選擇器
-            // ③on()函式的第三個參數是事件的響應函式
-            $("#rolePageBody").on("click", ".pencilBtn", function () {
-                // 打開模態框
-                $("#editModal").modal("show");
-
-                // 獲取表格中目前行中的角色名稱
-                var roleName = $(this).parent().prev().text();
-
-                // 獲取目前角色的id
-                // 依據是：var pencilBtn = "<button id='"+roleId+"' ……這段程式碼中我們把roleId 設定到id屬性了
-                // 爲了讓執行更新的按鈕能夠獲取到roleId 的值，把它放在全域性變數上
-                window.roleId = this.id;
-
-                // 使用roleName 的值設定模態框中的文字框
-                $("#editModal [name=roleName]").val(roleName);
-            });
-
-            $("#updateRoleBtn").click(function () {
-                // ①從文字框中獲取新的角色名稱
-                var roleName = $("#editModal [name=roleName]").val();
-
-                var token = $("meta[name='_csrf']").attr("content");
-                var header = $("meta[name='_csrf_header']").attr("content");
-
-                // ②發送Ajax 請求執行更新
-                $.ajax({
-                    "url": "/role/update.json",
-                    "type": "post",
-                    "data": {
-                        "id": window.roleId,
-                        "name": roleName
-                    },
-                    "beforeSend": function (xhr) {
-                        xhr.setRequestHeader(header, token);
-                    },
-                    "dataType": "json",
-                    "success": function (response) {
-
-                        var result = response.result;
-
-                        if (result == "SUCCESS") {
-                            layer.msg("操作成功！");
-
-                            // 重新載入分頁數據
-                            generatePage();
-                        }
-
-                        if (result == "FAILED") {
-                            layer.msg("操作失敗！" + response.message);
-                        }
-
-                    },
-                    "error": function (response) {
-                        layer.msg(response.status + " " + response.statusText);
-                    }
-                });
-
-                // ③關閉模態框
-                $("#editModal").modal("hide");
-            });
-
-
-            $(function () {
-                $(".list-group-item").click(function () {
-                    if ($(this).find("ul")) {
-                        $(this).toggleClass("tree-closed");
-                        if ($(this).hasClass("tree-closed")) {
-                            $("ul", this).hide("fast");
-                        } else {
-                            $("ul", this).show("fast");
-                        }
-                    }
-                });
-            });
-
-
-        });
-
-
-    </script>
+    <script type="text/javascript" src="../frontend/script/role.js" th:src="@{/frontend/script/role.js}"></script>
     <style>
         .tree li {
             list-style-type: none;
@@ -240,8 +74,8 @@
                                 class="glyphicon glyphicon-search"></i> 查詢
                         </button>
                     </form>
-                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i
-                            class=" glyphicon glyphicon-remove"></i> 刪除
+                    <button id="batchRemoveBtn" type="button" class="btn btn-danger" style="float: right; margin-left: 10px;">
+                        <i class=" glyphicon glyphicon-remove"></i> 刪除
                     </button>
                     <button type="button" class="btn btn-primary" style="float:right;" id="showAddModalBtn"><i
                             class="glyphicon glyphicon-plus"></i> 新增
@@ -253,7 +87,7 @@
                             <thead>
                             <tr>
                                 <th width="30">#</th>
-                                <th width="30"><input type="checkbox"></th>
+                                <th width="30"><input id="summaryBox" type="checkbox"></th>
                                 <th>名稱</th>
                                 <th width="100">操作</th>
                             </tr>
@@ -283,6 +117,10 @@
 
 <!--修改角色的彈跳視窗-->
 <div th:insert="~{modal-role-edit :: modal-role-edit}">
+</div>
+
+<!--批次刪除角色的彈跳視窗-->
+<div th:insert="~{modal-role-confirm :: modal-role-confirm}">
 </div>
 
 </body>
