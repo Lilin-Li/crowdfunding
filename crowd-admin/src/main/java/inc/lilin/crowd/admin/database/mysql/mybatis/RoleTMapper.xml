@@ -9,6 +9,15 @@
     delete from role_t
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteByIdList" parameterType="java.lang.Integer">
+    delete from role_t
+    <foreach collection="roleIdList" item="item_id" separator="," open="where id in(" close=")">
+      #{item_id}
+    </foreach>
+  </delete>
+
+
   <insert id="insert" parameterType="inc.lilin.crowd.admin.database.mysql.mybatis.RoleT">
     insert into role_t (id, name)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=CHAR})

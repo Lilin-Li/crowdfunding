@@ -32,4 +32,9 @@ public class RoleServiceImpl implements RoleService {
     public void updateRole(RoleT role) {
         roleDAO.updateByPrimaryKey(role);
     }
+
+    public void removeRole(List<Integer> roleIdList){
+        roleDAO.deleteByIdList(roleIdList);
+
+    };
 }

@@ -16,4 +16,6 @@ public interface RoleTMapper {
     int updateByPrimaryKey(RoleT record);
 
     List<RoleT> selectRoleByKeyword(@Param("keyword") String keyword);
+
+    void deleteByIdList(@Param("roleIdList")List<Integer> roleIdList);
 }

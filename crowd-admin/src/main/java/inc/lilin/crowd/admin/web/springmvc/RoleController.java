@@ -6,10 +6,9 @@ import inc.lilin.crowd.admin.database.mysql.mybatis.RoleT;
 import inc.lilin.crowd.common.web.springmvc.responseTools.RestResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class RoleController {
@@ -40,6 +39,15 @@ public class RoleController {
     public RestResultDTO<String> updateRole(RoleT role) {
 
         roleService.updateRole(role);
+
+        return RestResultDTO.successWithoutData();
+    }
+
+    @ResponseBody
+    @RequestMapping("/role/remove/by/role/id/array.json")
+    public RestResultDTO<String> removeByRoleIdAarry(@RequestBody List<Integer> roleIdList) {
+
+        roleService.removeRole(roleIdList);
 
         return RestResultDTO.successWithoutData();
     }
