@@ -33,7 +33,7 @@ public class MenuServiceImp implements MenuService {
             // 6.獲取目前 menu 對象的 pid 屬性值
             Integer pid = menu.getPid();
             // 7.如果 pid 為 null，判定為根節點
-            if (pid == null) {
+            if (pid == null || pid.equals(new Integer(0))) {
                 root = menu;
                 // 8.如果目前節點是根節點，那麼肯定沒有父節點，不必繼續執行
                 continue;
@@ -45,5 +45,20 @@ public class MenuServiceImp implements MenuService {
         }
         // 11.經過上面的運算，根節點包含了整個樹形結構，返回根節點就是返回整個樹
         return root;
+    }
+
+    @Override
+    public void saveMenu(MenuT menu) {
+        menuDAO.insert(menu);
+    }
+
+    @Override
+    public void updateMenu(MenuT menu) {
+        menuDAO.updateByPrimaryKeySelective(menu);
+    }
+
+    @Override
+    public void removeMenu(Integer id) {
+        menuDAO.deleteByPrimaryKey(id);
     }
 }

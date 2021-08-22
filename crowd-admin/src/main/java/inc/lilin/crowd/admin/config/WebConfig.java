@@ -21,7 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/frontend/bootstrap/**").addResourceLocations("classpath:/frontend/bootstrap/");
         registry.addResourceHandler("/frontend/css/**").addResourceLocations("classpath:/frontend/css/");
-        registry.addResourceHandler("/frontend/font/**").addResourceLocations("classpath:/frontend/font/");
+        registry.addResourceHandler("/frontend/fonts/**").addResourceLocations("classpath:/frontend/fonts/");
         registry.addResourceHandler("/frontend/img/**").addResourceLocations("classpath:/frontend/img/");
         registry.addResourceHandler("/frontend/jquery/**").addResourceLocations("classpath:/frontend/jquery/");
         registry.addResourceHandler("/frontend/layer/**").addResourceLocations("classpath:/frontend/layer/");

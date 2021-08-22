@@ -46,11 +46,7 @@ public class RoleController {
     @ResponseBody
     @RequestMapping("/role/remove/by/role/id/array.json")
     public RestResultDTO<String> removeByRoleIdAarry(@RequestBody List<Integer> roleIdList) {
-
         roleService.removeRole(roleIdList);
-
         return RestResultDTO.successWithoutData();
     }
-
-
 }

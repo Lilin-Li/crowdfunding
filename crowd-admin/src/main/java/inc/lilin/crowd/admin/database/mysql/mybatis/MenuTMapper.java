@@ -15,4 +15,6 @@ public interface MenuTMapper {
     List<MenuT> selectAll();
 
     int updateByPrimaryKey(MenuT record);
+
+    void updateByPrimaryKeySelective(MenuT menu);
 }
