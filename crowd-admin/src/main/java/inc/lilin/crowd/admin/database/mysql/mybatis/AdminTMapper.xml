@@ -59,4 +59,15 @@
         user_name like concat("%",#{keyword},"%") or
         email like concat("%",#{keyword},"%")
   </select>
+
+  <delete id="deleteOLdRelationship">
+    delete from inner_admin_role where admin_id=${adminId}
+  </delete>
+
+  <insert id="insertNewRelationship">
+    insert into inner_admin_role(admin_id, role_id) values
+    <foreach collection="roleIdList" item="roleId" separator=",">
+      (#{adminId},#{roleId})
+    </foreach>
+  </insert>
 </mapper>

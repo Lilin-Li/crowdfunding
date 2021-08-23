@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-
 public interface AdminTMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -19,4 +18,8 @@ public interface AdminTMapper {
     List<AdminT> selectByAcct(@Param("acct") String loginAcct);
 
     List<AdminT> selectAdminByKeyword(String keyword);
+
+    void deleteOLdRelationship(Integer adminId);
+
+    void insertNewRelationship(@Param("adminId")Integer adminId, @Param("roleIdList")List<Integer> roleIdList);
 }
