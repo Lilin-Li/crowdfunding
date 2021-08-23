@@ -147,7 +147,7 @@
 								<td th:text="${admin.userName}">11</td>
 								<td th:text="${admin.email}">11</td>
 								<td>
-									<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
+									<a th:href="@{/assign/to/assign/role/page.html?adminId=${admin.id}&pageNum=${requestScope.pageInfo.pageNum}&keyword=${param.keyword}}" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></a>
 									<a th:href =  "@{/user/toEditPage/{adminId}/{pageNum}/{keyword}(adminId=${admin.id} ,pageNum=${pageInfo.pageNum},keyword=${param.keyword == null} ? '':${param.keyword})}" type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></abutton>
 									<a th:href =  "@{/user/delete/{adminId}/{pageNum}/{keyword}(adminId=${admin.id}	 ,pageNum=${pageInfo.pageNum},keyword=${param.keyword == null} ? '':${param.keyword})}"  type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>
 								</td>

@@ -18,4 +18,8 @@ public interface RoleTMapper {
     List<RoleT> selectRoleByKeyword(@Param("keyword") String keyword);
 
     void deleteByIdList(@Param("roleIdList")List<Integer> roleIdList);
+
+    List<RoleT> selectAssignedRole(Integer adminId);
+
+    List<RoleT> selectUnAssignedRole(Integer adminId);
 }

@@ -37,4 +37,16 @@ public class RoleServiceImpl implements RoleService {
         roleDAO.deleteByIdList(roleIdList);
 
     };
+
+    @Override
+    public List<RoleT> getAssignedRole(Integer adminId) {
+        return roleDAO.selectAssignedRole(adminId);
+
+    }
+
+    @Override
+    public List<RoleT> getUnAssignedRole(Integer adminId) {
+        return roleDAO.selectUnAssignedRole(adminId);
+
+    }
 }

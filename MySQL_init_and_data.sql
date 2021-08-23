@@ -22,6 +22,14 @@ CREATE TABLE `role_t` (
      PRIMARY KEY(`id`)
 ) DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `crowd_admin`.`inner_admin_role` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `admin_id` INT,
+    `role_id` INT,
+    PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8mb4;
+
+
 INSERT INTO crowd_admin.admin_t
 (id, login_acct, user_pswd, user_name, email, create_time)
 VALUES("1","admin","$2a$10$ZsdW2i19OOZDSw0osSrf2u9NcL2dKxhP7ZrkdArO8.z304efC5eZa","qmante","newell.hahn@example.net","2010/6/29"),
