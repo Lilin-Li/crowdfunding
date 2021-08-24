@@ -12,20 +12,28 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
 
-    <link rel="stylesheet" href="../frontend/bootstrap/css/bootstrap.min.css" th:href="@{/frontend/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../frontend/bootstrap/css/bootstrap.min.css"
+          th:href="@{/frontend/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../frontend/css/font-awesome.min.css" th:href="@{/frontend/css/font-awesome.min.css}">
     <link rel="stylesheet" href="../frontend/css/login.css" th:href="@{/frontend/css/login.css}">
     <link rel="stylesheet" href="../frontend/css/main.css" th:href="@{/frontend/css/main.css}">
 
 
     <script src="../frontend/jquery/jquery-2.1.1.min.js" th:src="@{/frontend/jquery/jquery-2.1.1.min.js}"></script>
-    <script src="../frontend/bootstrap/js/bootstrap.min.js" th:src="@{/frontend/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="../frontend/bootstrap/js/bootstrap.min.js"
+            th:src="@{/frontend/bootstrap/js/bootstrap.min.js}"></script>
     <script src="../frontend/script/docs.min.js" th:src="@{/frontend/script/docs.min.js}"></script>
     <script src="../frontend/layer/layer/layer.js" th:src="@{/frontend/layer/layer/layer.js}"></script>
 
     <!--	分頁外掛-->
     <link rel="stylesheet" href="../frontend/css/pagination.css" th:href="@{/frontend/css/pagination.css}">
-    <script type="text/javascript" src="../frontend/jquery/jquery.pagination.js" th:src="@{/frontend/jquery/jquery.pagination.js}"></script>
+    <script type="text/javascript" src="../frontend/jquery/jquery.pagination.js"
+            th:src="@{/frontend/jquery/jquery.pagination.js}"></script>
+
+    <!--  Ztree  -->
+    <link rel="stylesheet" href="../frontend/ztree/zTreeStyle.css" th:href="@{/frontend/ztree/zTreeStyle.css}">
+    <script type="text/javascript" src="../frontend/ztree/jquery.ztree.all-3.5.min.js"
+            th:src="@{/frontend/ztree/jquery.ztree.all-3.5.min.js}"></script>
 
     <!--	供本頁使用的自己的js-->
     <script type="text/javascript" src="../frontend/script/my-role.js" th:src="@{/frontend/script/my-role.js}"></script>
@@ -72,7 +80,8 @@
                                 class="glyphicon glyphicon-search"></i> 查詢
                         </button>
                     </form>
-                    <button id="batchRemoveBtn" type="button" class="btn btn-danger" style="float: right; margin-left: 10px;">
+                    <button id="batchRemoveBtn" type="button" class="btn btn-danger"
+                            style="float: right; margin-left: 10px;">
                         <i class=" glyphicon glyphicon-remove"></i> 刪除
                     </button>
                     <button type="button" class="btn btn-primary" style="float:right;" id="showAddModalBtn"><i
@@ -120,6 +129,10 @@
 <!--批次刪除角色的彈跳視窗-->
 <div th:insert="~{modal-role-confirm :: modal-role-confirm}">
 </div>
+
+<!--賦予權限的彈跳視窗-->
+<div th:insert="~{modal-role-assign-auth :: modal-role-assign-auth}"></div>
+
 
 </body>
 </html>

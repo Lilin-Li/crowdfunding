@@ -24,7 +24,7 @@ public class AdminController {
     AdminService adminService;
 
     @GetMapping("admin/logout")
-    public String gusetLogin(HttpSession session) throws Exception {
+    public String adminLogout(HttpSession session) throws Exception {
         session.invalidate();
         return "redirect:/";
     }

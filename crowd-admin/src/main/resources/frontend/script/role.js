@@ -1,3 +1,6 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
 $(function () {
     window.pageNum = 1;
     window.pageSize = 5;
@@ -9,10 +12,6 @@ $(function () {
         window.keyword = $("#keywordInput").val();
         generatePage();
 
-    });
-
-    $("tbody .btn-success").click(function () {
-        window.location.href = "assignPermission.html";
     });
 
     $("#showAddModalBtn").click(function () {
@@ -28,8 +27,7 @@ $(function () {
         // [name=roleName]表示匹配name 屬性等於roleName 的元素
         var roleName = $.trim($("#addModal [name=roleName]").val());
 
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
+
         // 呼叫$.ajax()函式發送請求並接受$.ajax()函式的返回值
         // ②發送Ajax 請求
         $.ajax({
@@ -185,7 +183,7 @@ $(function () {
     });
 
     // 8.點選確認模態框中的確認刪除按鈕執行刪除
-    $("#removeRoleBtn").click(function() {
+    $("#removeRoleBtn").click(function () {
 
         // 從全域性變數範圍獲取roleIdArray，轉換為JSON 字串
         var requestBody = JSON.stringify(window.roleIdArray);
@@ -272,13 +270,156 @@ $(function () {
         });
 
         // 檢查roleArray 的長度是否為0
-        if(roleArray.length == 0) {
+        if (roleArray.length == 0) {
             layer.msg("請至少選擇一個執行刪除");
-            return ;
+            return;
         }
 
         // 呼叫專門的函式打開模態框
         showConfirmModal(roleArray);
     });
-
+    $("#rolePageBody").on("click", ".checkBtn", function () {
+        // 打開模態框
+        window.roleId = this.id;
+        $("#assignModal").modal("show");
+        // 在模態框中裝載樹 Auth 的形結構數據
+        fillAuthTree();
+    });
 });
+
+// 聲明專門的函式用來在分配 Auth 的模態框中顯示 Auth 的樹形結構數據
+function fillAuthTree() {
+    // 1.發送 Ajax 請求查詢 Auth 數據
+    var ajaxReturn = $.ajax({
+        "url": "/assgin/get/all/auth.json",
+        "type": "post",
+        "beforeSend": function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        "dataType": "json",
+        "async": false
+    });
+    if (ajaxReturn.status != 200) {
+        layer.msg(" 請 求 處 理 出 錯 ！ 響 應 狀 態 碼 是 ： " + ajaxReturn.status + " 說 明 是 ：" + ajaxReturn.statusText);
+        return;
+
+    }
+
+    // 2.從響應結果中獲取 Auth 的 JSON 數據
+    // 從伺服器端查詢到的 list 不需要組裝成樹形結構，這裡我們交給 zTree 去組裝
+    var authList = ajaxReturn.responseJSON.data;
+    // 3.準備對 zTree 進行設定的 JSON 對像
+    var setting = {
+        "data": {
+            "simpleData": {
+                // 開啟簡單 JSON 功能：不用我們在後端組tree，只要有pid，ztree會被我們在前端組成tree
+                "enable": true,
+                // 使用 categoryId 屬性關聯父節點，不用預設的 pId 了
+                "pIdKey": "categoryId"
+            },
+            "key": {
+                // 使用 title 屬性顯示節點名稱，不用預設的 name 作為屬性名了
+                "name": "title"
+            }
+        },
+        "check": {
+            "enable": true
+        }
+    };
+    // 4.產生樹形結構
+    // <ul id="authTreeDemo" class="ztree"></ul>
+    $.fn.zTree.init($("#authTreeDemo"), setting, authList);
+    // 獲取 zTreeObj 對像
+    var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+    // 呼叫 zTreeObj 對象的方法，把節點展開
+    zTreeObj.expandAll(true);
+
+
+    // 5.查詢已分配的 Auth 的 id 組成的陣列
+    ajaxReturn = $.ajax({
+        "url": "/assign/get/assigned/auth/id/by/role/id.json",
+        "type": "post",
+        "beforeSend": function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        "data": {
+            "roleId": window.roleId
+        },
+        "dataType": "json",
+        "async": false
+
+    });
+    if (ajaxReturn.status != 200) {
+        layer.msg(" 請 求 處 理 出 錯 ！ 響 應 狀 態 碼 是 ： " + ajaxReturn.status + " 說 明 是 ：" + ajaxReturn.statusText);
+        return;
+
+    }
+    // 從響應結果中獲取 authIdArray
+    var authIdArray = ajaxReturn.responseJSON.data;
+
+    // 6.根據 authIdArray 把樹形結構中對應的節點勾選上
+    // ①遍歷 authIdArray
+    for (var i = 0; i < authIdArray.length; i++) {
+        var authId = authIdArray[i];
+        // ②根據 id 查詢樹形結構中對應的節點
+        var treeNode = zTreeObj.getNodeByParam("id", authId);
+        // ③將 treeNode 設定為被勾選
+        // checked 設定為 true 表示節點勾選
+        var checked = true;
+        // checkTypeFlag 設定為 false，表示不「聯動」，不聯動是爲了避免把不該勾選的勾選上
+        var checkTypeFlag = false;
+        // 執行
+        zTreeObj.checkNode(treeNode, checked, checkTypeFlag);
+    }
+
+    $("#assignBtn").click(function () {
+        // ①收集樹形結構的各個節點中被勾選的節點
+        // [1]聲明一個專門的陣列存放 id
+        var authIdArray = [];
+        // [2]獲取 zTreeObj 對像
+        var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+        // [3]獲取全部被勾選的節點
+        var checkedNodes = zTreeObj.getCheckedNodes();
+        // [4]遍歷 checkedNodes
+        for (var i = 0; i < checkedNodes.length; i++) {
+            var checkedNode = checkedNodes[i];
+            var authId = checkedNode.id;
+            authIdArray.push(authId);
+        }
+
+        // ②發送請求執行分配
+        var requestBody = {
+            "authIdArray": authIdArray,
+            // 爲了伺服器端 handler 方法能夠統一使用 List<Integer>方式接收數據，roleId 也存入陣列
+            "roleId": [window.roleId]
+        };
+        requestBody = JSON.stringify(requestBody);
+        $.ajax({
+            "url": "/assign/do/role/assign/auth.json",
+            "type": "post",
+            "data": requestBody,
+            "contentType": "application/json;charset=UTF-8",
+            "dataType": "json",
+            "beforeSend": function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            "success": function (response) {
+                var result = response.result;
+                if (result == "SUCCESS") {
+                    layer.msg("操作成功！");
+
+                }
+
+                if (result == "FAILED") {
+                    layer.msg("操作失敗！" + response.message);
+
+                }
+
+            },
+            "error": function (response) {
+                layer.msg(response.status + " " + response.statusText);
+            }
+        });
+        $("#assignModal").modal("hide");
+    });
+}
