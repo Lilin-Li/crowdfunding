@@ -419,6 +419,7 @@ function fillAuthTree() {
                 layer.msg(response.status + " " + response.statusText);
             }
         });
+        $.fn.zTree.destroy("authTreeDemo");
         $("#assignModal").modal("hide");
     });
 }
