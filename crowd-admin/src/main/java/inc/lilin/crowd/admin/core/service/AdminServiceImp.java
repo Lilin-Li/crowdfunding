@@ -7,6 +7,8 @@ import inc.lilin.crowd.admin.database.mysql.mybatis.AdminTMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,6 +47,7 @@ public class AdminServiceImp implements AdminService {
         return adminMapper.selectByPrimaryKey(adminId);
     }
 
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @Override
     public void update(AdminT admin) {
         AdminT adminFromDB = adminMapper.selectByPrimaryKey(admin.getId());
@@ -54,6 +57,7 @@ public class AdminServiceImp implements AdminService {
         adminMapper.updateByPrimaryKey(admin);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList) {
         // 舊數據如下：

@@ -412,7 +412,6 @@ function fillAuthTree() {
 
                 if (result == "FAILED") {
                     layer.msg("操作失敗！" + response.message);
-
                 }
 
             },

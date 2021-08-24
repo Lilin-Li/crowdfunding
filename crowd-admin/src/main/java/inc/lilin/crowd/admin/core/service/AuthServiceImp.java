@@ -4,6 +4,8 @@ import inc.lilin.crowd.admin.database.mysql.mybatis.AuthT;
 import inc.lilin.crowd.admin.database.mysql.mybatis.AuthTMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ public class AuthServiceImp implements AuthService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void saveRoleAuthRelathinship(Map<String, List<Integer>> map) {
         // 1.獲取 roleId 的值
         List<Integer> roleIdList = map.get("roleId");
