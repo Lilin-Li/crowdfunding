@@ -57,4 +57,12 @@
             (#{authId}, #{roleId})
         </foreach>
     </insert>
+
+    <select id="selectAssignedAuthNameByAdminId" resultType="java.lang.String">
+        SELECT DISTINCT auth_t.name
+        FROM auth_t
+        LEFT JOIN inner_role_auth ON auth_t.id=inner_role_auth.auth_id
+        LEFT JOIN inner_admin_role ON inner_admin_role.role_id=inner_role_auth.role_id
+        WHERE inner_admin_role.admin_id=#{adminId} and auth_t.name != "" and auth_t.name is not null
+    </select>
 </mapper>

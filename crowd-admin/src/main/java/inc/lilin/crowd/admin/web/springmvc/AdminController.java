@@ -23,11 +23,14 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @GetMapping("admin/logout")
-    public String adminLogout(HttpSession session) throws Exception {
-        session.invalidate();
-        return "redirect:/";
-    }
+    /*
+     *    改用SpringSecurity
+     */
+    // @GetMapping("admin/logout")
+    // public String adminLogout(HttpSession session) throws Exception {
+    //     session.invalidate();
+    //     return "redirect:/";
+    // }
 
     @GetMapping("/users")
     public String getAdmins(@RequestParam(value = "keyword", defaultValue = "") String keyword,

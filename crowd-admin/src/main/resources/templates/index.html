@@ -28,7 +28,7 @@
 </nav>
 
 <div class="container">
-    <form action="/guestLogin" method="post" class="form-signin" role="form">
+    <form action="/security/do/login.html" method="post" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 管理員登錄</h2>
         <input type="hidden" name="_csrf" th:value="${_csrf.token}">
         <p th:if = "${exception != null}" th:text = "${exception.getMessage()}">111</p>
