@@ -20084,38 +20084,38 @@ create table menu_t
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
 values ('1', NULL, '系統許可權菜單', 'glyphicon glyphicon-th-list', NULL);
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('2', '1', ' 控 制 面 板 ', 'glyphicon glyphicon-dashboard', 'main.htm');
+values ('2', '1', ' 控 制 面 板 ', 'glyphicon glyphicon-dashboard', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
 values ('3', '1', '許可權管理', 'glyphicon glyphicon glyphicon-tasks', NULL);
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('4', '3', ' 用 戶 維 護 ', 'glyphicon glyphicon-user', 'user/index.htm');
+values ('4', '3', ' 用 戶 維 護 ', 'glyphicon glyphicon-user', 'users');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('5', '3', ' 角 色 維 護 ', 'glyphicon glyphicon-king', 'role/index.htm');
+values ('5', '3', ' 角 色 維 護 ', 'glyphicon glyphicon-king', 'role/page');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('6', '3', ' 菜 單 維 護 ', 'glyphicon glyphicon-lock', 'permission/index.htm');
+values ('6', '3', ' 菜 單 維 護 ', 'glyphicon glyphicon-lock', 'menu/to/page.html');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
 values ('7', '1', ' 業 務 審 核 ', 'glyphicon glyphicon-ok', NULL);
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('8', '7', ' 實 名 認 證 審 核 ', 'glyphicon glyphicon-check', 'auth_cert/index.htm');
+values ('8', '7', ' 實 名 認 證 審 核 ', 'glyphicon glyphicon-check', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('9', '7', ' 廣 告 審 核 ', 'glyphicon glyphicon-check', 'auth_adv/index.htm');
+values ('9', '7', ' 廣 告 審 核 ', 'glyphicon glyphicon-check', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('10', '7', ' 項 目 審 核 ', 'glyphicon glyphicon-check', 'auth_project/index.htm');
+values ('10', '7', ' 項 目 審 核 ', 'glyphicon glyphicon-check', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
 values ('11', '1', ' 業 務 管 理 ', 'glyphicon glyphicon-th-large', NULL);
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('12', '11', ' 資 質 維 護 ', 'glyphicon glyphicon-picture', 'cert/index.htm');
+values ('12', '11', ' 資 質 維 護 ', 'glyphicon glyphicon-picture', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('13', '11', ' 分 類 管 理 ', 'glyphicon glyphicon-equalizer', 'certtype/index.htm');
+values ('13', '11', ' 分 類 管 理 ', 'glyphicon glyphicon-equalizer', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('14', '11', ' 流 程 管 理 ', 'glyphicon glyphicon-random', 'process/index.htm');
+values ('14', '11', ' 流 程 管 理 ', 'glyphicon glyphicon-random', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('15', '11', ' 廣 告 管 理 ', 'glyphicon glyphicon-hdd', 'advert/index.htm');
+values ('15', '11', ' 廣 告 管 理 ', 'glyphicon glyphicon-hdd', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('16', '11', ' 消 息 模 板 ', 'glyphicon glyphicon-comment', 'message/index.htm');
+values ('16', '11', ' 消 息 模 板 ', 'glyphicon glyphicon-comment', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('17', '11', ' 項 目 分 類 ', 'glyphicon glyphicon-list', 'projectType/index.htm');
+values ('17', '11', ' 項 目 分 類 ', 'glyphicon glyphicon-list', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('18', '11', ' 項 目 標 簽 ', 'glyphicon glyphicon-tags', 'tag/index.htm');
+values ('18', '11', ' 項 目 標 簽 ', 'glyphicon glyphicon-tags', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('19', '1', ' 參 數 管 理 ', 'glyphicon glyphicon-list-alt', 'param/index.htm');
+values ('19', '1', ' 參 數 管 理 ', 'glyphicon glyphicon-list-alt', '');

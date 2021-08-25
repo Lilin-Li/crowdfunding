@@ -52,4 +52,8 @@ public class MenuT implements Serializable {
     private List<MenuT> children = new ArrayList<>();
     // 控制節點是否預設為打開裝，設定為 true 表示預設打開
     private Boolean open = true;
+    // 控制點擊連結後，新視窗開啟的位置
+    private String target = "_self"; //默認是本視窗
+
+
 }

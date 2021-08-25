@@ -7,12 +7,25 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
 	<link rel="stylesheet" href="../frontend/bootstrap/css/bootstrap.min.css"  th:href="@{/frontend/bootstrap/css/bootstrap.min.css}">
 	<link rel="stylesheet" href="../frontend/css/font-awesome.min.css"  th:href="@{/frontend/css/font-awesome.min.css}">
 	<link rel="stylesheet" href="../frontend/css/main.css" th:href="@{/frontend/css/main.css}">
 	<script src="../frontend/jquery/jquery-2.1.1.min.js" th:src="@{/frontend/jquery/jquery-2.1.1.min.js}"></script>
 	<script src="../frontend/bootstrap/js/bootstrap.min.js" th:src="@{/frontend/bootstrap/js/bootstrap.min.js}"></script>
 	<script src="../frontend/script/docs.min.js" th:src="@{/frontend/script/docs.min.js}"></script>
+	<!--  Ztree 套件 -->
+	<link rel="stylesheet" href="../frontend/ztree/zTreeStyle.css" th:href="@{/frontend/ztree/zTreeStyle.css}">
+	<script type="text/javascript" src="../frontend/ztree/jquery.ztree.all-3.5.min.js"
+			th:src="@{/frontend/ztree/jquery.ztree.all-3.5.min.js}"></script>
+
+	<!-- menu 的ztree js	-->
+	<script src="../frontend/script/common-menu.js" th:src="@{/frontend/script/common-menu.js}"></script>
+	<script src="../frontend/script/my-menu.js" th:src="@{/frontend/script/my-menu.js}"></script>
+
+
 	<script type="text/javascript">
 		$(function () {
 			$(".list-group-item").click(function(){
