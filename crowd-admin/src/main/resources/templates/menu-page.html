@@ -21,9 +21,14 @@
     <script src="../frontend/bootstrap/js/bootstrap.min.js"
             th:src="@{/frontend/bootstrap/js/bootstrap.min.js}"></script>
     <script src="../frontend/script/docs.min.js" th:src="@{/frontend/script/docs.min.js}"></script>
-    <!-- ztree   -->
-    <script src="../frontend/ztree/jquery.ztree.all-3.5.min.js"
+    <!--  Ztree 套件 -->
+    <link rel="stylesheet" href="../frontend/ztree/zTreeStyle.css" th:href="@{/frontend/ztree/zTreeStyle.css}">
+    <script type="text/javascript" src="../frontend/ztree/jquery.ztree.all-3.5.min.js"
             th:src="@{/frontend/ztree/jquery.ztree.all-3.5.min.js}"></script>
+
+    <!-- menu 的ztree js	-->
+    <script src="../frontend/script/common-menu.js" th:src="@{/frontend/script/common-menu.js}"></script>
+    <script src="../frontend/script/my-menu.js" th:src="@{/frontend/script/my-menu.js}"></script>
 
     <script src="../frontend/layer/layer/layer.js" th:src="@{/frontend/layer/layer/layer.js}"></script>
 
@@ -131,6 +136,7 @@
                             // 重新載入樹形結構，注意：要在確認伺服器端完成儲存操作后再重新整理
                             // 否則有可能重新整理不到最新的數據，因為這裡是非同步的
                             generateTree();
+                            generateMenuTree();
                         }
                         if (result == "FAILED") {
                             layer.msg("操作失敗！" + response.message);
@@ -203,6 +209,7 @@
                             // 重新載入樹形結構，注意：要在確認伺服器端完成儲存操作后再重新整理
                             // 否則有可能重新整理不到最新的數據，因為這裡是非同步的
                             generateTree();
+                            generateMenuTree();
 
                         }
                         if (result == "FAILED") {
@@ -257,6 +264,7 @@
                             // 重新載入樹形結構，注意：要在確認伺服器端完成儲存操作后再重新整理
                             // 否則有可能重新整理不到最新的數據，因為這裡是非同步的
                             generateTree();
+                            generateMenuTree();
                         }
                         if (result == "FAILED") {
                             layer.msg("操作失敗！" + response.message);
@@ -296,7 +304,7 @@
         <div class="col-sm-offset-3  col-md-offset-2 main">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="glyphicon glyphicon-th-list"></i> 許可權菜單列表
+                    <i class="glyphicon glyphicon-th-list"></i> 編輯菜單列表
                     <div style="float: right; cursor: pointer;" data-toggle="modal"
                          data-target="#myModal">
                         <i class="glyphicon glyphicon-question-sign"></i>
@@ -321,8 +329,5 @@
 <!--刪除節點的彈跳視窗-->
 <div th:insert="~{modal-menu-confirm :: modal-menu-confirm}">
 </div>
-
-
 </body>
-
 </html>

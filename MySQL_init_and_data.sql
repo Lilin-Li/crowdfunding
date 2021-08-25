@@ -20082,17 +20082,17 @@ create table menu_t
   DEFAULT CHARSET = utf8mb4;
 
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('1', NULL, '系統許可權菜單', 'glyphicon glyphicon-th-list', NULL);
+values ('1', NULL, '系統菜單', 'glyphicon glyphicon-th-list', NULL);
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('2', '1', ' 控 制 面 板 ', 'glyphicon glyphicon-dashboard', '');
+values ('2', '1', ' 控 制 面 板 ', 'glyphicon glyphicon-dashboard', '/admin-main');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
 values ('3', '1', '許可權管理', 'glyphicon glyphicon glyphicon-tasks', NULL);
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('4', '3', ' 用 戶 維 護 ', 'glyphicon glyphicon-user', 'users');
+values ('4', '3', ' 用 戶 維 護 ', 'glyphicon glyphicon-user', '/users');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('5', '3', ' 角 色 維 護 ', 'glyphicon glyphicon-king', 'role/page');
+values ('5', '3', ' 角 色 維 護 ', 'glyphicon glyphicon-king', '/role/page');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
-values ('6', '3', ' 菜 單 維 護 ', 'glyphicon glyphicon-lock', 'menu/to/page.html');
+values ('6', '3', ' 菜 單 維 護 ', 'glyphicon glyphicon-lock', '/menu/to/page.html');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
 values ('7', '1', ' 業 務 審 核 ', 'glyphicon glyphicon-ok', NULL);
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)

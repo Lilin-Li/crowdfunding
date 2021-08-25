@@ -1,12 +1,12 @@
 $(function () {
-    generateTree();
+    generateMenuTree();
 })
 
 
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
-function generateTree() {
+function generateMenuTree() {
     // 1.準備產生樹形結構的 JSON 數據，數據的來源是發送 Ajax 請求得到
     $.ajax({
         "url": "/menu/get/whole/tree.json",
@@ -28,7 +28,7 @@ function generateTree() {
                 // 3.從響應體中獲取用來產生樹形結構的 JSON 數據
                 var zNodes = response.data;
                 // 4.初始化樹形結構
-                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                $.fn.zTree.init($("#treeMenu"), setting, zNodes);
             }
 
             if (result == "FAILED") {
