@@ -3,29 +3,48 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.4</version>
+        <groupId>inc.lilin.crowd</groupId>
+        <artifactId>corwd-maven-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>inc.lilin.crowd</groupId>
     <artifactId>crowd-member</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>crowd-4-member</name>
-    <description>Demo project for Spring Boot</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <description>member</description>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/member/database</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/member/config/properties</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/common/database</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/common/config/properties</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>inc.lilin.crowd</groupId>
+            <artifactId>crowd-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

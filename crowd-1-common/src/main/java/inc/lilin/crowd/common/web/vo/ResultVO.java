@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.web.responseTools;
+package inc.lilin.crowd.common.web.vo;
 
 /**
  * 統一整個專案中Ajax請求返回的結果

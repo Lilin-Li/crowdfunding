@@ -2,7 +2,7 @@ package inc.lilin.crowd.common.web.exceptionhandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inc.lilin.crowd.common.web.requestTools.RequestHeadTools;
-import inc.lilin.crowd.common.web.responseTools.ResultVO;
+import inc.lilin.crowd.common.web.vo.ResultVO;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;

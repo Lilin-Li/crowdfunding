@@ -54,4 +54,10 @@
     cardnum, accttype
     from t_member
   </select>
+
+  <select id="selectByLoginAcct" resultMap="BaseResultMap">
+    select loginacct
+      FROM t_member
+        WHERE loginacct == #{loginacct}
+  </select>
 </mapper>

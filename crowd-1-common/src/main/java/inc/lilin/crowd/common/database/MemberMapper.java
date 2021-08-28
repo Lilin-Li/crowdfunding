@@ -1,5 +1,7 @@
 package inc.lilin.crowd.common.database;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -15,4 +17,6 @@ public interface MemberMapper {
     List<MemberPO> selectAll();
 
     int updateByPrimaryKey(MemberPO record);
+
+    List<MemberPO> selectByLoginAcct(@Param("loginacct")String loginacct);
 }
