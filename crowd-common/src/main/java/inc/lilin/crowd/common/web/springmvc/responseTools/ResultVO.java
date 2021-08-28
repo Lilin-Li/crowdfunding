@@ -4,7 +4,7 @@ package inc.lilin.crowd.common.web.springmvc.responseTools;
  * 統一整個專案中Ajax請求返回的結果
  *
  */
-public class RestResultDTO<T> {
+public class ResultVO<T> {
 
     public static final String SUCCESS = "SUCCESS";
     public static final String FAILED = "FAILED";
@@ -22,8 +22,8 @@ public class RestResultDTO<T> {
      * 請求處理成功且不需要返回數據時使用的工具方法
      * @return
      */
-    public static <Type> RestResultDTO<Type> successWithoutData() {
-        return new RestResultDTO<Type>(SUCCESS, null, null);
+    public static <Type> ResultVO<Type> successWithoutData() {
+        return new ResultVO<Type>(SUCCESS, null, null);
     }
 
     /**
@@ -31,8 +31,8 @@ public class RestResultDTO<T> {
      * @param data 要返回的數據
      * @return
      */
-    public static <Type> RestResultDTO<Type> successWithData(Type data) {
-        return new RestResultDTO<Type>(SUCCESS, null, data);
+    public static <Type> ResultVO<Type> successWithData(Type data) {
+        return new ResultVO<Type>(SUCCESS, null, data);
     }
 
     /**
@@ -40,15 +40,15 @@ public class RestResultDTO<T> {
      * @param message 失敗的錯誤訊息
      * @return
      */
-    public static <Type> RestResultDTO<Type> failed(String message) {
-        return new RestResultDTO<Type>(FAILED, message, null);
+    public static <Type> ResultVO<Type> failed(String message) {
+        return new ResultVO<Type>(FAILED, message, null);
     }
 
-    public RestResultDTO() {
+    public ResultVO() {
 
     }
 
-    public RestResultDTO(String result, String message, T data) {
+    public ResultVO(String result, String message, T data) {
         super();
         this.result = result;
         this.message = message;

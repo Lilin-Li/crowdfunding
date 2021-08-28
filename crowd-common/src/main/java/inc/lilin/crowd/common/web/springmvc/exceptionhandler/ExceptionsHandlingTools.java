@@ -2,7 +2,7 @@ package inc.lilin.crowd.common.web.springmvc.exceptionhandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inc.lilin.crowd.common.web.springmvc.requestTools.RequestHeadTools;
-import inc.lilin.crowd.common.web.springmvc.responseTools.RestResultDTO;
+import inc.lilin.crowd.common.web.springmvc.responseTools.ResultVO;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class ExceptionsHandlingTools implements EnvironmentAware {
 
         // 如果是JSON請求
         if (isThis_a_JSON_Request) {
-            RestResultDTO<Object> resultEntity = RestResultDTO.failed(exception.getMessage());
+            ResultVO<Object> resultEntity = ResultVO.failed(exception.getMessage());
 
             String json = new ObjectMapper().writeValueAsString(resultEntity);
             response.getWriter().write(json);    // 將JSON字串作為響應體返回給瀏覽器

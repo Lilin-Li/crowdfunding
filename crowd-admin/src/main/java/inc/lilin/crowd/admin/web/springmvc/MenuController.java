@@ -2,7 +2,7 @@ package inc.lilin.crowd.admin.web.springmvc;
 
 import inc.lilin.crowd.admin.core.service.MenuService;
 import inc.lilin.crowd.admin.database.mysql.mybatis.MenuT;
-import inc.lilin.crowd.common.web.springmvc.responseTools.RestResultDTO;
+import inc.lilin.crowd.common.web.springmvc.responseTools.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,31 +18,31 @@ public class MenuController {
 
     @ResponseBody
     @RequestMapping("/menu/get/whole/tree.json")
-    public RestResultDTO<MenuT> getWholeTreeNew() {
+    public ResultVO<MenuT> getWholeTreeNew() {
         MenuT treeRoot = menuService.getTree();
-        return RestResultDTO.successWithData(treeRoot);
+        return ResultVO.successWithData(treeRoot);
     }
 
     @ResponseBody
     @RequestMapping("/menu/save.json")
-    public RestResultDTO<String> saveMenu(MenuT menu) {
+    public ResultVO<String> saveMenu(MenuT menu) {
         menuService.saveMenu(menu);
-        return RestResultDTO.successWithoutData();
+        return ResultVO.successWithoutData();
     }
 
     @ResponseBody
     @PostMapping("/menu/update.json")
-    public RestResultDTO<String> updateMenu(MenuT menu) {
+    public ResultVO<String> updateMenu(MenuT menu) {
         menuService.updateMenu(menu);
-        return RestResultDTO.successWithoutData();
+        return ResultVO.successWithoutData();
 
     }
 
     @ResponseBody
     @RequestMapping("/menu/remove.json")
-    public RestResultDTO<String> removeMenu(@RequestParam("id") Integer id) {
+    public ResultVO<String> removeMenu(@RequestParam("id") Integer id) {
         menuService.removeMenu(id);
-        return RestResultDTO.successWithoutData();
+        return ResultVO.successWithoutData();
 
     }
 }

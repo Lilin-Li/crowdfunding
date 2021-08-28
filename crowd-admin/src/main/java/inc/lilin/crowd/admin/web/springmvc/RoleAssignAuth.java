@@ -2,7 +2,7 @@ package inc.lilin.crowd.admin.web.springmvc;
 
 import inc.lilin.crowd.admin.core.service.AuthService;
 import inc.lilin.crowd.admin.database.mysql.mybatis.AuthT;
-import inc.lilin.crowd.common.web.springmvc.responseTools.RestResultDTO;
+import inc.lilin.crowd.common.web.springmvc.responseTools.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,25 +21,25 @@ public class RoleAssignAuth {
 
     @ResponseBody
     @RequestMapping("/assgin/get/all/auth.json")
-    public RestResultDTO<List<AuthT>> getAllAauth() {
+    public ResultVO<List<AuthT>> getAllAauth() {
         List<AuthT> authList = authService.getAll();
-        return RestResultDTO.successWithData(authList);
+        return ResultVO.successWithData(authList);
     }
 
 
     @ResponseBody
     @RequestMapping("/assign/get/assigned/auth/id/by/role/id.json")
-    public RestResultDTO<List<Integer>> getAssignedAuthIdByRoleId(
+    public ResultVO<List<Integer>> getAssignedAuthIdByRoleId(
             @RequestParam("roleId") Integer roleId) {
         List<Integer> authIdList = authService.getAssignedAuthIdByRoleId(roleId);
-        return RestResultDTO.successWithData(authIdList);
+        return ResultVO.successWithData(authIdList);
     }
 
     @ResponseBody
     @RequestMapping("/assign/do/role/assign/auth.json")
-    public RestResultDTO<String> saveRoleAuthRelathinship(
+    public ResultVO<String> saveRoleAuthRelathinship(
             @RequestBody Map<String, List<Integer>> map) {
         authService.saveRoleAuthRelathinship(map);
-        return RestResultDTO.successWithoutData();
+        return ResultVO.successWithoutData();
     }
 }
