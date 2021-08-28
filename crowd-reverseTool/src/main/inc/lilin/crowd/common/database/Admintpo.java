@@ -1,4 +1,4 @@
-package MBG;
+package inc.lilin.crowd.common.database;
 
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminT implements Serializable {
+public class Admintpo implements Serializable {
     /**
      * 
      */

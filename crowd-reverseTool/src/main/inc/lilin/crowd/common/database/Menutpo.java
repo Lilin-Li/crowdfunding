@@ -1,4 +1,4 @@
-package MBG;
+package inc.lilin.crowd.common.database;
 
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleT implements Serializable {
+public class Menutpo implements Serializable {
     /**
      * 
      */
@@ -28,5 +28,20 @@ public class RoleT implements Serializable {
     /**
      * 
      */
+    private Integer pid;
+
+    /**
+     * 
+     */
     private String name;
+
+    /**
+     * 
+     */
+    private String url;
+
+    /**
+     * 
+     */
+    private String icon;
 }

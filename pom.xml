@@ -17,9 +17,11 @@
     </properties>
 
     <modules>
-        <module>crowd-admin</module>
-        <module>crowd-common</module>
-        <module>crowd-maven-parent</module>
+        <module>crowd-0-maven-parent</module>
+        <module>crowd-1-common</module>
+        <module>crowd-2-admin</module>
+        <module>crowd-3-eureka</module>
+        <module>crowd-4-member</module>
     </modules>
 
 </project>

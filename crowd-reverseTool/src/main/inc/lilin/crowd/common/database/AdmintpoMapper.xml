@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MBG.AdminTMapper">
+<mapper namespace="inc.lilin.crowd.common.database.AdmintpoMapper">
   <!-- ————————————————————————————————————————————————————————————————————————— -->
   <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
   <!-- ————————————————————————————————————————————————————————————————————————— -->
-  <resultMap id="BaseResultMap" type="MBG.AdminT">
+  <resultMap id="BaseResultMap" type="inc.lilin.crowd.common.database.Admintpo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="login_acct" jdbcType="VARCHAR" property="loginAcct" />
     <result column="user_pswd" jdbcType="CHAR" property="userPswd" />
@@ -16,7 +16,7 @@
     delete from admin_t
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="MBG.AdminT">
+  <insert id="insert" parameterType="inc.lilin.crowd.common.database.Admintpo">
     insert into admin_t (id, login_acct, user_pswd, 
       user_name, email, create_time
       )
@@ -24,7 +24,7 @@
       #{userName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="MBG.AdminT">
+  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.common.database.Admintpo">
     update admin_t
     set login_acct = #{loginAcct,jdbcType=VARCHAR},
       user_pswd = #{userPswd,jdbcType=CHAR},

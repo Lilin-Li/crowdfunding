@@ -51,6 +51,20 @@ CREATE TABLE `auth_t`
     PRIMARY KEY (`id`)
 ) DEFAULT CHARSET = utf8mb4;
 
+create table t_member
+(
+    id int(11) not null auto_increment,
+    loginacct varchar(255) not null,
+    userpswd char(200) not null,
+    username varchar(255),
+    email varchar(255),
+    authstatus int(4) comment '實名認證狀態 0 - 未實名認證， 1 - 實名認證申請中， 2 - 已實名認證',
+    usertype int(4) comment ' 0 - 個人， 1 - 企業',
+    realname varchar(255),
+    cardnum varchar(255),
+    accttype int(4) comment '0 - 企業， 1 - 個體， 2 - 個人， 3 - 政府',
+    primary key (id)
+)DEFAULT CHARSET = utf8mb4;
 
 INSERT INTO auth_t(id, `name`, title, category_id)
 VALUES (1, '', '用戶模組', NULL);
