@@ -28,10 +28,13 @@
                         <directory>src/main/resources</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/java/inc/lilin/crowd/admin/database/mysql/mybatis</directory>
+                        <directory>src/main/java/inc/lilin/crowd/admin/database</directory>
                     </resource>
                     <resource>
                         <directory>src/main/java/inc/lilin/crowd/admin/config/properties</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/common/database</directory>
                     </resource>
                     <resource>
                         <directory>src/main/java/inc/lilin/crowd/common/config/properties</directory>

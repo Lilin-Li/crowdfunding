@@ -1,7 +1,7 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.admin.database.mysql.mybatis.AuthT;
-import inc.lilin.crowd.admin.database.mysql.mybatis.AuthTMapper;
+import inc.lilin.crowd.common.database.AuthPO;
+import inc.lilin.crowd.common.database.AuthMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class AuthServiceImp implements AuthService {
 
     @Autowired
-    AuthTMapper authMapper;
+    AuthMapper authMapper;
 
     @Override
     public List<Integer> getAssignedAuthIdByRoleId(Integer roleId) {
@@ -22,7 +22,7 @@ public class AuthServiceImp implements AuthService {
     }
 
     @Override
-    public List<AuthT> getAll() {
+    public List<AuthPO> getAll() {
         return authMapper.selectAll();
     }
 

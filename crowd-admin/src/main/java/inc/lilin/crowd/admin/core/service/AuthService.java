@@ -1,6 +1,6 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.admin.database.mysql.mybatis.AuthT;
+import inc.lilin.crowd.common.database.AuthPO;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
 public interface AuthService {
     List<Integer> getAssignedAuthIdByRoleId(Integer roleId);
 
-    List<AuthT> getAll();
+    List<AuthPO> getAll();
 
     void saveRoleAuthRelathinship(Map<String, List<Integer>> map);
 

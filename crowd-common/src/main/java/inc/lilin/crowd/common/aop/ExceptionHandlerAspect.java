@@ -13,7 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class ExceptionHandlerAspect implements HandlerInterceptor {
 
-    @Pointcut("execution(public * inc.lilin.crowd.*.web.springmvc.exceptionhandler.*.*(..)) && !execution(public * inc.lilin.crowd.common.web.springmvc.exceptionhandler.ExceptionsHandlingTools.*(..))")
+    @Pointcut("execution(public * inc.lilin.crowd.*.web.springmvc.exceptionhandler.*.*(..)) && !execution(public * inc.lilin.crowd.common.web.exceptionhandler.ExceptionsHandlingTools.*(..))")
     public void asept() {
     }
 

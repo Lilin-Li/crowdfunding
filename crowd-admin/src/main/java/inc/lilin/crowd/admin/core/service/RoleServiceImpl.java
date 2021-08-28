@@ -2,8 +2,8 @@ package inc.lilin.crowd.admin.core.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import inc.lilin.crowd.admin.database.mysql.mybatis.RoleT;
-import inc.lilin.crowd.admin.database.mysql.mybatis.RoleTMapper;
+import inc.lilin.crowd.common.database.RolePO;
+import inc.lilin.crowd.common.database.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,23 +13,23 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
-    RoleTMapper roleDAO;
+    RoleMapper roleDAO;
 
     @Override
-    public PageInfo<RoleT> getPageInfo(Integer pageNum, Integer pageSize, String keyword) {
+    public PageInfo<RolePO> getPageInfo(Integer pageNum, Integer pageSize, String keyword) {
         PageHelper.startPage(pageNum,pageSize);
-        List<RoleT> roleList = roleDAO.selectRoleByKeyword(keyword);
+        List<RolePO> roleList = roleDAO.selectRoleByKeyword(keyword);
 
         return new PageInfo<>(roleList);
     }
 
     @Override
-    public void saveRole(RoleT role) {
+    public void saveRole(RolePO role) {
         roleDAO.insert(role);
     }
 
     @Override
-    public void updateRole(RoleT role) {
+    public void updateRole(RolePO role) {
         roleDAO.updateByPrimaryKey(role);
     }
 
@@ -39,13 +39,13 @@ public class RoleServiceImpl implements RoleService {
     };
 
     @Override
-    public List<RoleT> getAssignedRole(Integer adminId) {
+    public List<RolePO> getAssignedRole(Integer adminId) {
         return roleDAO.selectAssignedRole(adminId);
 
     }
 
     @Override
-    public List<RoleT> getUnAssignedRole(Integer adminId) {
+    public List<RolePO> getUnAssignedRole(Integer adminId) {
         return roleDAO.selectUnAssignedRole(adminId);
 
     }

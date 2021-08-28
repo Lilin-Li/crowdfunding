@@ -1,7 +1,7 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.admin.database.mysql.mybatis.MenuT;
-import inc.lilin.crowd.admin.database.mysql.mybatis.MenuTMapper;
+import inc.lilin.crowd.common.database.MenuPO;
+import inc.lilin.crowd.common.database.MenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +12,24 @@ import java.util.Map;
 @Service
 public class MenuServiceImp implements MenuService {
     @Autowired
-    MenuTMapper menuDAO;
+    MenuMapper menuDAO;
 
     @Override
-    public MenuT getTree() {
+    public MenuPO getTree() {
         // 1.查詢全部的 Menu 對像
-        List<MenuT> menuList = menuDAO.selectAll();
+        List<MenuPO> menuList = menuDAO.selectAll();
         // 2.聲明一個變數用來儲存找到的根節點
-        MenuT root = null;
+        MenuPO root = null;
         // 3.建立 Map 對像用來儲存 id 和 Menu 對象的對應關係便於查詢父節點
-        Map<Integer, MenuT> menuMap = new HashMap<>();
+        Map<Integer, MenuPO> menuMap = new HashMap<>();
         // 4.遍歷 menuList 填充 menuMap
-        for (MenuT menu : menuList) {
+        for (MenuPO menu : menuList) {
             Integer id = menu.getId();
             menuMap.put(id, menu);
         }
 
         // 5.再次遍歷 menuList 查詢根節點、組裝父子節點
-        for (MenuT menu : menuList) {
+        for (MenuPO menu : menuList) {
             // 6.獲取目前 menu 對象的 pid 屬性值
             Integer pid = menu.getPid();
             // 7.如果 pid 為 null，判定為根節點
@@ -39,7 +39,7 @@ public class MenuServiceImp implements MenuService {
                 continue;
             }
             // 9.如果 pid 不為 null，說明目前節點有父節點，那麼可以根據 pid 到 menuMap 中查詢對應的 Menu 對像
-            MenuT father = menuMap.get(pid);
+            MenuPO father = menuMap.get(pid);
             // 10.將目前節點存入父節點的 children 集合
             father.getChildren().add(menu);
         }
@@ -48,12 +48,12 @@ public class MenuServiceImp implements MenuService {
     }
 
     @Override
-    public void saveMenu(MenuT menu) {
+    public void saveMenu(MenuPO menu) {
         menuDAO.insert(menu);
     }
 
     @Override
-    public void updateMenu(MenuT menu) {
+    public void updateMenu(MenuPO menu) {
         menuDAO.updateByPrimaryKeySelective(menu);
     }
 

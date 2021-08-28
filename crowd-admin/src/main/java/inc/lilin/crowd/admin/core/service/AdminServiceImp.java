@@ -3,8 +3,8 @@ package inc.lilin.crowd.admin.core.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import inc.lilin.crowd.admin.core.exception.LoginFailedException;
-import inc.lilin.crowd.admin.database.mysql.mybatis.AdminT;
-import inc.lilin.crowd.admin.database.mysql.mybatis.AdminTMapper;
+import inc.lilin.crowd.common.database.AdminPO;
+import inc.lilin.crowd.common.database.AdminMapper;
 import inc.lilin.crowd.common.core.ErrorCodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,12 +20,12 @@ import java.util.List;
 public class AdminServiceImp implements AdminService {
 
     @Autowired
-    AdminTMapper adminMapper;
+    AdminMapper adminMapper;
 
     @Override
-    public PageInfo<AdminT> getAdmins(String keyword, Integer pageNum, Integer pageSize) {
+    public PageInfo<AdminPO> getAdmins(String keyword, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<AdminT> list = adminMapper.selectAdminByKeyword(keyword);
+        List<AdminPO> list = adminMapper.selectAdminByKeyword(keyword);
 
         return new PageInfo<>(list);
     }
@@ -36,7 +36,7 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
-    public void createAdmin(AdminT admin) {
+    public void createAdmin(AdminPO admin) {
         String encodePswd = new BCryptPasswordEncoder().encode(admin.getUserPswd());
         admin.setUserPswd(encodePswd);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
@@ -45,14 +45,14 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
-    public AdminT getAdminByID(Integer adminId) {
+    public AdminPO getAdminByID(Integer adminId) {
         return adminMapper.selectByPrimaryKey(adminId);
     }
 
     @Transactional(isolation = Isolation.REPEATABLE_READ)
     @Override
-    public void update(AdminT admin) {
-        AdminT adminFromDB = adminMapper.selectByPrimaryKey(admin.getId());
+    public void update(AdminPO admin) {
+        AdminPO adminFromDB = adminMapper.selectByPrimaryKey(admin.getId());
         admin.setUserPswd(adminFromDB.getUserPswd());
         admin.setCreateTime(adminFromDB.getCreateTime());
 
@@ -85,8 +85,8 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
-    public AdminT getAdminByLoginAcct(String username) {
-        List<AdminT> list = adminMapper.selectByAcct(username);
+    public AdminPO getAdminByLoginAcct(String username) {
+        List<AdminPO> list = adminMapper.selectByAcct(username);
 
         if(list == null || list.size() == 0) {
             throw new LoginFailedException(ErrorCodeEnum.LOGIN_FAILED_ACCT_NOT_EXIST.getErrorCodeAndMes());
@@ -95,7 +95,7 @@ public class AdminServiceImp implements AdminService {
             throw new LoginFailedException(ErrorCodeEnum.LOGIN_FAILED_ACCT_NOT_UNIQUE.getErrorCodeAndMes());
         }
 
-        AdminT admin = list.get(0);
+        AdminPO admin = list.get(0);
         if(admin == null) {
             throw new LoginFailedException(ErrorCodeEnum.LOGIN_FAILED_RESULT_NULL.getErrorCodeAndMes());
         }

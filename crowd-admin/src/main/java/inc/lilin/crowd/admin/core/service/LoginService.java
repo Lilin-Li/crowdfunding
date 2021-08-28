@@ -1,8 +1,8 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.admin.database.mysql.mybatis.AdminT;
+import inc.lilin.crowd.common.database.AdminPO;
 
 public interface LoginService {
 
-    AdminT getAdminByLoginAcct(String loginAcct, String userPswd);
+    AdminPO getAdminByLoginAcct(String loginAcct, String userPswd);
 }

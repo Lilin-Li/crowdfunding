@@ -28,6 +28,9 @@
                         <directory>src/main/resources</directory>
                     </resource>
                     <resource>
+                        <directory>src/main/java/inc/lilin/crowd/common/database</directory>
+                    </resource>
+                    <resource>
                         <directory>src/main/java/inc/lilin/crowd/common/config/properties</directory>
                     </resource>
                 </resources>

@@ -43,7 +43,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/frontend/ztree/**")
                 .permitAll()
-                // 其他請求 
+                // 其他請求
                 .anyRequest()
                 .authenticated()  // 需驗證後訪問
                 .and()

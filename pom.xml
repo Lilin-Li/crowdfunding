@@ -19,7 +19,6 @@
     <modules>
         <module>crowd-admin</module>
         <module>crowd-common</module>
-        <module>crowd-reverseTool</module>
         <module>crowd-maven-parent</module>
     </modules>
 

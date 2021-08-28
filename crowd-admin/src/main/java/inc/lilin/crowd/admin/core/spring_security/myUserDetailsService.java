@@ -3,8 +3,8 @@ package inc.lilin.crowd.admin.core.spring_security;
 import inc.lilin.crowd.admin.core.service.AdminService;
 import inc.lilin.crowd.admin.core.service.AuthService;
 import inc.lilin.crowd.admin.core.service.RoleService;
-import inc.lilin.crowd.admin.database.mysql.mybatis.AdminT;
-import inc.lilin.crowd.admin.database.mysql.mybatis.RoleT;
+import inc.lilin.crowd.common.database.AdminPO;
+import inc.lilin.crowd.common.database.RolePO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,17 +28,17 @@ public class myUserDetailsService  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 1.根據賬號名稱查詢 Admin 對像
-        AdminT admin = adminService.getAdminByLoginAcct(username);
+        AdminPO admin = adminService.getAdminByLoginAcct(username);
         // 2.獲取 adminId
         Integer adminId = admin.getId();
         // 3.根據 adminId 查詢角色資訊
-        List<RoleT> assignedRoleList = roleService.getAssignedRole(adminId);
+        List<RolePO> assignedRoleList = roleService.getAssignedRole(adminId);
         // 4.根據 adminId 查詢許可權資訊
         List<String> authNameList = authService.getAssignedAuthNameByAdminId(adminId);
         // 5.建立集合對像用來儲存 GrantedAuthority
         List<GrantedAuthority> authorities = new ArrayList<>();
         // 6.遍歷 assignedRoleList 存入角色資訊
-        for (RoleT role : assignedRoleList) {
+        for (RolePO role : assignedRoleList) {
             // 注意：不要忘了加字首！
             String roleName = "ROLE_" + role.getName();
             SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(roleName);

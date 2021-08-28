@@ -1,13 +1,13 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.admin.database.mysql.mybatis.MenuT;
+import inc.lilin.crowd.common.database.MenuPO;
 
 public interface MenuService {
-    MenuT getTree();
+    MenuPO getTree();
 
-    void saveMenu(MenuT menu);
+    void saveMenu(MenuPO menu);
 
-    void updateMenu(MenuT menu);
+    void updateMenu(MenuPO menu);
 
     void removeMenu(Integer id);
 }

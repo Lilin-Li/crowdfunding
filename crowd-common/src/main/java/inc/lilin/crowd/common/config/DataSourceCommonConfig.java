@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Properties;
 
 @Configuration
-@MapperScan(basePackages = {"inc.lilin.crowd.*.database.mysql.mybatis"}, sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(basePackages = {"inc.lilin.crowd.*.database"}, sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceCommonConfig {
 
     @Bean("sqlSessionFactory")

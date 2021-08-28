@@ -1,6 +1,6 @@
 package inc.lilin.crowd.admin.core.spring_security;
 
-import inc.lilin.crowd.admin.database.mysql.mybatis.AdminT;
+import inc.lilin.crowd.common.database.AdminPO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -14,16 +14,16 @@ import java.util.List;
 public class SecurityAdmin extends User {
     private static final long serialVersionUID = 1L;
     // 原始的 Admin 對象，包含 Admin 對象的全部屬性
-    private AdminT originalAdmin;
+    private AdminPO originalAdmin;
 
     public SecurityAdmin(
-            AdminT originalAdmin,  // 傳入原始的 Admin 對像
+            AdminPO originalAdmin,  // 傳入原始的 Admin 對像
             List<GrantedAuthority> authorities) {   // 建立角色、許可權資訊的集合
         super(originalAdmin.getLoginAcct(), originalAdmin.getUserPswd(), authorities);
         this.originalAdmin = originalAdmin;
     }
 
-    public AdminT getOriginalAdmin() {
+    public AdminPO getOriginalAdmin() {
         return originalAdmin;
 
     }
