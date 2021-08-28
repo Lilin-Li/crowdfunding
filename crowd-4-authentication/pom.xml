@@ -8,11 +8,11 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>inc.lilin.crowd</groupId>
-    <artifactId>crowd-admin</artifactId>
+
+    <artifactId>authentication</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd-admin</name>
-    <description>後台</description>
+    <name>authentication</name>
+    <description>authentication</description>
 
     <profiles>
         <profile>
@@ -23,10 +23,10 @@
                         <directory>src/main/resources</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/java/inc/lilin/crowd/admin/database</directory>
+                        <directory>src/main/java/inc/lilin/crowd/authentication/database</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/java/inc/lilin/crowd/admin/config/properties</directory>
+                        <directory>src/main/java/inc/lilin/crowd/authentication/config/properties</directory>
                     </resource>
                     <resource>
                         <directory>src/main/java/inc/lilin/crowd/common/database</directory>
@@ -38,11 +38,12 @@
             </build>
         </profile>
     </profiles>
+
     <dependencies>
+
         <dependency>
-            <groupId>inc.lilin.crowd</groupId>
-            <artifactId>crowd-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
     </dependencies>
 

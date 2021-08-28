@@ -19,20 +19,19 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- 匯入 SpringCloud 需要使用的依賴資訊 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>Greenwich.SR2</version>
                 <type>pom</type>
-                <!-- import 依賴範圍表示將 spring-cloud-dependencies 包中的依賴資訊匯入 -->
+                <!-- import 依赖范围表示将 spring-cloud-dependencies 包中的依赖信息导入 -->
                 <scope>import</scope>
             </dependency>
-            <!-- 匯入 SpringBoot 需要使用的依賴資訊 -->
+            <!-- 导入 SpringBoot 需要使用的依赖信息 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.5.2</version>
+                <version>2.1.6.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -40,6 +39,11 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>2.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.0.5</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

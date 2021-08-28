@@ -8,21 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class MemberServiceImpl implements MemberService {
+
+    @Autowired
+    private MemberMapper memberPOMapper;
+
     @Transactional(readOnly = true)
-    @Service
-    public class MemberServiceImpl implements MemberService {
+    @Override
+    public MemberPO getMemberPOByLoginAcct(String loginacct) {
 
-        @Autowired
-        private MemberMapper memberPOMapper;
-        @Override
-        public MemberPO getMemberPOByLoginAcct(String loginacct) {
+        List<MemberPO> list = memberPOMapper.selectByLoginAcct(loginacct);
 
-            List<MemberPO> list = memberPOMapper.selectByLoginAcct(loginacct);
-
-            return list.get(0);
-
-        }
+        return list.get(0);
 
     }
+
 }

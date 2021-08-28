@@ -1,8 +1,0 @@
-server:
-  port: 7000
-
-spring:
-  profiles:
-    include: common
-  datasource:
-      url: jdbc:mysql://192.168.56.10:3306/crowd_admin   #資料庫其他設定，已移到comoon

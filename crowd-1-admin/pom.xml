@@ -3,17 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>inc.lilin.crowd</groupId>
-        <artifactId>corwd-maven-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>inc.lilin.crowd</groupId>
-    <artifactId>crowd-member</artifactId>
+    <artifactId>crowd-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd-4-member</name>
-    <description>member</description>
+    <name>crowd-admin</name>
+    <description>後台</description>
 
     <profiles>
         <profile>
@@ -24,10 +23,10 @@
                         <directory>src/main/resources</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/java/inc/lilin/crowd/member/database</directory>
+                        <directory>src/main/java/inc/lilin/crowd/admin/database</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/java/inc/lilin/crowd/member/config/properties</directory>
+                        <directory>src/main/java/inc/lilin/crowd/admin/config/properties</directory>
                     </resource>
                     <resource>
                         <directory>src/main/java/inc/lilin/crowd/common/database</directory>
@@ -39,9 +38,12 @@
             </build>
         </profile>
     </profiles>
-
     <dependencies>
-
+        <dependency>
+            <groupId>inc.lilin.crowd</groupId>
+            <artifactId>crowd-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

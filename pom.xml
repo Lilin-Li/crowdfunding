@@ -22,6 +22,7 @@
         <module>crowd-2-admin</module>
         <module>crowd-3-eureka</module>
         <module>crowd-4-member</module>
+        <module>crowd-4-authentication</module>
     </modules>
 
 </project>
