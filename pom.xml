@@ -17,12 +17,16 @@
     </properties>
 
     <modules>
-        <module>crowd-0-maven-parent</module>
-        <module>crowd-1-common</module>
-        <module>crowd-2-admin</module>
-        <module>crowd-3-eureka</module>
-        <module>crowd-4-member</module>
-        <module>crowd-4-authentication</module>
+        <module>crowd-2-member-port4000</module>
+        <module>crowd-3-eureka-port1000</module>
+        <module>crowd--entity</module>
+        <module>crowd--remote_api</module>
+        <module>crowd--common</module>
+        <module>crowd-maven-parent</module>
+        <module>crowd-database</module>
+        <module>crowd-redis</module>
+        <module>crowd-springcore</module>
+        <module>crowd-springmvc</module>
     </modules>
 
 </project>

@@ -11,7 +11,7 @@
 
     <artifactId>crowd-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd-admin</name>
+    <name>crowd-1-admin</name>
     <description>後台</description>
 
     <profiles>
