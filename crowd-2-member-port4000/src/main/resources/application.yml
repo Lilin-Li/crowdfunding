@@ -4,12 +4,4 @@ spring:
   application:
     name: crowd-auth
   profiles:
-    include: springmvc,springcore,database,redis
-
-thymeleaf:
-  prefix: classpath:/templates/
-  suffix: .html
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:1000/eureka
+    include: springmvc,springcore,database,redis,eureka-client
