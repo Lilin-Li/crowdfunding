@@ -4,4 +4,4 @@ spring:
   application:
     name: crowd-auth
   profiles:
-    include: springmvc,springcore,database,redis,eureka-client
+    include: springmvc,springcore,database,redis,eurekaclient
