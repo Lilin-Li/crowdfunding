@@ -28,6 +28,11 @@
         </dependency>
         <dependency>
             <groupId>inc.lilin.crowd</groupId>
+            <artifactId>redis</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>inc.lilin.crowd</groupId>
             <artifactId>database</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -40,6 +45,12 @@
             <groupId>inc.lilin.crowd</groupId>
             <artifactId>crowd-eureka-client</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--  阿里雲SDK     -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.5.17</version>
         </dependency>
     </dependencies>
 

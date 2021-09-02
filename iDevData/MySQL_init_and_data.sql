@@ -66,6 +66,9 @@ create table t_member
     primary key (id)
 )DEFAULT CHARSET = utf8mb4;
 
+ALTER TABLE crowd_admin.t_member ADD CONSTRAINT t_member_UN UNIQUE KEY (loginacct);
+
+
 INSERT INTO auth_t(id, `name`, title, category_id)
 VALUES (1, '', '用戶模組', NULL);
 INSERT INTO auth_t(id, `name`, title, category_id)
