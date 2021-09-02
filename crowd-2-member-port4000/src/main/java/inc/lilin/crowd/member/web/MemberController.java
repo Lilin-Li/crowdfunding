@@ -161,4 +161,12 @@ public class MemberController {
 
         return "redirect:/auth/member/to/center/page";
     }
+
+    @RequestMapping("/auth/member/logout")
+    public String logout(HttpSession session) {
+
+        session.invalidate();
+
+        return "redirect:/";
+    }
 }
