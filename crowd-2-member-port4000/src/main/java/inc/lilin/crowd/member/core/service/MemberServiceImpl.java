@@ -22,6 +22,10 @@ public class MemberServiceImpl implements MemberService {
 
         List<MemberPO> list = memberPOMapper.selectByLoginAcct(loginacct);
 
+        if(list == null || list.size() == 0) {
+            return null;
+        }
+
         return list.get(0);
 
     }

@@ -56,7 +56,7 @@
   </select>
 
   <select id="selectByLoginAcct" resultMap="BaseResultMap">
-    select loginacct
+    select *
       FROM t_member
         WHERE loginacct = #{loginacct}
   </select>

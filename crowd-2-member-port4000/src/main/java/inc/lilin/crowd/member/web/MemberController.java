@@ -3,6 +3,7 @@ package inc.lilin.crowd.member.web;
 import inc.lilin.crowd.common.core.constant.CrowdConstant;
 import inc.lilin.crowd.database.MemberMapper;
 import inc.lilin.crowd.entity.po.MemberPO;
+import inc.lilin.crowd.entity.vo.MemberLoginVO;
 import inc.lilin.crowd.entity.vo.MemberVO;
 import inc.lilin.crowd.entity.vo.ResultVO;
 import inc.lilin.crowd.member.config.ShortMessageProperties;
@@ -11,16 +12,17 @@ import inc.lilin.crowd.redis.RedisHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-@RestController
+@Controller
 public class MemberController {
     @Autowired
     private MemberService memberService;
@@ -120,5 +122,43 @@ public class MemberController {
 
         // 使用重定向避免重新整理瀏覽器導致重新執行註冊流程
         return "redirect:/auth/member/to/login/page";
+    }
+
+    @RequestMapping("/auth/member/do/login")
+    public String login(
+            @RequestParam("loginacct") String loginacct,
+            @RequestParam("userpswd") String userpswd,
+            ModelMap modelMap,
+            HttpSession session) {
+
+        // 1.呼叫遠端介面根據登錄賬號查詢MemberPO對像
+        MemberPO memberPO;
+        try {
+            memberPO = memberService.getMemberPOByLoginAcct(loginacct);
+        } catch (Exception e) {
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, e.getMessage());
+            return "member-login";
+        }
+
+        if (memberPO == null) {
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_LOGIN_FAILED);
+            return "member-login";
+        }
+
+        // 2.比較密碼
+        String userpswdDataBase = memberPO.getUserpswd();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        boolean matcheResult = passwordEncoder.matches(userpswd, userpswdDataBase);
+
+        if (!matcheResult) {
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_LOGIN_FAILED);
+            return "member-login";
+        }
+
+        // 3.建立MemberLoginVO對像存入Session域
+        MemberLoginVO memberLoginVO = new MemberLoginVO(memberPO.getId(), memberPO.getUsername(), memberPO.getEmail());
+        session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER, memberLoginVO);
+
+        return "redirect:/auth/member/to/center/page";
     }
 }
