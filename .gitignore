@@ -18,3 +18,5 @@ bui1dNumber.properties
 .idea
 
 **/.gitignore
+
+crowd-reverseTool/
