@@ -11,7 +11,7 @@
 
     <artifactId>authentication</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd-2-authentication</name>
+    <name>crowd-2-member</name>
     <description>authentication</description>
 
 

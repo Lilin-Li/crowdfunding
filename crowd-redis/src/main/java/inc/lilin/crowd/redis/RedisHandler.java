@@ -14,7 +14,7 @@ public class RedisHandler {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    ResultVO<String> setRedisKeyValueRemote(
+    public ResultVO<String> setRedisKeyValueRemote(
             String key,
             String value) {
         try {
@@ -29,7 +29,7 @@ public class RedisHandler {
 
     }
 
-    void setRedisKeyValueRemoteWithTimeout(String key,
+    public void setRedisKeyValueRemoteWithTimeout(String key,
                                            String value,
                                            long time,
                                            TimeUnit timeUnit) throws Exception{
@@ -38,7 +38,7 @@ public class RedisHandler {
         operations.set(key, value, time, timeUnit);
     }
 
-    String getRedisStringValueByKeyRemote(String key) throws Exception {
+    public String getRedisStringValueByKeyRemote(String key) throws Exception {
         try {
             ValueOperations<String, String> operations = redisTemplate.opsForValue();
             String value = operations.get(key);
@@ -49,7 +49,7 @@ public class RedisHandler {
         }
     }
 
-    ResultVO<String> removeRedisKeyRemote(String key) {
+    public ResultVO<String> removeRedisKeyRemote(String key) {
         try {
             redisTemplate.delete(key);
             return ResultVO.successWithoutData();

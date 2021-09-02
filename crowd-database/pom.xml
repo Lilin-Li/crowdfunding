@@ -15,6 +15,25 @@
     <name>crowd-database</name>
     <description>Demo project for Spring Boot</description>
 
+    <profiles>
+        <profile>
+            <id>local</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/database</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/java/inc/lilin/crowd/database/config</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>inc.lilin.crowd</groupId>

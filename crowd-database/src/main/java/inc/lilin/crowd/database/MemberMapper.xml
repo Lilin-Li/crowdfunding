@@ -58,7 +58,7 @@
   <select id="selectByLoginAcct" resultMap="BaseResultMap">
     select loginacct
       FROM t_member
-        WHERE loginacct == #{loginacct}
+        WHERE loginacct = #{loginacct}
   </select>
 
   <insert id="insertSelective" parameterType="inc.lilin.crowd.entity.po.MemberPO" >
