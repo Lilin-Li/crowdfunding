@@ -20,4 +20,6 @@ public interface MemberMapper {
     int updateByPrimaryKey(MemberPO record);
 
     List<MemberPO> selectByLoginAcct(@Param("loginacct")String loginacct);
+
+    void insertSelective(MemberPO memberPO);
 }

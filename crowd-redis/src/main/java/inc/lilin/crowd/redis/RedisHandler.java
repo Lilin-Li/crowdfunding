@@ -29,32 +29,23 @@ public class RedisHandler {
 
     }
 
-    ResultVO<String> setRedisKeyValueRemoteWithTimeout(
-            String key,
-            String value,
-            long time,
-            TimeUnit timeUnit) {
-        try {
-            ValueOperations<String, String> operations = redisTemplate.opsForValue();
-            operations.set(key, value, time, timeUnit);
-            return ResultVO.successWithoutData();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.failed(e.getMessage());
+    void setRedisKeyValueRemoteWithTimeout(String key,
+                                           String value,
+                                           long time,
+                                           TimeUnit timeUnit) throws Exception{
 
-        }
-
+        ValueOperations<String, String> operations = redisTemplate.opsForValue();
+        operations.set(key, value, time, timeUnit);
     }
 
-    ResultVO<String> getRedisStringValueByKeyRemote(String key) {
+    String getRedisStringValueByKeyRemote(String key) throws Exception {
         try {
             ValueOperations<String, String> operations = redisTemplate.opsForValue();
             String value = operations.get(key);
-            return ResultVO.successWithData(value);
+            return value;
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultVO.failed(e.getMessage());
-
+            throw e;
         }
     }
 

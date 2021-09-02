@@ -60,4 +60,72 @@
       FROM t_member
         WHERE loginacct == #{loginacct}
   </select>
+
+  <insert id="insertSelective" parameterType="inc.lilin.crowd.entity.po.MemberPO" >
+    insert into t_member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="loginacct != null" >
+        loginacct,
+      </if>
+      <if test="userpswd != null" >
+        userpswd,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="authstatus != null" >
+        authstatus,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="cardnum != null" >
+        cardnum,
+      </if>
+      <if test="accttype != null" >
+        accttype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loginacct != null" >
+        #{loginacct,jdbcType=VARCHAR},
+      </if>
+      <if test="userpswd != null" >
+        #{userpswd,jdbcType=CHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="authstatus != null" >
+        #{authstatus,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="cardnum != null" >
+        #{cardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="accttype != null" >
+        #{accttype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
 </mapper>

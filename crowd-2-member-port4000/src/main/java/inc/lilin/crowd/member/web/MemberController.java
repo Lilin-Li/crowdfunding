@@ -2,6 +2,7 @@ package inc.lilin.crowd.member.web;
 
 import inc.lilin.crowd.common.core.constant.CrowdConstant;
 import inc.lilin.crowd.common.util.CrowdUtil;
+import inc.lilin.crowd.database.MemberMapper;
 import inc.lilin.crowd.entity.po.MemberPO;
 import inc.lilin.crowd.entity.vo.MemberVO;
 import inc.lilin.crowd.entity.vo.ResultVO;
@@ -32,10 +33,13 @@ public class MemberController {
     @Autowired
     private RedisHandler redisHandler;
 
+    @Autowired
+    private MemberMapper memberMapper;
+
     @RequestMapping("/get/memberpo/by/login/acct/remote")
     public ResultVO<MemberPO> getMemberPOByLoginAcctRemote(@RequestParam("loginacct") String loginacct) {
-            MemberPO memberPO = memberService.getMemberPOByLoginAcct(loginacct);
-            return ResultVO.successWithData(memberPO);
+        MemberPO memberPO = memberService.getMemberPOByLoginAcct(loginacct);
+        return ResultVO.successWithData(memberPO);
     }
 
     // 簡訊驗證碼
@@ -53,7 +57,7 @@ public class MemberController {
                 shortMessageProperties.getSkin());
 
         // 2.判斷簡訊發送結果
-        if(ResultVO.SUCCESS.equals(sendMessageResultEntity.getResult())) {
+        if (ResultVO.SUCCESS.equals(sendMessageResultEntity.getResult())) {
             // 3.如果發送成功，則將驗證碼存入Redis
             // ①從上一步操作的結果中獲取隨機產生的驗證碼
             String code = sendMessageResultEntity.getData();
@@ -62,17 +66,12 @@ public class MemberController {
             String key = CrowdConstant.REDIS_CODE_PREFIX + phoneNum;
 
             // ③呼叫遠端介面存入Redis
-            ResultVO<String> saveCodeResultEntity = redisHandler.setRedisKeyValueRemoteWithTimeout(key, code, 15, TimeUnit.MINUTES);
-
-            // ④判斷結果
-            if(ResultVO.SUCCESS.equals(saveCodeResultEntity.getResult())) {
-
+            try {
+                redisHandler.setRedisKeyValueRemoteWithTimeout(key, code, 15, TimeUnit.MINUTES);
                 return ResultVO.successWithoutData();
-            }else {
-                return saveCodeResultEntity;
+            } catch (Exception e) {
+                return ResultVO.failed(e.getMessage());
             }
-        } else {
-            return sendMessageResultEntity;
         }
     }
 
@@ -86,25 +85,22 @@ public class MemberController {
         String key = CrowdConstant.REDIS_CODE_PREFIX + phoneNum;
 
         // 3.從Redis讀取Key對應的value
-        ResultVO<String> resultEntity = redisHandler.getRedisStringValueByKeyRemote(key);
-
-        String result = resultEntity.getResult();
-        if(ResultVO.FAILED.equals(result)) {
-            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, resultEntity.getMessage());
+        String redisCode;
+        try {
+            redisCode = redisHandler.getRedisStringValueByKeyRemote(key);
+        } catch (Exception e) {
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, e.getMessage());
             return "member-reg";
         }
 
-        String redisCode = resultEntity.getData();
-
-        if(redisCode == null) {
+        if (redisCode == null) {
             modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_CODE_NOT_EXISTS);
             return "member-reg";
         }
 
         // 5.如果從Redis能夠查詢到value則比較表單驗證碼和Redis驗證碼
         String formCode = memberVO.getCode();
-
-        if(!Objects.equals(formCode, redisCode)) {
+        if (!Objects.equals(formCode, redisCode)) {
             modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_CODE_INVALID);
             return "member-reg";
         }
@@ -116,23 +112,12 @@ public class MemberController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String userpswdBeforeEncode = memberVO.getUserpswd();
         String userpswdAfterEncode = passwordEncoder.encode(userpswdBeforeEncode);
-
         memberVO.setUserpswd(userpswdAfterEncode);
 
         // 8.執行儲存
-        // ①建立空的MemberPO對像
         MemberPO memberPO = new MemberPO();
-
-        // ②複製屬性
         BeanUtils.copyProperties(memberVO, memberPO);
-
-        // ③呼叫遠端方法
-        ResultVO<String> saveMemberResultEntity = mySQLRemoteService.saveMember(memberPO);
-
-        if(ResultVO.FAILED.equals(saveMemberResultEntity.getResult())) {
-            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, saveMemberResultEntity.getMessage());
-            return "member-reg";
-        }
+        memberService.saveMember(memberPO);
 
         // 使用重定向避免重新整理瀏覽器導致重新執行註冊流程
         return "redirect:/auth/member/to/login/page";
