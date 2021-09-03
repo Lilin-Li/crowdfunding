@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inc.lilin.crowd.common.database.TmemberpoMapper">
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <resultMap id="BaseResultMap" type="inc.lilin.crowd.common.database.Tmemberpo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="loginacct" jdbcType="VARCHAR" property="loginacct" />
+    <result column="userpswd" jdbcType="CHAR" property="userpswd" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="authstatus" jdbcType="INTEGER" property="authstatus" />
+    <result column="usertype" jdbcType="INTEGER" property="usertype" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="cardnum" jdbcType="VARCHAR" property="cardnum" />
+    <result column="accttype" jdbcType="INTEGER" property="accttype" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="inc.lilin.crowd.common.database.Tmemberpo">
+    insert into t_member (id, loginacct, userpswd, 
+      username, email, authstatus, 
+      usertype, realname, cardnum, 
+      accttype)
+    values (#{id,jdbcType=INTEGER}, #{loginacct,jdbcType=VARCHAR}, #{userpswd,jdbcType=CHAR}, 
+      #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{authstatus,jdbcType=INTEGER}, 
+      #{usertype,jdbcType=INTEGER}, #{realname,jdbcType=VARCHAR}, #{cardnum,jdbcType=VARCHAR}, 
+      #{accttype,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.common.database.Tmemberpo">
+    update t_member
+    set loginacct = #{loginacct,jdbcType=VARCHAR},
+      userpswd = #{userpswd,jdbcType=CHAR},
+      username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      authstatus = #{authstatus,jdbcType=INTEGER},
+      usertype = #{usertype,jdbcType=INTEGER},
+      realname = #{realname,jdbcType=VARCHAR},
+      cardnum = #{cardnum,jdbcType=VARCHAR},
+      accttype = #{accttype,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, loginacct, userpswd, username, email, authstatus, usertype, realname, 
+    cardnum, accttype
+    from t_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, loginacct, userpswd, username, email, authstatus, usertype, realname, 
+    cardnum, accttype
+    from t_member
+  </select>
+</mapper>

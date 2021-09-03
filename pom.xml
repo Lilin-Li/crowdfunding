@@ -2,12 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>inc.lilin.crowd</groupId>
-    <artifactId>crowd</artifactId>
+    <artifactId>crowdfunding</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd</name>
+    <name>crowdfunding-總父工程</name>
+
     <description>聚合服務</description>
     <packaging>pom</packaging>
+
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,16 +20,62 @@
     </properties>
 
     <modules>
-        <module>crowd-2-member-port4000</module>
-        <module>crowd-3-eureka-port1000</module>
-        <module>crowd--entity</module>
-        <module>crowd--remote_api</module>
-        <module>crowd--common</module>
-        <module>crowd-maven-parent</module>
-        <module>crowd-database</module>
-        <module>crowd-redis</module>
-        <module>crowd-springcore</module>
-        <module>crowd-springmvc</module>
+        <module>assembly-database</module>
+        <module>assembly-eureka-client</module>
+        <module>assembly-redis</module>
+        <module>assembly-springcore</module>
+        <module>assembly-springmvc</module>
+        <module>crowd-server-eureka-port1000</module>
+        <module>crowd-server-gatway-port80</module>
+        <module>crowd-tool-reverseTool</module>
+        <module>crowd/crowd-assembly-common</module>
+        <module>crowd/crowd-assembly-entity</module>
+        <module>crowd/crowd-assembly-remote_api</module>
+
+        <module>crowd/crowd-member-port4000</module>
+        <module>crowd-admin/crowd--admin</module>
+        <module>crowd-admin/crowd--admin-common</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.SR2</version>
+                <type>pom</type>
+                <!-- import 依赖范围表示将 spring-cloud-dependencies 包中的依赖信息导入 -->
+                <scope>import</scope>
+            </dependency>
+            <!-- 导入 SpringBoot 需要使用的依赖信息 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.1.6.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.0.5</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.6.RELEASE</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
