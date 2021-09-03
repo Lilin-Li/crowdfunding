@@ -1,4 +1,4 @@
-package inc.lilin.crowd.crowd3gatway;
+package inc.lilin.crowd.crowd.gateway;
 
 
 import org.springframework.boot.SpringApplication;

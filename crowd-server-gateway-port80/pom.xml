@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>inc.lilin.crowd</groupId>
-    <artifactId>crowd-server-gatway-port80</artifactId>
+    <artifactId>crowd-server-gateway-port80</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd-server-gatway-port80</name>
+    <name>crowd-server-gateway-port80</name>
     <description>Demo project for Spring Boot</description>
 
 
@@ -30,6 +30,11 @@
         <dependency>
             <groupId>inc.lilin.crowd</groupId>
             <artifactId>assembly-redis</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>inc.lilin.crowd</groupId>
+            <artifactId>crowd-assembly-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
