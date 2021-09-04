@@ -1,6 +1,7 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.common.database.AdminPO;
+
+import inc.lilin.crowd.entity.po.AdminPO;
 
 public interface LoginService {
 

@@ -1,7 +1,7 @@
 package inc.lilin.crowd.admin.core.service;
 
 import com.github.pagehelper.PageInfo;
-import inc.lilin.crowd.common.database.RolePO;
+import inc.lilin.crowd.entity.po.RolePO;
 
 import java.util.List;
 

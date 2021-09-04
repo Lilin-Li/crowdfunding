@@ -1,7 +1,8 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.common.database.AuthPO;
-import inc.lilin.crowd.common.database.AuthMapper;
+
+import inc.lilin.crowd.database.AuthMapper;
+import inc.lilin.crowd.entity.po.AuthPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;

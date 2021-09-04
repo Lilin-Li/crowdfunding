@@ -1,4 +1,6 @@
-package inc.lilin.crowd.common.database;
+package inc.lilin.crowd.database;
+
+import inc.lilin.crowd.entity.po.MenuPO;
 
 import java.util.List;
 

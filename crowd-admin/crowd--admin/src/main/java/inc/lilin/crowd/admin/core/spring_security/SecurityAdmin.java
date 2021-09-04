@@ -1,6 +1,6 @@
 package inc.lilin.crowd.admin.core.spring_security;
 
-import inc.lilin.crowd.common.database.AdminPO;
+import inc.lilin.crowd.entity.po.AdminPO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 

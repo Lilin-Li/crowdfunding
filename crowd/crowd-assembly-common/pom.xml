@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>inc.lilin.crowd</groupId>
-            <artifactId>crowd-assembly-entity</artifactId>
+            <artifactId>assembly-entity</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- 以下是發送簡訊時呼叫第三方API所需依賴 -->

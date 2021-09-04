@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>inc.lilin.crowd</groupId>
-        <artifactId>crowd</artifactId>
+        <artifactId>crowdfunding</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath/>
     </parent>
 
     <groupId>inc.lilin.crowd</groupId>
-    <artifactId>crowd-assembly-entity</artifactId>
+    <artifactId>assembly-entity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>crowd-前台-assembly-entity</name>
     <description>供各介面通訊用entity</description>

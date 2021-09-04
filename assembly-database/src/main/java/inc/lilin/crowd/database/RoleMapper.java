@@ -1,5 +1,6 @@
-package inc.lilin.crowd.common.database;
+package inc.lilin.crowd.database;
 
+import inc.lilin.crowd.entity.po.RolePO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

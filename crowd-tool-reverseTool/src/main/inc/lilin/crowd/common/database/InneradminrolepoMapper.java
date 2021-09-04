@@ -1,6 +1,6 @@
 package inc.lilin.crowd.common.database;
 
-import inc.lilin.crowd.common.database.Inneradminrolepo;
+
 import java.util.List;
 
 /**

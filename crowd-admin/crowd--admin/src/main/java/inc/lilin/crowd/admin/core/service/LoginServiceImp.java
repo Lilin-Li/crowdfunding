@@ -1,9 +1,9 @@
 package inc.lilin.crowd.admin.core.service;
 
 import inc.lilin.crowd.admin.core.exception.LoginFailedException;
-import inc.lilin.crowd.common.database.AdminPO;
-import inc.lilin.crowd.common.database.AdminMapper;
 import inc.lilin.crowd.common.core.ErrorCodeEnum;
+import inc.lilin.crowd.database.AdminMapper;
+import inc.lilin.crowd.entity.po.AdminPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

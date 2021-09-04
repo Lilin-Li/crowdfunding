@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.database;
+package inc.lilin.crowd.entity.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

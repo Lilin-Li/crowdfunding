@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="inc.lilin.crowd.common.database.RoleMapper">
-  <resultMap id="BaseResultMap" type="inc.lilin.crowd.common.database.RolePO">
+<mapper namespace="inc.lilin.crowd.database.RoleMapper">
+  <resultMap id="BaseResultMap" type="inc.lilin.crowd.entity.po.RolePO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="CHAR" property="name" />
   </resultMap>
@@ -18,11 +18,11 @@
   </delete>
 
 
-  <insert id="insert" parameterType="inc.lilin.crowd.common.database.RolePO">
+  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.RolePO">
     insert into role_t (id, name)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=CHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.common.database.RolePO">
+  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.entity.po.RolePO">
     update role_t
     set name = #{name,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}

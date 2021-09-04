@@ -1,8 +1,8 @@
 package inc.lilin.crowd.admin.web;
 
 import inc.lilin.crowd.admin.core.service.AuthService;
-import inc.lilin.crowd.common.database.AuthPO;
 import inc.lilin.crowd.common.web.vo.ResultVO;
+import inc.lilin.crowd.entity.po.AuthPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;

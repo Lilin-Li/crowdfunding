@@ -2,8 +2,8 @@ package inc.lilin.crowd.admin.core.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import inc.lilin.crowd.common.database.RolePO;
-import inc.lilin.crowd.common.database.RoleMapper;
+import inc.lilin.crowd.database.RoleMapper;
+import inc.lilin.crowd.entity.po.RolePO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

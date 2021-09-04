@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.database;
+package inc.lilin.crowd.entity.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RolePO implements Serializable {
+public class AuthPO implements Serializable {
     /**
      * 
      */
@@ -30,4 +30,14 @@ public class RolePO implements Serializable {
      * 
      */
     private String name;
+
+    /**
+     * 
+     */
+    private String title;
+
+    /**
+     * 
+     */
+    private Integer categoryId;
 }

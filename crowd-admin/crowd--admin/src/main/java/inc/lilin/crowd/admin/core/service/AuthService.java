@@ -1,6 +1,6 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.common.database.AuthPO;
+import inc.lilin.crowd.entity.po.AuthPO;
 
 import java.util.List;
 import java.util.Map;

@@ -44,6 +44,17 @@
             <artifactId>crowd--admin-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>inc.lilin.crowd</groupId>
+            <artifactId>assembly-entity</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>inc.lilin.crowd</groupId>
+            <artifactId>assembly-database</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

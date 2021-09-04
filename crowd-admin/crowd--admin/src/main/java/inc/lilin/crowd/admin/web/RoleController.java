@@ -2,8 +2,8 @@ package inc.lilin.crowd.admin.web;
 
 import com.github.pagehelper.PageInfo;
 import inc.lilin.crowd.admin.core.service.RoleService;
-import inc.lilin.crowd.common.database.RolePO;
 import inc.lilin.crowd.common.web.vo.ResultVO;
+import inc.lilin.crowd.entity.po.RolePO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

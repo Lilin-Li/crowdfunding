@@ -1,7 +1,8 @@
 package inc.lilin.crowd.admin.core.service;
 
-import inc.lilin.crowd.common.database.MenuPO;
-import inc.lilin.crowd.common.database.MenuMapper;
+
+import inc.lilin.crowd.database.MenuMapper;
+import inc.lilin.crowd.entity.po.MenuPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
