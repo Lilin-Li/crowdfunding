@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inc.lilin.crowd.database.ReturnPOMapper">
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <resultMap id="BaseResultMap" type="inc.lilin.crowd.entity.po.ReturnPO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="projectid" jdbcType="INTEGER" property="projectid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="supportmoney" jdbcType="INTEGER" property="supportmoney" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="signalpurchase" jdbcType="INTEGER" property="signalpurchase" />
+    <result column="purchase" jdbcType="INTEGER" property="purchase" />
+    <result column="freight" jdbcType="INTEGER" property="freight" />
+    <result column="invoice" jdbcType="INTEGER" property="invoice" />
+    <result column="returndate" jdbcType="INTEGER" property="returndate" />
+    <result column="describ_pic_path" jdbcType="VARCHAR" property="describPicPath" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_return
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.ReturnPO">
+    insert into t_return (id, projectid, type, 
+      supportmoney, content, count, 
+      signalpurchase, purchase, freight, 
+      invoice, returndate, describ_pic_path
+      )
+    values (#{id,jdbcType=INTEGER}, #{projectid,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{supportmoney,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{signalpurchase,jdbcType=INTEGER}, #{purchase,jdbcType=INTEGER}, #{freight,jdbcType=INTEGER}, 
+      #{invoice,jdbcType=INTEGER}, #{returndate,jdbcType=INTEGER}, #{describPicPath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.entity.po.ReturnPO">
+    update t_return
+    set projectid = #{projectid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      supportmoney = #{supportmoney,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      signalpurchase = #{signalpurchase,jdbcType=INTEGER},
+      purchase = #{purchase,jdbcType=INTEGER},
+      freight = #{freight,jdbcType=INTEGER},
+      invoice = #{invoice,jdbcType=INTEGER},
+      returndate = #{returndate,jdbcType=INTEGER},
+      describ_pic_path = #{describPicPath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, projectid, type, supportmoney, content, count, signalpurchase, purchase, 
+    freight, invoice, returndate, describ_pic_path
+    from t_return
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, projectid, type, supportmoney, content, count, signalpurchase, purchase, 
+    freight, invoice, returndate, describ_pic_path
+    from t_return
+  </select>
+</mapper>

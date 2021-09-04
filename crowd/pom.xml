@@ -19,7 +19,7 @@
 
     <modules>
         <module>crowd-assembly-common</module>
-        <module>crowd-assembly-entity</module>
+        <module>crowd-project-port5000</module>
         <module>crowd-assembly-remote_api</module>
         <module>crowd-member-port4000</module>
     </modules>

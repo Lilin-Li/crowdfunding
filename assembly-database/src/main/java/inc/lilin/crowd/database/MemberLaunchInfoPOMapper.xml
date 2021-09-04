@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inc.lilin.crowd.database.MemberLaunchInfoPOMapper">
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <resultMap id="BaseResultMap" type="inc.lilin.crowd.entity.po.MemberLaunchInfoPO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="memberid" jdbcType="INTEGER" property="memberid" />
+    <result column="description_simple" jdbcType="VARCHAR" property="descriptionSimple" />
+    <result column="description_detail" jdbcType="VARCHAR" property="descriptionDetail" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="service_num" jdbcType="VARCHAR" property="serviceNum" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_member_launch_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.MemberLaunchInfoPO">
+    insert into t_member_launch_info (id, memberid, description_simple, 
+      description_detail, phone_num, service_num
+      )
+    values (#{id,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{descriptionSimple,jdbcType=VARCHAR}, 
+      #{descriptionDetail,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{serviceNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.entity.po.MemberLaunchInfoPO">
+    update t_member_launch_info
+    set memberid = #{memberid,jdbcType=INTEGER},
+      description_simple = #{descriptionSimple,jdbcType=VARCHAR},
+      description_detail = #{descriptionDetail,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      service_num = #{serviceNum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, memberid, description_simple, description_detail, phone_num, service_num
+    from t_member_launch_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, memberid, description_simple, description_detail, phone_num, service_num
+    from t_member_launch_info
+  </select>
+</mapper>

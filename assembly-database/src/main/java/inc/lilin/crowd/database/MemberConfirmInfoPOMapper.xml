@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inc.lilin.crowd.database.MemberConfirmInfoPOMapper">
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <resultMap id="BaseResultMap" type="inc.lilin.crowd.entity.po.MemberConfirmInfoPO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="memberid" jdbcType="INTEGER" property="memberid" />
+    <result column="paynum" jdbcType="VARCHAR" property="paynum" />
+    <result column="cardnum" jdbcType="VARCHAR" property="cardnum" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_member_confirm_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.MemberConfirmInfoPO">
+    insert into t_member_confirm_info (id, memberid, paynum, 
+      cardnum)
+    values (#{id,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{paynum,jdbcType=VARCHAR}, 
+      #{cardnum,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.entity.po.MemberConfirmInfoPO">
+    update t_member_confirm_info
+    set memberid = #{memberid,jdbcType=INTEGER},
+      paynum = #{paynum,jdbcType=VARCHAR},
+      cardnum = #{cardnum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, memberid, paynum, cardnum
+    from t_member_confirm_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, memberid, paynum, cardnum
+    from t_member_confirm_info
+  </select>
+</mapper>

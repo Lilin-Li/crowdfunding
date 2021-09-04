@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"
+		  href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"
+		  href="css/font-awesome.min.css">
+	<link rel="stylesheet" th:href="@{/css/theme.css}" href="css/theme.css">
+	<style>
+		#footer {
+			padding: 15px 0;
+			background: #fff;
+			border-top: 1px solid #ddd;
+			text-align: center;
+		}
+
+		#topcontrol {
+			color: #fff;
+			z-index: 99;
+			width: 30px;
+			height: 30px;
+			font-size: 20px;
+			background: #222;
+			position: relative;
+			right: 14px !important;
+			bottom: 11px !important;
+			border-radius: 3px !important;
+		}
+
+		#topcontrol:after {
+			/*top: -2px;*/
+			left: 8.5px;
+			content: "\f106";
+			position: absolute;
+			text-align: center;
+			font-family: FontAwesome;
+		}
+
+		#topcontrol:hover {
+			color: #fff;
+			background: #18ba9b;
+			-webkit-transition: all 0.3s ease-in-out;
+			-moz-transition: all 0.3s ease-in-out;
+			-o-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.label-type, .label-status, .label-order {
+			background-color: #fff;
+			color: #f60;
+			padding: 5px;
+			border: 1px #f60 solid;
+		}
+
+		#typeList  :not (:first-child ) {
+			margin-top: 20px;
+		}
+
+		.label-txt {
+			margin: 10px 10px;
+			border: 1px solid #ddd;
+			padding: 4px;
+			font-size: 14px;
+		}
+
+		.panel {
+			border-radius: 0;
+		}
+
+		.progress-bar-default {
+			background-color: #ddd;
+		}
+
+		.selected {
+			color: yellow;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+<div class="navbar-wrapper">
+	<div class="container">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html" style="font-size: 32px;">尚籌網-創意產品眾籌平臺</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse"
+					 style="float: right;">
+					<ul class="nav navbar-nav">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+												data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
+							[[${session.loginMember.username}]]<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="member.html"><i
+										class="glyphicon glyphicon-scale"></i> 會員中心</a></li>
+								<li><a href="#"><i class="glyphicon glyphicon-comment"></i>
+									訊息</a></li>
+								<li class="divider"></li>
+								<li><a href="http://www.crowd.com/auth/member/logout"><i
+										class="glyphicon glyphicon-off"></i> 退出系統</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
+
+<div class="container theme-showcase" role="main">
+
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<nav class="navbar navbar-default" role="navigation">
+					<div class="collapse navbar-collapse"
+						 id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li><a rel="nofollow" href="index.html"><i
+									class="glyphicon glyphicon-home"></i> 眾籌首頁</a></li>
+							<li><a rel="nofollow" href="projects.html"><i
+									class="glyphicon glyphicon-th-large"></i> 專案總覽</a></li>
+							<li class="active"><a rel="nofollow" href="javascript:;"><i
+									class="glyphicon glyphicon-edit"></i> 發起專案</a></li>
+							<li><a rel="nofollow" href="minecrowdfunding.html"><i
+									class="glyphicon glyphicon-user"></i> 我的眾籌</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<form id="projectForm" th:action="@{/project/create/project/information}" method="post" enctype="multipart/form-data" class="form-horizontal">
+					<p th:text="${message}"></p>
+					<div class="panel panel-default">
+						<div class="panel-heading" style="text-align: center;">
+							<div class="container-fluid">
+								<div class="row clearfix">
+									<div class="col-md-3 column">
+										<div class="progress"
+											 style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+											<div class="progress-bar progress-bar-success"
+												 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												 aria-valuemax="100" style="width: 100%; height: 50px;">
+												<div style="font-size: 16px; margin-top: 15px;">1.
+													專案及發起人資訊</div>
+											</div>
+										</div>
+										<div
+												style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(92, 184, 92, 1); border-top-color: rgba(92, 184, 92, 0); border-bottom-color: rgba(92, 184, 92, 0); border-right-color: rgba(92, 184, 92, 0);">
+										</div>
+									</div>
+									<div class="col-md-3 column">
+										<div class="progress"
+											 style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+											<div class="progress-bar progress-bar-default"
+												 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												 aria-valuemax="100" style="width: 100%; height: 50px;">
+												<div style="font-size: 16px; margin-top: 15px;">2.
+													回報設定</div>
+											</div>
+										</div>
+										<div
+												style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+										</div>
+									</div>
+									<div class="col-md-3 column">
+										<div class="progress"
+											 style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+											<div class="progress-bar progress-bar-default"
+												 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												 aria-valuemax="100" style="width: 100%; height: 50px;">
+												<div style="font-size: 16px; margin-top: 15px;">3.
+													確認資訊</div>
+											</div>
+										</div>
+										<div
+												style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+										</div>
+									</div>
+									<div class="col-md-3 column">
+										<div class="progress" style="height: 50px; border-radius: 0;">
+											<div class="progress-bar progress-bar-default"
+												 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+												 aria-valuemax="100" style="width: 100%; height: 50px;">
+												<div style="font-size: 16px; margin-top: 15px;">4. 完成</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="container-fluid">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<blockquote
+												style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+											<b> 專案及發起人資訊 </b>
+										</blockquote>
+									</div>
+									<div class="col-md-12 column">
+										<div class="page-header" style="border-bottom-style: dashed;">
+											<h3>專案資訊</h3>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-2 control-label">分類資訊</label>
+											<div class="col-sm-10">
+												<label class="radio-inline">
+													<input type="checkbox" name="typeIdList"
+														   id="inlineRadio1"
+														   value="1"> 科技
+												</label>
+												<label class="radio-inline">
+													<input
+															type="checkbox" name="typeIdList"
+															id="inlineRadio2" value="2" checked="checked"> 設計
+												</label>
+												<label class="radio-inline">
+													<input
+															type="checkbox" name="typeIdList"
+															id="inlineRadio3" value="3"> 公益
+												</label>
+												<label class="radio-inline">
+													<input
+															type="checkbox" name="typeIdList"
+															id="inlineRadio3" value="4" checked="checked"> 農業
+												</label>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-2 control-label">標籤</label>
+											<div class="col-sm-10">
+												<ul style="list-style: none; padding-left: 0;">
+													<li style="margin: 10px 0">[手機] <span
+															class="tagLable label-txt" id="4">大屏</span> <span
+															class="tagLable label-txt" id="5">美顏</span> <span
+															class="tagLable label-txt" id="6">續航</span>
+													</li>
+													<li style="margin: 10px 0">[數碼] <span
+															class="tagLable label-txt" id="7">高解析度</span> <span
+															class="tagLable label-txt" id="8">高清</span>
+													</li>
+													<li style="margin: 10px 0">[電腦] <span
+															class="tagLable label-txt" id="9">大記憶體</span> <span
+															class="tagLable label-txt" id="10">固態</span>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">專案名稱</label>
+											<div class="col-sm-10">
+												<input type="text" name="projectName" value="brotherMao" class="form-control">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">一句話簡介</label>
+											<div class="col-sm-10">
+												<textarea name="projectDescription" class="form-control" rows="5">就是帥！</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">籌資金額（元）</label>
+											<div class="col-sm-10">
+												<input type="text" name="money" value="100000" class="form-control"
+													   style="width: 100px;"> <label
+													class="control-label">籌資金額不能低於100元,不能高於1000000000元</label>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">籌資天數（天）</label>
+											<div class="col-sm-10">
+												<input type="text" name="day" value="30" class="form-control"
+													   style="width: 100px;"> <label
+													class="control-label">一般10-90天，建議30天</label>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">專案頭圖</label>
+											<div class="col-sm-10">
+												<input type="file" name="headerPicture" style="display: none;" />
+												<button id="uploadHeadBtn" type="button" class="btn btn-primary btn-lg active">上傳圖片</button>
+												<label class="control-label">圖片上無文字,支援jpg、jpeg、png、gif格式，大小不超過2M，建議尺寸：740*457px</label>
+												<br /><img style="display: none;" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">專案詳情</label>
+											<div class="col-sm-10">
+												<input type="file" multiple="multiple" name="detailPictureList" style="display: none;" />
+												<button id="uploadDetailBtn" type="button" class="btn btn-primary btn-lg active">上傳圖片</button>
+												<label class="control-label">支援jpg、jpeg、png、gif格式，大小不超過2M，建議尺寸：寬740px</label>
+												<div id="showDetailPicture"></div>
+											</div>
+										</div>
+										<!-- </form> -->
+									</div>
+									<div class="col-md-12 column">
+										<div class="page-header" style="border-bottom-style: dashed;">
+											<h3>發起人資訊</h3>
+										</div>
+										<!-- <form class="form-horizontal"> -->
+										<div class="form-group">
+											<label class="col-sm-2 control-label">自我介紹</label>
+											<div class="col-sm-10">
+												<input type="text" name="memberLauchInfoVO.descriptionSimple" value="i am mao" class="form-control"
+													   placeholder="一句話自我介紹，不超過40字">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">詳細自我介紹</label>
+											<div class="col-sm-10">
+													<textarea name="memberLauchInfoVO.descriptionDetail" class="form-control" rows="5"
+															  placeholder="向支持者詳細介紹你自己或你的團隊及專案背景，讓支持者在最短時間內瞭解你，不超過160字">我是貓哥</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">聯繫電話</label>
+											<div class="col-sm-10">
+												<input type="text" name="memberLauchInfoVO.phoneNum" value="123456" class="form-control"
+													   placeholder="此資訊不會顯示在專案頁面">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">客服電話</label>
+											<div class="col-sm-10">
+												<input type="text" name="memberLauchInfoVO.serviceNum" value="654321" class="form-control"
+													   placeholder="此資訊顯示在專案頁面">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer" style="text-align: center;">
+							<button id="submitBtn" type="button" class="btn  btn-warning btn-lg">下一步</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container" style="margin-top: 20px;">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div id="footer">
+					<div class="footerNav">
+						<a rel="nofollow" href="http://www.layoutit.cn">關於我們</a> | <a
+							rel="nofollow" href="http://www.layoutit.cn">服務條款</a> | <a
+							rel="nofollow" href="http://www.layoutit.cn">免責聲明</a> | <a
+							rel="nofollow" href="http://www.layoutit.cn">網站地圖</a> | <a
+							rel="nofollow" href="http://www.layoutit.cn">聯繫我們</a>
+					</div>
+					<div class="copyRight">Copyright ?2017-2017layoutit.cn 版權所有
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- /container -->
+<script type="text/javascript" th:src="@{/jquery/jquery-2.1.1.min.js}"
+		src="jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript"
+		th:src="@{/bootstrap/js/bootstrap.min.js}"
+		src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/script/docs.min.js}"
+		src="script/docs.min.js"></script>
+<script type="text/javascript" th:src="@{/script/back-to-top.js}"
+		src="script/back-to-top.js"></script>
+<script type="text/javascript">
+	$('#myTab a').click(function(e) {
+		e.preventDefault()
+		$(this).tab('show')
+	});
+
+	// 聲明全域性變數用於儲存選中的標籤的id
+	var tagIdList = new Array();
+
+	$(".tagLable").click(function() {
+
+		// 標籤文字顯示框如果有selected就去掉，如果沒有就加上
+		$(this).toggleClass("selected");
+
+		// 獲取目前文字顯示框的id（也就是標籤的id）
+		var tagId = this.id;
+
+		// 判定tagId是否在陣列中，如果在則刪除，如果不在則新增
+		checkExitsts(tagIdList, tagId);
+
+		console.log(tagIdList);
+
+	});
+
+	function checkExitsts(arr, id) {
+		for (var i = 0; i < arr.length; i++) {
+			var value = arr[i];
+			if (value == id) {
+
+				// 從陣列中刪除元素，i是元素索引，1是刪除數量
+				arr.splice(i, 1);
+
+				return;
+			}
+		}
+
+		// 將目前標籤的id加入陣列
+		arr.push(id);
+	}
+
+	$("#uploadHeadBtn").click(function() {
+
+		// 呼叫click()函式，相當於被點選了一下
+		$("[name=headerPicture]").click();
+	});
+
+	$("[name=headerPicture]").change(function(event) {
+
+		// 獲取使用者選中的檔案
+		var files = event.target.files;
+
+		// 使用下標0，選擇唯一的一個檔案
+		var file = files[0];
+
+		// 獲取URL對像
+		var url = window.url || window.webkitURL;
+
+		// 呼叫url對象的createObjectURL()方法獲取目前選中的檔案在系統中的路徑
+		var path = url.createObjectURL(file);
+
+		// 使用path修改img標籤的src屬性
+		$(this).next().next().next().next().attr("src", path).show();
+
+	});
+
+	$("#uploadDetailBtn").click(function() {
+
+		$("[name=detailPictureList]").click();
+
+	});
+
+	$("[name=detailPictureList]").change(function(event) {
+
+		$("#showDetailPicture").empty();
+
+		var files = event.target.files;
+
+		var url = window.url || window.webkitURL;
+
+		for (var i = 0; i < files.length; i++) {
+			var file = files[i];
+
+			var path = url.createObjectURL(file);
+
+			var imgHtml = "<img src='"+path+"' /><br/>";
+
+			$("#showDetailPicture").append(imgHtml);
+		}
+
+	});
+
+	// 點選下一步按鈕提交表單
+	$("#submitBtn").click(function(){
+
+		// 將表單中標籤id的值組成的陣列轉換成表單內的隱藏域
+		for(var i = 0; i < tagIdList.length; i++) {
+			var tagId = tagIdList[i];
+
+			var hiddenInputHTML = "<input type='hidden' name='tagIdList' value='"+tagId+"' />";
+
+			$("#projectForm").append(hiddenInputHTML);
+		}
+
+		// 提交表單
+		$("#projectForm").submit();
+	});
+
+</script>
+</body>
+</html>

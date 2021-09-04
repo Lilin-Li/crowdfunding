@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inc.lilin.crowd.database.TypePOMapper">
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <resultMap id="BaseResultMap" type="inc.lilin.crowd.entity.po.TypePO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.TypePO">
+    insert into t_type (id, name, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.entity.po.TypePO">
+    update t_type
+    set name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, remark
+    from t_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, remark
+    from t_type
+  </select>
+</mapper>

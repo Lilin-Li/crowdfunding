@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<base th:href="@{/}" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/theme.css">
+	<style>
+		#footer {
+			padding: 15px 0;
+			background: #fff;
+			border-top: 1px solid #ddd;
+			text-align: center;
+		}
+
+		#topcontrol {
+			color: #fff;
+			z-index: 99;
+			width: 30px;
+			height: 30px;
+			font-size: 20px;
+			background: #222;
+			position: relative;
+			right: 14px !important;
+			bottom: 11px !important;
+			border-radius: 3px !important;
+		}
+
+		#topcontrol:after {
+			/*top: -2px;*/
+			left: 8.5px;
+			content: "\f106";
+			position: absolute;
+			text-align: center;
+			font-family: FontAwesome;
+		}
+
+		#topcontrol:hover {
+			color: #fff;
+			background: #18ba9b;
+			-webkit-transition: all 0.3s ease-in-out;
+			-moz-transition: all 0.3s ease-in-out;
+			-o-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+		{
+			border-bottom-color: #ddd;
+		}
+
+		.nav-tabs>li>a {
+			border-radius: 0;
+		}
+	</style>
+</head>
+<body>
+<div class="navbar-wrapper">
+	<div class="container">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#" style="font-size: 32px;">尚籌網-創意產品眾籌平臺</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse"
+					 style="float: right;">
+					<ul class="nav navbar-nav">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+												data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
+							張三<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="member.html"><i
+										class="glyphicon glyphicon-scale"></i> 會員中心</a></li>
+								<li><a href="#"><i class="glyphicon glyphicon-comment"></i>
+									訊息</a></li>
+								<li class="divider"></li>
+								<li><a href="index.html"><i
+										class="glyphicon glyphicon-off"></i> 退出系統</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
+
+<div class="container theme-showcase" role="main">
+
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<nav class="navbar navbar-default" role="navigation">
+					<div class="collapse navbar-collapse"
+						 id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li><a rel="nofollow" href="index.html"><i
+									class="glyphicon glyphicon-home"></i> 眾籌首頁</a></li>
+							<li><a rel="nofollow" href="projects.html"><i
+									class="glyphicon glyphicon-th-large"></i> 眾籌專案</a></li>
+							<li><a rel="nofollow" href="start.html"><i
+									class="glyphicon glyphicon-edit"></i> 發起眾籌</a></li>
+							<li><a rel="nofollow" href="minecrowdfunding.html"><i
+									class="glyphicon glyphicon-user"></i> 我的眾籌</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="jumbotron nofollow" style="padding-top: 10px;">
+					<h3>酷馳觸控龍頭，智享廚房黑科技</h3>
+					<div style="float: left; width: 70%;">
+						智慧時代，酷馳觸控廚房龍頭，讓煮婦解放雙手，觸發更多烹飪靈感，讓美味信手拈來。</div>
+					<div style="float: right;">
+						<button type="button" class="btn btn-default">
+							<i style="color: #f60" class="glyphicon glyphicon-heart"></i> 關注
+							111
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="row clearfix">
+					<div class="col-md-8 column">
+						<img alt="140x140" width="740" src="img/product_detail_head.jpg" />
+						<img alt="140x140" width="740" src="img/product_detail_body.jpg" />
+
+					</div>
+					<div class="col-md-4 column">
+						<div class="panel panel-default" style="border-radius: 0px;">
+							<div class="panel-heading"
+								 style="background-color: #fff; border-color: #fff;">
+									<span class="label label-success"><i
+											class="glyphicon glyphicon-tag"></i> 眾籌中</span>
+							</div>
+							<div class="panel-body">
+								<h3>已籌資金：￥50000.00</h3>
+								<p>
+									<span>目標金額 ： 1000.00</span><span style="float: right;">達成
+											： 60%</span>
+								</p>
+								<div class="progress" style="height: 10px; margin-bottom: 5px;">
+									<div class="progress-bar progress-bar-success"
+										 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+										 aria-valuemax="100" style="width: 60%;"></div>
+								</div>
+								<p>剩餘 15 天</p>
+								<div>
+									<p>
+											<span>已有629人支援該專案
+									</p>
+									<!-- <button type="button"
+                                        class="btn  btn-warning btn-lg btn-block" data-toggle="modal"
+                                        data-target="#myModal">立即支援</button> -->
+									<a class="btn  btn-warning btn-lg btn-block" href="http://www.crowd.com/pay/confirm/order">立即支援</a>
+								</div>
+							</div>
+							<div class="panel-footer"
+								 style="background-color: #fff; border-top: 1px solid #ddd; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+								<div class="container-fluid">
+									<div class="row clearfix">
+										<div class="col-md-3 column" style="padding: 0;">
+											<img alt="140x140" src="img/services-box2.jpg"
+												 data-holder-rendered="true"
+												 style="width: 80px; height: 80px;">
+										</div>
+										<div class="col-md-9 column">
+											<div class="">
+												<h4>
+													<b>福建省南安廚衛</b> <span
+														style="float: right; font-size: 12px;"
+														class="label label-success">已認證</span>
+												</h4>
+												<p style="font-size: 12px">
+													酷馳是一家年輕的廚衛科技公司，我們有一支朝氣蓬勃，有激情、有想法、敢實踐的團隊。</p>
+												<p style="font-size: 12px">客服電話:0595-86218855</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default" style="border-radius: 0px;">
+							<div class="panel-heading">
+								<h3>
+									￥1.00 <span style="float: right; font-size: 12px;">無限額，447位支持者</span>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<p>配送費用：包郵</p>
+								<p>預計發放時間：專案籌款成功后的50天內</p>
+								<button type="button" class="btn  btn-warning btn-lg"
+										onclick="window.location.href='pay-step-1.html'">支援</button>
+								<br>
+								<br>
+								<p>感謝您的支援，在眾籌開始后，您將以79元的優惠價格獲得「遇見彩虹?」智慧插座一件（參考價208元）。</p>
+							</div>
+						</div>
+
+						<div class="panel panel-default" style="border-radius: 0px;">
+							<div class="panel-heading">
+								<h3>
+									￥149.00 <span style="float: right; font-size: 12px;">限額2000位，剩餘1966位</span>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<p>配送費用：包郵</p>
+								<p>預計發放時間：專案籌款成功后的50天內</p>
+								<button type="button" class="btn  btn-warning btn-lg"
+										onclick="window.location.href='pay-step-1.html'">支援</button>
+								<br>
+								<br>
+								<p>感謝您的支援，在眾籌開始后，您將以79元的優惠價格獲得「遇見彩虹?」智慧插座一件（參考價208元）。</p>
+							</div>
+						</div>
+						<div class=" panel panel-default" style="border-radius: 0px;">
+							<div class="panel-heading">
+								<h3>風險提示</h3>
+							</div>
+							<div class="panel-body">
+								<p>
+									1.眾籌並非商品交易，存在一定風險。支持者根據自己的判斷選擇、支援眾籌專案，與發起人共同實現夢想並獲得發起人承諾的回報。<br>
+									2.眾籌平臺僅提供平臺網路空間及技術支援等中介服務，眾籌僅存在於發起人和支持者之間，使用眾籌平臺產生的法律後果由發起人與支持者自行承擔。<br>
+									3.本專案必須在2017-06-09之前達到￥10000.00
+									的目標才算成功，否則已經支援的訂單將取消。訂單取消或募集失敗的，您支援的金額將原支付路徑退回。<br>
+									4.請在支援專案后15分鐘內付款，否則您的支援請求會被自動關閉。<br>
+									5.眾籌成功後由發起人統一進行發貨，售後服務由發起人統一提供；如果發生發起人無法發放回報、延遲發放回報、不提供回報後續服務等情況，您需要直接和發起人協商解決。<br>
+									6.如您不同意上述風險提示內容，您有權選擇不支援；一旦選擇支援，視為您已確認並同意以上提示內容。
+								</p>
+							</div>
+						</div>
+
+						<div>
+							<h2>為你推薦</h2>
+							<hr>
+						</div>
+						<div class="prjtip panel panel-default"
+							 style="border-radius: 0px;">
+							<div class="panel-body">
+								<img src="img/product-3.png" width="100%" height="100%">
+							</div>
+						</div>
+
+						<div class="prjtip panel panel-default"
+							 style="border-radius: 0px;">
+							<div class="panel-body">
+								<img src="img/product-4.jpg" width="100%" height="100%">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container" style="margin-top: 20px;">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div id="footer">
+					<div class="footerNav">
+						<a rel="nofollow" href="http://www.atguigu.com">關於我們</a> | <a
+							rel="nofollow" href="http://www.atguigu.com">服務條款</a> | <a
+							rel="nofollow" href="http://www.atguigu.com">免責聲明</a> | <a
+							rel="nofollow" href="http://www.atguigu.com">網站地圖</a> | <a
+							rel="nofollow" href="http://www.atguigu.com">聯繫我們</a>
+					</div>
+					<div class="copyRight">Copyright ?2010-2014atguigu.com 版權所有
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- /container -->
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel">
+	<div class="modal-dialog " style="width: 960px; height: 400px;"
+		 role="document">
+		<div class="modal-content" data-spy="scroll"
+			 data-target="#myScrollspy">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">選擇支援項</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row clearfix">
+						<div class="col-sm-3 col-md-3 column" id="myScrollspy">
+							<ul class="nav nav-tabs nav-stacked">
+								<li class="active"><a href="#section-1">￥1.00</a></li>
+								<li class="active"><a href="#section-2">￥149.00</a></li>
+								<li class="active"><a href="#section-3">￥249.00</a></li>
+								<li class="active"><a href="#section-4">￥549.00</a></li>
+								<li class="active"><a href="#section-5">￥1999.00</a></li>
+							</ul>
+						</div>
+						<div id="navList" class="col-sm-9 col-md-9 column"
+							 style="height: 400px; overflow-y: auto;">
+							<h2 id="section-1" style="border-bottom: 1px dashed #ddd;">
+								<span style="font-size: 20px; font-weight: bold;">￥1.00</span><span
+									style="font-size: 12px; margin-left: 60px;">無限額，223位支持者</span>
+							</h2>
+							<p>配送費用：全國包郵</p>
+							<p>預計發放時間：專案籌款成功后的30天內</p>
+							<button type="button" class="btn  btn-warning btn-lg "
+									onclick="window.location.href='pay-step-1.html'">支援</button>
+							<br>
+							<br>
+							<p>每滿1750人抽取一臺活性富氫凈水直飲機，至少抽取一臺。抽取名額（小數點后一位四捨五入）=參與人數÷1750人，由蘇寧官方抽取。</p>
+							<hr>
+							<h2 id="section-2" style="border-bottom: 1px dashed #ddd;">
+								<span style="font-size: 20px; font-weight: bold;">￥149.00</span><span
+									style="font-size: 12px; margin-left: 60px;">無限額，223位支持者</span>
+							</h2>
+							<p>配送費用：全國包郵</p>
+							<p>預計發放時間：專案籌款成功后的30天內</p>
+							<button type="button" class="btn  btn-warning btn-lg "
+									onclick="window.location.href='pay-step-1.html'">支援</button>
+							<br>
+							<br>
+							<p>每滿1750人抽取一臺活性富氫凈水直飲機，至少抽取一臺。抽取名額（小數點后一位四捨五入）=參與人數÷1750人，由蘇寧官方抽取。</p>
+							<hr>
+							<h2 id="section-3" style="border-bottom: 1px dashed #ddd;">
+								<span style="font-size: 20px; font-weight: bold;">￥249.00</span><span
+									style="font-size: 12px; margin-left: 60px;">無限額，223位支持者</span>
+							</h2>
+							<p>配送費用：全國包郵</p>
+							<p>預計發放時間：專案籌款成功后的30天內</p>
+							<button type="button" class="btn  btn-warning btn-lg "
+									onclick="window.location.href='pay-step-1.html'">支援</button>
+							<br>
+							<br>
+							<p>每滿1750人抽取一臺活性富氫凈水直飲機，至少抽取一臺。抽取名額（小數點后一位四捨五入）=參與人數÷1750人，由蘇寧官方抽取。</p>
+							<hr>
+							<h2 id="section-4" style="border-bottom: 1px dashed #ddd;">
+								<span style="font-size: 20px; font-weight: bold;">￥549.00</span><span
+									style="font-size: 12px; margin-left: 60px;">無限額，223位支持者</span>
+							</h2>
+							<p>配送費用：全國包郵</p>
+							<p>預計發放時間：專案籌款成功后的30天內</p>
+							<button type="button" class="btn  btn-warning btn-lg "
+									onclick="window.location.href='pay-step-1.html'">支援</button>
+							<br>
+							<br>
+							<p>每滿1750人抽取一臺活性富氫凈水直飲機，至少抽取一臺。抽取名額（小數點后一位四捨五入）=參與人數÷1750人，由蘇寧官方抽取。</p>
+							<hr>
+							<h2 id="section-5" style="border-bottom: 1px dashed #ddd;">
+								<span style="font-size: 20px; font-weight: bold;">￥1999.00</span><span
+									style="font-size: 12px; margin-left: 60px;">無限額，223位支持者</span>
+							</h2>
+							<p>配送費用：全國包郵</p>
+							<p>預計發放時間：專案籌款成功后的30天內</p>
+							<button type="button" class="btn  btn-warning btn-lg "
+									onclick="window.location.href='pay-step-1.html'">支援</button>
+							<br>
+							<br>
+							<p>每滿1750人抽取一臺活性富氫凈水直飲機，至少抽取一臺。抽取名額（小數點后一位四捨五入）=參與人數÷1750人，由蘇寧官方抽取。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
+<script src="script/back-to-top.js"></script>
+<script>
+	$(".prjtip img").css("cursor", "pointer");
+	$(".prjtip img").click(function() {
+		window.location.href = 'project.html';
+	});
+</script>
+</body>
+</html>

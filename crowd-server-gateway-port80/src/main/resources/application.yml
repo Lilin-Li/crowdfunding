@@ -13,3 +13,6 @@ zuul:
     crowd-portal:
       service-id: crowd-auth
       path: /** #這裡一定要使用兩個「*」號，不然「/」路徑後面的多層路徑將無法訪問
+    crowd-project:
+      service-id: crowd-project
+      path: /project/**

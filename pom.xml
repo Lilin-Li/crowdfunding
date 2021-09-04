@@ -31,7 +31,7 @@
         <module>crowd/crowd-assembly-common</module>
         <module>assembly-entity</module>
         <module>crowd/crowd-assembly-remote_api</module>
-
+        <module>crowd/crowd-project-port5000</module>
         <module>crowd/crowd-member-port4000</module>
         <module>crowd-admin/crowd--admin</module>
         <module>crowd-admin/crowd--admin-common</module>

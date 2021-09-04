@@ -53,20 +53,145 @@ CREATE TABLE `auth_t`
 
 create table t_member
 (
-    id int(11) not null auto_increment,
-    loginacct varchar(255) not null,
-    userpswd char(200) not null,
-    username varchar(255),
-    email varchar(255),
+    id         int(11)      not null auto_increment,
+    loginacct  varchar(255) not null,
+    userpswd   char(200)    not null,
+    username   varchar(255),
+    email      varchar(255),
     authstatus int(4) comment '實名認證狀態 0 - 未實名認證， 1 - 實名認證申請中， 2 - 已實名認證',
-    usertype int(4) comment ' 0 - 個人， 1 - 企業',
-    realname varchar(255),
-    cardnum varchar(255),
-    accttype int(4) comment '0 - 企業， 1 - 個體， 2 - 個人， 3 - 政府',
+    usertype   int(4) comment ' 0 - 個人， 1 - 企業',
+    realname   varchar(255),
+    cardnum    varchar(255),
+    accttype   int(4) comment '0 - 企業， 1 - 個體， 2 - 個人， 3 - 政府',
     primary key (id)
-)DEFAULT CHARSET = utf8mb4;
+) DEFAULT CHARSET = utf8mb4;
 
-ALTER TABLE crowd_admin.t_member ADD CONSTRAINT t_member_UN UNIQUE KEY (loginacct);
+create table t_type
+
+(
+
+    id     int(11) not null auto_increment,
+    name   varchar(255) comment '分類名稱',
+    remark varchar(255) comment '分類介紹',
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+create table t_project_type
+
+(
+
+    id        int not null auto_increment,
+    projectid int(11),
+    typeid    int(11),
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+create table t_tag
+
+(
+
+    id   int(11) not null auto_increment,
+    pid  int(11),
+    name varchar(255),
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+create table t_project_tag
+(
+
+    id        int(11) not null auto_increment,
+    projectid int(11),
+    tagid     int(11),
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+create table t_project
+
+(
+
+    id                  int(11) not null auto_increment,
+    project_name        varchar(255) comment '專案名稱',
+    project_description varchar(255) comment '專案描述',
+    money               bigint(11) comment '籌集金額',
+    day                 int(11) comment '籌集天數',
+    status              int(4) comment '0-即將開始，1-眾籌中，2-眾籌成功，3-眾籌失敗
+
+',
+
+    deploydate          varchar(10) comment '專案發起時間',
+    supportmoney        bigint(11) comment '已籌集到的金額',
+    supporter           int(11) comment '支援人數',
+    completion          int(3) comment '百分比完成度',
+    memberid            int(11) comment '發起人的會員 id',
+    createdate          varchar(19) comment '專案建立時間',
+    follower            int(11) comment '關注人數',
+    header_picture_path varchar(255) comment '頭圖路徑',
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+create table t_project_item_pic
+
+(
+
+    id            int(11) not null auto_increment,
+    projectid     int(11),
+    item_pic_path varchar(255),
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+create table t_member_launch_info
+(
+
+    id                 int(11) not null auto_increment,
+    memberid           int(11) comment '會員 id',
+    description_simple varchar(255) comment '簡單介紹',
+    description_detail varchar(255) comment '詳細介紹',
+    phone_num          varchar(255) comment '聯繫電話',
+    service_num        varchar(255) comment '客服電話',
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+create table t_return
+
+(
+
+    id               int(11) not null auto_increment,
+    projectid        int(11),
+    type             int(4) comment '0 - 實物回報， 1 虛擬物品回報',
+    supportmoney     int(11) comment '支援金額',
+    content          varchar(255) comment '回報內容',
+    count            int(11) comment '回報產品限額，「0」為不限回報數量',
+    signalpurchase   int(11) comment '是否設定單筆限購',
+    purchase         int(11) comment '具體限購數量',
+    freight          int(11) comment '運費，「0」為包郵',
+    invoice          int(4) comment '0 - 不開發票， 1 - 開發票',
+    returndate       int(11) comment '專案結束后多少天向支持者發送回報',
+    describ_pic_path varchar(255) comment '說明圖片路徑',
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+create table t_member_confirm_info
+
+(
+
+    id       int(11) not null auto_increment,
+    memberid int(11) comment '會員 id',
+    paynum   varchar(200) comment '易付寶企業賬號',
+    cardnum  varchar(200) comment '法人身份證號',
+    primary key (id)
+
+) DEFAULT CHARSET = utf8mb4;
+
+ALTER TABLE crowd_admin.t_member
+    ADD CONSTRAINT t_member_UN UNIQUE KEY (loginacct);
 
 
 INSERT INTO auth_t(id, `name`, title, category_id)

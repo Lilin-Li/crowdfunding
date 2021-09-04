@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>inc.lilin.crowd</groupId>
+        <artifactId>crowd</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>inc.lilin.crowd</groupId>
+    <artifactId>crowd-project-port5000</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>crowd-project-port5000</name>
+    <description>Demo project for Spring Boot</description>
+
+    <dependencies>
+
+            <dependency>
+                <groupId>inc.lilin.crowd</groupId>
+                <artifactId>crowd-assembly-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>inc.lilin.crowd</groupId>
+                <artifactId>assembly-springmvc</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>inc.lilin.crowd</groupId>
+                <artifactId>assembly-redis</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>inc.lilin.crowd</groupId>
+                <artifactId>assembly-database</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>inc.lilin.crowd</groupId>
+                <artifactId>assembly-entity</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>inc.lilin.crowd</groupId>
+                <artifactId>assembly-eureka-client</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <!--  阿里雲SDK     -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>4.5.17</version>
+            </dependency>
+
+            <!-- OSS 客户端 SDK -->
+            <!--   Maven找不到，手動下載的jar檔存在iDevData/aliyun_java_sdk 內     -->
+            <!--        <dependency>-->
+            <!--            <groupId>com.aliyun.oss</groupId>-->
+            <!--            <artifactId>aliyun-sdk-oss</artifactId>-->
+            <!--            <version>3.8.0</version>-->
+            <!--        </dependency>-->
+
+    </dependencies>
+
+
+</project>
