@@ -14,3 +14,11 @@ short:
     path: /codeNotice
     sign: 151003
     skin: 84683
+
+aliyun:
+  oss:
+    access-key-id: LTAI4FtyK7WcqxaiE9ttukNi
+    access-key-secret: 43OFOgMghjsitNsNlTGqcpPGgyzqgU
+    bucket-domain: http://190830.oss-cn-shenzhen.aliyuncs.com
+    bucket-name: 190830
+    end-point: http://oss-cn-shenzhen.aliyuncs.com
