@@ -11,6 +11,8 @@ public class CrowdConstant {
 	public static final String MESSAGE_CODE_NOT_EXISTS = "驗證碼已過期！請檢查手機號是否正確或重新發送！";
 	public static final String MESSAGE_CODE_INVALID = "驗證碼不正確！";
 
+	public static final String GATEWAY_URL = "http://localhost:80";
+
 	public static final String ATTR_NAME_EXCEPTION = "exception";
 	public static final String ATTR_NAME_LOGIN_ADMIN = "loginAdmin";
 	public static final String ATTR_NAME_LOGIN_MEMBER = "loginMember";

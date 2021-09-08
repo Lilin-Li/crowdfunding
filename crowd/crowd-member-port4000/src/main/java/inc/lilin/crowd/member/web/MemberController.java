@@ -159,7 +159,7 @@ public class MemberController {
         MemberLoginVO memberLoginVO = new MemberLoginVO(memberPO.getId(), memberPO.getUsername(), memberPO.getEmail());
         session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER, memberLoginVO);
 
-        return "redirect:/auth/member/to/center/page";
+        return "redirect:" + CrowdConstant.GATEWAY_URL + "/auth/member/to/center/page";
     }
 
     @RequestMapping("/auth/member/logout")
@@ -167,6 +167,6 @@ public class MemberController {
 
         session.invalidate();
 
-        return "redirect:/";
+        return "redirect:" + CrowdConstant.GATEWAY_URL;
     }
 }
