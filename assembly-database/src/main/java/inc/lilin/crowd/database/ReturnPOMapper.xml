@@ -60,4 +60,36 @@
     freight, invoice, returndate, describ_pic_path
     from t_return
   </select>
+
+  <insert id="insertReturnPOBatch">
+    insert into t_return (
+    projectid,
+    type,
+    supportmoney,
+    content,
+    count,
+    signalpurchase,
+    purchase,
+    freight,
+    invoice,
+    returndate,
+    describ_pic_path
+    )
+    values
+    <foreach collection="returnPOList" item="returnPO" separator=",">
+      (
+      #{projectId},
+      #{returnPO.type},
+      #{returnPO.supportmoney},
+      #{returnPO.content},
+      #{returnPO.count},
+      #{returnPO.signalpurchase},
+      #{returnPO.purchase},
+      #{returnPO.freight},
+      #{returnPO.invoice},
+      #{returnPO.returndate},
+      #{returnPO.describPicPath}
+      )
+    </foreach>
+  </insert>
 </mapper>

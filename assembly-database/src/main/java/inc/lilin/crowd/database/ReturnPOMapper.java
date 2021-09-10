@@ -1,6 +1,8 @@
 package inc.lilin.crowd.database;
 
 import inc.lilin.crowd.entity.po.ReturnPO;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -16,4 +18,6 @@ public interface ReturnPOMapper {
     List<ReturnPO> selectAll();
 
     int updateByPrimaryKey(ReturnPO record);
+
+    void insertReturnPOBatch(@Param("returnPOList") List<ReturnPO> returnPOList, @Param("projectId") Integer projectId);
 }

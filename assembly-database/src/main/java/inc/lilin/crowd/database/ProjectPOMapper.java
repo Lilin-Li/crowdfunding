@@ -1,6 +1,8 @@
 package inc.lilin.crowd.database;
 
 import inc.lilin.crowd.entity.po.ProjectPO;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -16,4 +18,10 @@ public interface ProjectPOMapper {
     List<ProjectPO> selectAll();
 
     int updateByPrimaryKey(ProjectPO record);
+
+    void insertSelective(ProjectPO projectPO);
+
+    void insertTypeRelationship(@Param("typeIdList") List<Integer> typeIdList, @Param("projectId")Integer projectId);
+
+    void insertTagRelationship(@Param("tagIdList") List<Integer> tagIdList, @Param("projectId")Integer projectId);
 }

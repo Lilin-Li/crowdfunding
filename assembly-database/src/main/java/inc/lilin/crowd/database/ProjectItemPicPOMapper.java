@@ -1,6 +1,8 @@
 package inc.lilin.crowd.database;
 
 import inc.lilin.crowd.entity.po.ProjectItemPicPO;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -16,4 +18,7 @@ public interface ProjectItemPicPOMapper {
     List<ProjectItemPicPO> selectAll();
 
     int updateByPrimaryKey(ProjectItemPicPO record);
+
+    void insertPathList(@Param("projectId") Integer projectId, @Param("detailPicturePathList")List<String> detailPicturePathList);
+
 }

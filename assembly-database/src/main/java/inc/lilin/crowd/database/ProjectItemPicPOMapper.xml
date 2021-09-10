@@ -34,4 +34,10 @@
     select id, projectid, item_pic_path
     from t_project_item_pic
   </select>
+
+  <insert id="insertPathList">
+    insert into t_project_item_pic (projectid, item_pic_path)
+    values
+    <foreach collection="detailPicturePathList" item="detailPath" separator=",">(#{projectId},#{detailPath})</foreach>
+  </insert>
 </mapper>

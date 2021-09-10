@@ -2,10 +2,9 @@ package inc.lilin.crowd.project.web;
 
 import inc.lilin.crowd.common.core.constant.CrowdConstant;
 import inc.lilin.crowd.common.thirdparty_api.CrowdUtil;
-import inc.lilin.crowd.entity.vo.ProjectVO;
-import inc.lilin.crowd.entity.vo.ResultVO;
-import inc.lilin.crowd.entity.vo.ReturnVO;
+import inc.lilin.crowd.entity.vo.*;
 import inc.lilin.crowd.project.config.OSSProperties;
+import inc.lilin.crowd.project.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +23,9 @@ public class ProjectHandler {
 
     @Autowired
     OSSProperties ossProperties;
+
+    @Autowired
+    ProjectServiceImpl projectServiceImpl;
 
     @RequestMapping("/create/project/information")
     public String saveProjectBasicInfo(
@@ -126,7 +128,7 @@ public class ProjectHandler {
         return "redirect:" + CrowdConstant.GATEWAY_URL + "/project/return/info/page";
     }
 
-
+    @ResponseBody
     @RequestMapping("/create/upload/return/picture.json")
     public ResultVO<String> uploadReturnPicture(
             // 接收使用者上傳的檔案
@@ -142,6 +144,7 @@ public class ProjectHandler {
                 ossProperties.getBucketDomain(),
                 returnPicture.getOriginalFilename());
         // 2.返回上傳的結果
+        System.out.println(uploadReturnPicResultVO);
         return uploadReturnPicResultVO;
     }
 
@@ -179,5 +182,32 @@ public class ProjectHandler {
             e.printStackTrace();
             return ResultVO.failed(e.getMessage());
         }
+    }
+
+    @RequestMapping("/create/confirm")
+    public String saveConfirm(ModelMap modelMap, HttpSession session, MemberConfirmInfoVO
+            memberConfirmInfoVO) {
+        // 1.從 Session 域讀取之前臨時儲存的 ProjectVO 對像
+        ProjectVO projectVO = (ProjectVO) session.getAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT);
+        // 2.如果 projectVO 為 null
+        if (projectVO == null) {
+            throw new RuntimeException(CrowdConstant.MESSAGE_TEMPLE_PROJECT_MISSING);
+        }
+
+        // 3.將確認資訊數據設定到 projectVO 對像中
+        projectVO.setMemberConfirmInfoVO(memberConfirmInfoVO);
+        // 4.從 Session 域讀取目前登錄的使用者
+        MemberLoginVO memberLoginVO = (MemberLoginVO) session.getAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER);
+        Integer memberId = memberLoginVO.getId();
+        // 5.DB儲存 projectVO 對像
+
+        projectServiceImpl.saveProject(projectVO, memberId);
+
+
+        // 7.將臨時的 ProjectVO 對像從 Session 域移除
+        session.removeAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT);
+        // 8.如果遠端儲存成功則跳轉到最終完成頁面
+        return "redirect:" + CrowdConstant.GATEWAY_URL + "/project/create/success";
+
     }
 }
