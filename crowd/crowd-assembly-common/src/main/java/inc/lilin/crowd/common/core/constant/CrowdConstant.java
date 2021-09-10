@@ -14,6 +14,7 @@ public class CrowdConstant {
 	public static final String MESSAGE_HEADER_PIC_UPLOAD_FAILED = "大頭貼上傳失敗！";
 	public static final Object MESSAGE_DETAIL_PIC_EMPTY = "伺服器接收到的詳細圖片大小為0";
 	public static final Object MESSAGE_DETAIL_PIC_UPLOAD_FAILED =  "詳細圖片上傳失敗！";;
+	public static final String MESSAGE_TEMPLE_PROJECT_MISSING = "發起項目流程失敗(找不到session)，請重新開始";
 
 	public static final String GATEWAY_URL = "http://localhost:80";
 
@@ -25,6 +26,7 @@ public class CrowdConstant {
 	public static final String ATTR_NAME_TEMPLE_PROJECT = "project"; //建立專案時的臨時session域
 	
 	public static final String REDIS_CODE_PREFIX = "REDIS_CODE_PREFIX_";
+
 
 
 }

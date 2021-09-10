@@ -4,11 +4,14 @@ import inc.lilin.crowd.common.core.constant.CrowdConstant;
 import inc.lilin.crowd.common.thirdparty_api.CrowdUtil;
 import inc.lilin.crowd.entity.vo.ProjectVO;
 import inc.lilin.crowd.entity.vo.ResultVO;
+import inc.lilin.crowd.entity.vo.ReturnVO;
 import inc.lilin.crowd.project.config.OSSProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -120,6 +123,61 @@ public class ProjectHandler {
         // 1.將 ProjectVO 對像存入 Session 域
         session.setAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT, projectVO);
         // 2.以完整的訪問路徑前往下一個收集回報資訊的頁面
-        return "redirect:"+ CrowdConstant.GATEWAY_URL +"/project/return/info/page";
+        return "redirect:" + CrowdConstant.GATEWAY_URL + "/project/return/info/page";
+    }
+
+
+    @RequestMapping("/create/upload/return/picture.json")
+    public ResultVO<String> uploadReturnPicture(
+            // 接收使用者上傳的檔案
+            @RequestParam("returnPicture") MultipartFile returnPicture) throws IOException {
+
+        // 1.執行檔案上傳
+        ResultVO<String> uploadReturnPicResultVO = CrowdUtil.uploadFileToOss(
+                ossProperties.getEndPoint(),
+                ossProperties.getAccessKeyId(),
+                ossProperties.getAccessKeySecret(),
+                returnPicture.getInputStream(),
+                ossProperties.getBucketName(),
+                ossProperties.getBucketDomain(),
+                returnPicture.getOriginalFilename());
+        // 2.返回上傳的結果
+        return uploadReturnPicResultVO;
+    }
+
+    @ResponseBody
+    @RequestMapping("/create/save/return.json")
+    public ResultVO<String> saveReturn(ReturnVO returnVO, HttpSession session) {
+        try {
+            // 1.從 session 域中讀取之前快取的 ProjectVO 對像
+            ProjectVO projectVO = (ProjectVO) session.getAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT);
+            // 2.判斷 projectVO 是否為 null
+            if (projectVO == null) {
+                return ResultVO.failed(CrowdConstant.MESSAGE_TEMPLE_PROJECT_MISSING);
+            }
+
+            // 3.從 projectVO 對像中獲取儲存回報資訊的集合
+            List<ReturnVO> returnVOList = projectVO.getReturnVOList();
+
+            // 4.判斷 returnVOList 集合是否有效
+            if (returnVOList == null || returnVOList.size() == 0) {
+
+                // 5.建立集合對像對 returnVOList 進行初始化
+                returnVOList = new ArrayList<>();
+                // 6.爲了讓以後能夠正常使用這個集合，設定到 projectVO 對像中
+                projectVO.setReturnVOList(returnVOList);
+
+            }
+
+            // 7.將收集了表單數據的 returnVO 對像存入集合
+            returnVOList.add(returnVO);
+            // 8.把數據有變化的 ProjectVO 對像重新存入 Session 域，以確保新的數據最終能夠存入 Redis
+            session.setAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT, projectVO);
+            // 9.所有操作成功完成返回成功
+            return ResultVO.successWithoutData();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultVO.failed(e.getMessage());
+        }
     }
 }

@@ -12,6 +12,7 @@ public class SpringMVCConfig implements WebMvcConfigurer {
         // view-controller 是在 project-consumer 內部定義的，所以這裡是一個不經過 Zuul訪問的地址，所以這個路徑前面不加路由規則中定義的字首：「/project」
         registry.addViewController("/agree/protocol/page").setViewName("project-agree");
         registry.addViewController("/launch/project/page").setViewName("project-launch");
+        registry.addViewController("/return/info/page").setViewName("project-return");
 
     }
 
