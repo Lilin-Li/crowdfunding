@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"inc.lilin.crowd"})
-public class AdminApplication {
+public class MyAdminApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminApplication.class, args);
+        SpringApplication.run(MyAdminApplication.class, args);
     }
 }

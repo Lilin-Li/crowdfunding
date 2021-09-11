@@ -208,6 +208,5 @@ public class ProjectHandler {
         session.removeAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT);
         // 8.如果遠端儲存成功則跳轉到最終完成頁面
         return "redirect:" + CrowdConstant.GATEWAY_URL + "/project/create/success";
-
     }
 }

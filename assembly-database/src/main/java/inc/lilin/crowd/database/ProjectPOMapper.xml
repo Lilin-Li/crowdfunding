@@ -1,172 +1,233 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="inc.lilin.crowd.database.ProjectPOMapper">
-  <!-- ————————————————————————————————————————————————————————————————————————— -->
-  <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
-  <!-- ————————————————————————————————————————————————————————————————————————— -->
-  <resultMap id="BaseResultMap" type="inc.lilin.crowd.entity.po.ProjectPO">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
-    <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
-    <result column="money" jdbcType="BIGINT" property="money" />
-    <result column="day" jdbcType="INTEGER" property="day" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="deploydate" jdbcType="VARCHAR" property="deploydate" />
-    <result column="supportmoney" jdbcType="BIGINT" property="supportmoney" />
-    <result column="supporter" jdbcType="INTEGER" property="supporter" />
-    <result column="completion" jdbcType="INTEGER" property="completion" />
-    <result column="memberid" jdbcType="INTEGER" property="memberid" />
-    <result column="createdate" jdbcType="VARCHAR" property="createdate" />
-    <result column="follower" jdbcType="INTEGER" property="follower" />
-    <result column="header_picture_path" jdbcType="VARCHAR" property="headerPicturePath" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_project
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.ProjectPO">
-    insert into t_project (id, project_name, project_description, 
-      money, day, status, 
-      deploydate, supportmoney, supporter, 
-      completion, memberid, createdate, 
-      follower, header_picture_path)
-    values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectDescription,jdbcType=VARCHAR}, 
-      #{money,jdbcType=BIGINT}, #{day,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{deploydate,jdbcType=VARCHAR}, #{supportmoney,jdbcType=BIGINT}, #{supporter,jdbcType=INTEGER}, 
-      #{completion,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{createdate,jdbcType=VARCHAR}, 
-      #{follower,jdbcType=INTEGER}, #{headerPicturePath,jdbcType=VARCHAR})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.entity.po.ProjectPO">
-    update t_project
-    set project_name = #{projectName,jdbcType=VARCHAR},
-      project_description = #{projectDescription,jdbcType=VARCHAR},
-      money = #{money,jdbcType=BIGINT},
-      day = #{day,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      deploydate = #{deploydate,jdbcType=VARCHAR},
-      supportmoney = #{supportmoney,jdbcType=BIGINT},
-      supporter = #{supporter,jdbcType=INTEGER},
-      completion = #{completion,jdbcType=INTEGER},
-      memberid = #{memberid,jdbcType=INTEGER},
-      createdate = #{createdate,jdbcType=VARCHAR},
-      follower = #{follower,jdbcType=INTEGER},
-      header_picture_path = #{headerPicturePath,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, project_name, project_description, money, day, status, deploydate, supportmoney, 
-    supporter, completion, memberid, createdate, follower, header_picture_path
-    from t_project
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, project_name, project_description, money, day, status, deploydate, supportmoney, 
-    supporter, completion, memberid, createdate, follower, header_picture_path
-    from t_project
-  </select>
+    <!-- ————————————————————————————————————————————————————————————————————————— -->
+    <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
+    <!-- ————————————————————————————————————————————————————————————————————————— -->
+    <resultMap id="BaseResultMap" type="inc.lilin.crowd.entity.po.ProjectPO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="project_description" jdbcType="VARCHAR" property="projectDescription"/>
+        <result column="money" jdbcType="BIGINT" property="money"/>
+        <result column="day" jdbcType="INTEGER" property="day"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="deploydate" jdbcType="VARCHAR" property="deploydate"/>
+        <result column="supportmoney" jdbcType="BIGINT" property="supportmoney"/>
+        <result column="supporter" jdbcType="INTEGER" property="supporter"/>
+        <result column="completion" jdbcType="INTEGER" property="completion"/>
+        <result column="memberid" jdbcType="INTEGER" property="memberid"/>
+        <result column="createdate" jdbcType="VARCHAR" property="createdate"/>
+        <result column="follower" jdbcType="INTEGER" property="follower"/>
+        <result column="header_picture_path" jdbcType="VARCHAR" property="headerPicturePath"/>
+    </resultMap>
+    <resultMap type="inc.lilin.crowd.entity.vo.PortalTypeVO"
+               id="loadPortalProjectListResultMap">
+        <!-- 分類數據的常規屬性 -->
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="remark" property="remark"/>
+        <!-- 分類數據中包含的專案數據的 List -->
+        <!-- property 屬性：對應 PortalTypeVO 中分類數據中的專案數據的 List 屬性 -->
+        <!-- column 屬性：接下來查詢專案時需要用到分類 id，就是通過 column 屬性把值傳入-->
+        <!-- ofType 屬性：專案數據的實體型別 PortalProjectVO -->
+        <collection
+                property="portalProjectVOList"
+                column="id"
+                ofType="inc.lilin.crowd.entity.vo.PortalProjectVO"
+                select="inc.lilin.crowd.database.ProjectPOMapper.selectPortalProjectVOList"/>
+    </resultMap>
+    <select id="selectPortalTypeVOList" resultMap="loadPortalProjectListResultMap">
+        select id, name, remark
+        from t_type
+    </select>
+    <select id="selectPortalProjectVOList" resultType="inc.lilin.crowd.entity.vo.PortalProjectVO">
+        SELECT t_project.id               projectId,
+               project_name               projectName,
+               money,
+               deploydate                 deployDate,
+               supportmoney / money * 100 percentage,
+               supporter                  supporter,
+               header_picture_path        headerPicturePath
+        FROM t_project
+                     LEFT JOIN t_project_type ON t_project.id = t_project_type.projectid
+        WHERE t_project_type.typeid = #{id}
+        ORDER BY t_project.id DESC
+        LIMIT 0,4
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from t_project
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="inc.lilin.crowd.entity.po.ProjectPO">
+        insert into t_project (id, project_name, project_description,
+                               money, day, status,
+                               deploydate, supportmoney, supporter,
+                               completion, memberid, createdate,
+                               follower, header_picture_path)
+        values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectDescription,jdbcType=VARCHAR},
+                #{money,jdbcType=BIGINT}, #{day,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+                #{deploydate,jdbcType=VARCHAR}, #{supportmoney,jdbcType=BIGINT}, #{supporter,jdbcType=INTEGER},
+                #{completion,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{createdate,jdbcType=VARCHAR},
+                #{follower,jdbcType=INTEGER}, #{headerPicturePath,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.entity.po.ProjectPO">
+        update t_project
+        set project_name        = #{projectName,jdbcType=VARCHAR},
+            project_description = #{projectDescription,jdbcType=VARCHAR},
+            money               = #{money,jdbcType=BIGINT},
+            day                 = #{day,jdbcType=INTEGER},
+            status              = #{status,jdbcType=INTEGER},
+            deploydate          = #{deploydate,jdbcType=VARCHAR},
+            supportmoney        = #{supportmoney,jdbcType=BIGINT},
+            supporter           = #{supporter,jdbcType=INTEGER},
+            completion          = #{completion,jdbcType=INTEGER},
+            memberid            = #{memberid,jdbcType=INTEGER},
+            createdate          = #{createdate,jdbcType=VARCHAR},
+            follower            = #{follower,jdbcType=INTEGER},
+            header_picture_path = #{headerPicturePath,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select id,
+               project_name,
+               project_description,
+               money,
+               day,
+               status,
+               deploydate,
+               supportmoney,
+               supporter,
+               completion,
+               memberid,
+               createdate,
+               follower,
+               header_picture_path
+        from t_project
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id,
+               project_name,
+               project_description,
+               money,
+               day,
+               status,
+               deploydate,
+               supportmoney,
+               supporter,
+               completion,
+               memberid,
+               createdate,
+               follower,
+               header_picture_path
+        from t_project
+    </select>
 
-  <insert id="insertSelective" useGeneratedKeys="true"
-          keyProperty="id" parameterType="inc.lilin.crowd.entity.po.ProjectPO">
-    insert into t_project
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="projectName != null">
-        project_name,
-      </if>
-      <if test="projectDescription != null">
-        project_description,
-      </if>
-      <if test="money != null">
-        money,
-      </if>
-      <if test="day != null">
-        day,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="deploydate != null">
-        deploydate,
-      </if>
-      <if test="supportmoney != null">
-        supportmoney,
-      </if>
-      <if test="supporter != null">
-        supporter,
-      </if>
-      <if test="completion != null">
-        completion,
-      </if>
-      <if test="memberid != null">
-        memberid,
-      </if>
-      <if test="createdate != null">
-        createdate,
-      </if>
-      <if test="follower != null">
-        follower,
-      </if>
-      <if test="headerPicturePath != null">
-        header_picture_path,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="projectName != null">
-        #{projectName,jdbcType=VARCHAR},
-      </if>
-      <if test="projectDescription != null">
-        #{projectDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="money != null">
-        #{money,jdbcType=BIGINT},
-      </if>
-      <if test="day != null">
-        #{day,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="deploydate != null">
-        #{deploydate,jdbcType=VARCHAR},
-      </if>
-      <if test="supportmoney != null">
-        #{supportmoney,jdbcType=BIGINT},
-      </if>
-      <if test="supporter != null">
-        #{supporter,jdbcType=INTEGER},
-      </if>
-      <if test="completion != null">
-        #{completion,jdbcType=INTEGER},
-      </if>
-      <if test="memberid != null">
-        #{memberid,jdbcType=INTEGER},
-      </if>
-      <if test="createdate != null">
-        #{createdate,jdbcType=VARCHAR},
-      </if>
-      <if test="follower != null">
-        #{follower,jdbcType=INTEGER},
-      </if>
-      <if test="headerPicturePath != null">
-        #{headerPicturePath,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+    <insert id="insertSelective" useGeneratedKeys="true"
+            keyProperty="id" parameterType="inc.lilin.crowd.entity.po.ProjectPO">
+        insert into t_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="projectName != null">
+                project_name,
+            </if>
+            <if test="projectDescription != null">
+                project_description,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+            <if test="day != null">
+                day,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="deploydate != null">
+                deploydate,
+            </if>
+            <if test="supportmoney != null">
+                supportmoney,
+            </if>
+            <if test="supporter != null">
+                supporter,
+            </if>
+            <if test="completion != null">
+                completion,
+            </if>
+            <if test="memberid != null">
+                memberid,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="follower != null">
+                follower,
+            </if>
+            <if test="headerPicturePath != null">
+                header_picture_path,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="projectName != null">
+                #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectDescription != null">
+                #{projectDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="money != null">
+                #{money,jdbcType=BIGINT},
+            </if>
+            <if test="day != null">
+                #{day,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="deploydate != null">
+                #{deploydate,jdbcType=VARCHAR},
+            </if>
+            <if test="supportmoney != null">
+                #{supportmoney,jdbcType=BIGINT},
+            </if>
+            <if test="supporter != null">
+                #{supporter,jdbcType=INTEGER},
+            </if>
+            <if test="completion != null">
+                #{completion,jdbcType=INTEGER},
+            </if>
+            <if test="memberid != null">
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=VARCHAR},
+            </if>
+            <if test="follower != null">
+                #{follower,jdbcType=INTEGER},
+            </if>
+            <if test="headerPicturePath != null">
+                #{headerPicturePath,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 
-  <insert id="insertTypeRelationship">
-    insert into t_project_type(`projectid`,`typeid`) values
-    <foreach collection="typeIdList" item="typeId" separator=",">(#{projectId},#{typeId})
-    </foreach>
-  </insert>
+    <insert id="insertTypeRelationship">
+        insert into t_project_type(`projectid`, `typeid`) values
+        <foreach collection="typeIdList" item="typeId" separator=",">
+            (#{projectId}, #{typeId})
+        </foreach>
+    </insert>
 
-  <insert id="insertTagRelationship">
-    insert into `t_project_tag`(`projectid`,`tagid`) values
-    <foreach collection="tagIdList" item="tagId" separator=",">(#{projectId},#{tagId})
-    </foreach>
-  </insert>
+    <insert id="insertTagRelationship">
+        insert into `t_project_tag`(`projectid`, `tagid`) values
+        <foreach collection="tagIdList" item="tagId" separator=",">
+            (#{projectId}, #{tagId})
+        </foreach>
+    </insert>
 </mapper>

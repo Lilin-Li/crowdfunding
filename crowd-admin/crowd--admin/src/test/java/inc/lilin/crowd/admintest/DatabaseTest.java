@@ -1,6 +1,6 @@
 package inc.lilin.crowd.admintest;
 
-import inc.lilin.crowd.admin.AdminApplication;
+import inc.lilin.crowd.admin.MyAdminApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 
 @Slf4j
-@SpringBootTest(classes = AdminApplication.class)
+@SpringBootTest(classes = MyAdminApplication.class)
 class DatabaseTest {
 
     @Autowired

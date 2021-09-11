@@ -20261,3 +20261,10 @@ insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
 values ('18', '11', ' 項 目 標 簽 ', 'glyphicon glyphicon-tags', '');
 insert into `menu_t` (`id`, `pid`, `name`, `icon`, `url`)
 values ('19', '1', ' 參 數 管 理 ', 'glyphicon glyphicon-list-alt', '');
+
+
+INSERT INTO crowd_admin.t_type (name,remark) VALUES
+('科技','開啟智慧未來'),
+('設計','創建改變未來'),
+('公益','匯集點點愛心'),
+('農業','網絡天下肥美');
