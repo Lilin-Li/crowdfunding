@@ -54,6 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
 		// 修復bug：產生建立時間存入
 		String createdate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		projectPO.setCreatedate(createdate);
+		projectPO.setDeploydate(createdate);
 
 		// 修復bug：status設定成0，表示即將開始
 		projectPO.setStatus(0);
