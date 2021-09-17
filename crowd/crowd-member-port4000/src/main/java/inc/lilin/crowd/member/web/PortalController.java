@@ -26,4 +26,5 @@ public class PortalController {
 
         return"portal";
     }
+
 }

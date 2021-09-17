@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProjectServiceImpl implements ProjectService{
+public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     ProjectPOMapper projectPOMapper;
@@ -17,4 +17,6 @@ public class ProjectServiceImpl implements ProjectService{
     public List<PortalTypeVO> getPortalTypeVO() {
         return projectPOMapper.selectPortalTypeVOList();
     }
+
 }
+

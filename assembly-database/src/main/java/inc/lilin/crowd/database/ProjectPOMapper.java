@@ -2,6 +2,7 @@ package inc.lilin.crowd.database;
 
 import inc.lilin.crowd.entity.po.ProjectPO;
 import inc.lilin.crowd.entity.vo.PortalTypeVO;
+import inc.lilin.crowd.entity.vo.DetailProjectVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface ProjectPOMapper {
     void insertTagRelationship(@Param("tagIdList") List<Integer> tagIdList, @Param("projectId")Integer projectId);
 
     List<PortalTypeVO> selectPortalTypeVOList();
+
+    DetailProjectVO selectDetailProjectVO(Integer projectId);
 }

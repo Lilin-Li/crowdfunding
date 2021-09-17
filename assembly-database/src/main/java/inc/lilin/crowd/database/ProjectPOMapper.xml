@@ -230,4 +230,60 @@
             (#{projectId}, #{tagId})
         </foreach>
     </insert>
+    <resultMap type="inc.lilin.crowd.entity.vo.DetailProjectVO"
+               id="loadProjectDetailResultMap">
+        <id column="id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_description" property="projectDesc"/>
+        <result column="money" property="money"/>
+        <result column="status" property="status"/>
+        <result column="dau" property="dau"/>
+        <result column="deploydate" property="deployDate"/>
+        <result column="supportmoney" property="supportMoney"/>
+        <result column="follower" property="followerCount"/>
+        <result column="supporter" property="supporterCount"/>
+        <result column="header_picture_path" property="headerPicturePath"/>
+        <collection
+                property="detailPicturePathList"
+                select="inc.lilin.crowd.database.ProjectPOMapper.selectDetailPicturePath"
+                column="id"/>
+        <collection
+                property="detailReturnVOList"
+                select="inc.lilin.crowd.database.ProjectPOMapper.selectDeatailReturnVO"
+                column="id"/>
+    </resultMap>
+    <select id="selectDetailPicturePath" resultType="string">
+        SELECT item_pic_path FROM t_project_item_pic WHERE projectid=#{id}
+    </select>
+    <select id="selectDeatailReturnVO" resultType="inc.lilin.crowd.entity.vo.DetailReturnVO">
+        select
+
+        id returnId,
+        supportmoney supportMoney,
+        content,
+        signalpurchase signalPurchase,
+        purchase,
+        freight,
+        returndate returnDate
+        from t_return
+        where projectid=#{id}
+    </select>
+    <select id="selectDetailProjectVO" resultMap="loadProjectDetailResultMap">
+        select
+        id,
+        project_name,
+        project_description ,
+        money,
+        status,
+        day,
+        deploydate,
+        supportmoney,
+        supporter,
+        supportmoney/money*100 percentage,
+        follower,
+        header_picture_path
+        from
+        t_project
+        where id=#{projectId}
+    </select>
 </mapper>

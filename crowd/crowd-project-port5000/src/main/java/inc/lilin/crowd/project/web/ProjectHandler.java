@@ -7,7 +7,9 @@ import inc.lilin.crowd.project.config.OSSProperties;
 import inc.lilin.crowd.project.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -208,5 +210,14 @@ public class ProjectHandler {
         session.removeAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT);
         // 8.如果遠端儲存成功則跳轉到最終完成頁面
         return "redirect:" + CrowdConstant.GATEWAY_URL + "/project/create/success";
+    }
+    @RequestMapping("/get/project/detail/{projectId}")
+    public String getProjectDetail(@PathVariable("projectId") Integer projectId, Model model) {
+
+        DetailProjectVO detailProjectVO = projectServiceImpl.getDetailProjectVO(projectId);
+        model.addAttribute("detailProjectVO", detailProjectVO);
+
+        return "project-show-detail";
+
     }
 }

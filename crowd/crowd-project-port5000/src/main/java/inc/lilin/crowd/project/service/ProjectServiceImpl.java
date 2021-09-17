@@ -110,5 +110,53 @@ public class ProjectServiceImpl implements ProjectService {
 		memberConfirmInfoPO.setMemberid(memberId);
 		memberConfirmInfoPOMapper.insert(memberConfirmInfoPO);
 	}
+	@Override
+	public DetailProjectVO getDetailProjectVO(Integer projectId) {
+		// 1.查詢得到 DetailProjectVO 對像
+		DetailProjectVO detailProjectVO = projectPOMapper.selectDetailProjectVO(projectId);
 
+		// 2.根據 status 確定 statusText
+		Integer status = detailProjectVO.getStatus();
+		switch (status) {
+			case 0:
+				detailProjectVO.setStatusText("審覈中");
+				break;
+			case 1:
+				detailProjectVO.setStatusText("眾籌中");
+				break;
+			case 2:
+				detailProjectVO.setStatusText("眾籌成功");
+				break;
+			case 3:
+				detailProjectVO.setStatusText("已關閉");
+				break;
+			default:
+				break;
+		}
+
+		// 3.根據 deployeDate 計算 lastDay
+		// 2020-10-15
+		String deployDate = detailProjectVO.getDeployDate();
+		// 獲取目前日期
+		Date currentDay = new Date();
+		// 把眾籌日期解析成 Date 型別
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date deployDay = format.parse(deployDate);
+			// 獲取目前目前日期的時間戳
+			long currentTimeStamp = currentDay.getTime();
+			// 獲取眾籌日期的時間戳
+			long deployTimeStamp = deployDay.getTime();
+			// 兩個時間戳相減計算目前已經過去的時間
+			long pastDays = (currentTimeStamp - deployTimeStamp) / 1000 / 60 / 60 / 24;
+			// 獲取總的眾籌天數
+			Integer totalDays = detailProjectVO.getDay();
+			// 使用總的眾籌天數減去已經過去的天數得到剩餘天數
+			Integer lastDay = (int) (totalDays - pastDays);
+			detailProjectVO.setLastDay(lastDay);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return detailProjectVO;
+	}
 }

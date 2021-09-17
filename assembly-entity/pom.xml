@@ -12,7 +12,7 @@
     <groupId>inc.lilin.crowd</groupId>
     <artifactId>assembly-entity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd-前台-assembly-entity</name>
+    <name>assembly-entity</name>
     <description>供各介面通訊用entity</description>
 
 

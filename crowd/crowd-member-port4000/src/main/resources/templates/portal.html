@@ -266,7 +266,7 @@
 											<img alt="300x200" th:src="${project.headerPicturePath}" src="img/product-1.jpg" />
 											<div class="caption">
 												<h3 class="break">
-													<a th:href="'http://www.crowd.com/project/get/project/detail/'+${project.projectId}" href="project.html" th:text="${project.projectName}">活性富氫凈水直飲機</a>
+													<a th:href="${T(inc.lilin.crowd.common.core.constant.CrowdConstant).GATEWAY_URL} + '/project/get/project/detail/'+${project.projectId}" href="project.html" th:text="${project.projectName}">活性富氫凈水直飲機</a>
 												</h3>
 												<p>
 												<div style="float: left;">
