@@ -19,34 +19,44 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberLaunchInfoPO implements Serializable {
+public class OrderPO implements Serializable {
     /**
-     * 
+     * 主鍵
      */
     private Integer id;
 
     /**
-     * 會員 id
+     * 訂單號
      */
-    private Integer memberid;
+    private String orderNum;
 
     /**
-     * 簡單介紹
+     * 支付寶流水號
      */
-    private String descriptionSimple;
+    private String payOrderNum;
 
     /**
-     * 詳細介紹
+     * 訂單金額
      */
-    private String descriptionDetail;
+    private Double orderAmount;
 
     /**
-     * 聯繫電話
+     * 是否開發票（0 不開，1 開）
      */
-    private String phoneNum;
+    private Integer invoice;
 
     /**
-     * 客服電話
+     * 發票抬頭
      */
-    private String serviceNum;
+    private String invoiceTitle;
+
+    /**
+     * 訂單備註
+     */
+    private String orderRemark;
+
+    /**
+     * 收貨地址 id
+     */
+    private String addressId;
 }

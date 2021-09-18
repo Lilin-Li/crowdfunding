@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inc.lilin.crowd.database.OrderPOMapper">
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <!--請注意，此文件由代碼產生器(MybatisGenerattor)產生，任何修改都會在下次產生代碼時被覆寫。-->
+  <!-- ————————————————————————————————————————————————————————————————————————— -->
+  <resultMap id="BaseResultMap" type="inc.lilin.crowd.entity.po.OrderPO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_num" jdbcType="CHAR" property="orderNum" />
+    <result column="pay_order_num" jdbcType="CHAR" property="payOrderNum" />
+    <result column="order_amount" jdbcType="DOUBLE" property="orderAmount" />
+    <result column="invoice" jdbcType="INTEGER" property="invoice" />
+    <result column="invoice_title" jdbcType="CHAR" property="invoiceTitle" />
+    <result column="order_remark" jdbcType="CHAR" property="orderRemark" />
+    <result column="address_id" jdbcType="CHAR" property="addressId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.OrderPO">
+    insert into t_order (id, order_num, pay_order_num, 
+      order_amount, invoice, invoice_title, 
+      order_remark, address_id)
+    values (#{id,jdbcType=INTEGER}, #{orderNum,jdbcType=CHAR}, #{payOrderNum,jdbcType=CHAR}, 
+      #{orderAmount,jdbcType=DOUBLE}, #{invoice,jdbcType=INTEGER}, #{invoiceTitle,jdbcType=CHAR}, 
+      #{orderRemark,jdbcType=CHAR}, #{addressId,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="inc.lilin.crowd.entity.po.OrderPO">
+    update t_order
+    set order_num = #{orderNum,jdbcType=CHAR},
+      pay_order_num = #{payOrderNum,jdbcType=CHAR},
+      order_amount = #{orderAmount,jdbcType=DOUBLE},
+      invoice = #{invoice,jdbcType=INTEGER},
+      invoice_title = #{invoiceTitle,jdbcType=CHAR},
+      order_remark = #{orderRemark,jdbcType=CHAR},
+      address_id = #{addressId,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, order_num, pay_order_num, order_amount, invoice, invoice_title, order_remark, 
+    address_id
+    from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, order_num, pay_order_num, order_amount, invoice, invoice_title, order_remark, 
+    address_id
+    from t_order
+  </select>
+</mapper>

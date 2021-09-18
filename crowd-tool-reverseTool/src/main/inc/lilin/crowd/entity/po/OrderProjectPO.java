@@ -19,19 +19,44 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectItemPicPO implements Serializable {
+public class OrderProjectPO implements Serializable {
     /**
-     * 
+     * 主鍵
      */
     private Integer id;
 
     /**
-     * 
+     * 專案名稱
      */
-    private Integer projectid;
+    private String projectName;
 
     /**
-     * 
+     * 發起人
      */
-    private String itemPicPath;
+    private String launchName;
+
+    /**
+     * 回報內容
+     */
+    private String returnContent;
+
+    /**
+     * 回報數量
+     */
+    private Integer returnCount;
+
+    /**
+     * 支援單價
+     */
+    private Integer supportPrice;
+
+    /**
+     * 配送費用
+     */
+    private Integer freight;
+
+    /**
+     * 訂單表的主鍵
+     */
+    private Integer orderId;
 }

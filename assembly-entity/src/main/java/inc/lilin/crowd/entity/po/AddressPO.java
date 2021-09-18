@@ -1,10 +1,11 @@
 package inc.lilin.crowd.entity.po;
 
-import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
 * 
@@ -19,19 +20,29 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagPO implements Serializable {
+public class AddressPO implements Serializable {
     /**
-     * 
+     * 主鍵
      */
     private Integer id;
 
     /**
-     * 
+     * 收件人
      */
-    private Integer pid;
+    private String receiveName;
 
     /**
-     * 
+     * 手機號
      */
-    private String name;
+    private String phoneNum;
+
+    /**
+     * 收貨地址
+     */
+    private String address;
+
+    /**
+     * 使用者 id
+     */
+    private Integer memberId;
 }

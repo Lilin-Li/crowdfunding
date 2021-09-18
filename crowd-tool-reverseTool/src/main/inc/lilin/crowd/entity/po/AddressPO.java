@@ -19,19 +19,29 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TypePO implements Serializable {
+public class AddressPO implements Serializable {
     /**
-     * 
+     * 主鍵
      */
     private Integer id;
 
     /**
-     * 分類名稱
+     * 收件人
      */
-    private String name;
+    private String receiveName;
 
     /**
-     * 分類介紹
+     * 手機號
      */
-    private String remark;
+    private String phoneNum;
+
+    /**
+     * 收貨地址
+     */
+    private String address;
+
+    /**
+     * 使用者 id
+     */
+    private Integer memberId;
 }

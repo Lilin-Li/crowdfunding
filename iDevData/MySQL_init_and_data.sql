@@ -40,7 +40,7 @@ CREATE TABLE `crowd_admin`.`inner_role_auth`
     `role_id` INT,
     `auth_id` INT,
     PRIMARY KEY (`id`)
-) DEFAULT CHARSET = utf8mb4;;
+) DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `auth_t`
 (
@@ -189,6 +189,43 @@ create table t_member_confirm_info
     primary key (id)
 
 ) DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `t_order`
+(
+    `id` INT NOT NULL AUTO_INCREMENT COMMENT '主鍵',
+    `order_num` CHAR(100) COMMENT '訂單號',
+    `pay_order_num` CHAR(100) COMMENT '支付寶流水號',
+    `order_amount` DOUBLE(10,5) COMMENT '訂單金額',
+    `invoice` INT COMMENT '是否開發票（0 不開，1 開）',
+    `invoice_title` CHAR(100) COMMENT '發票抬頭',
+    `order_remark` CHAR(100) COMMENT '訂單備註',
+    `address_id` CHAR(100) COMMENT '收貨地址 id',
+    PRIMARY KEY (`id`)
+)DEFAULT CHARSET = utf8mb4;
+
+
+CREATE TABLE `t_address`
+(
+    `id` INT NOT NULL AUTO_INCREMENT COMMENT '主鍵',
+    `receive_name` CHAR(100) COMMENT '收件人',
+    `phone_num` CHAR(100) COMMENT '手機號',
+    `address` CHAR(200) COMMENT '收貨地址',
+    `member_id` INT COMMENT '使用者 id',
+    PRIMARY KEY (`id`)
+)DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `t_order_project`
+(
+    `id` INT NOT NULL AUTO_INCREMENT COMMENT '主鍵',
+    `project_name` CHAR(200) COMMENT '專案名稱',
+    `launch_name` CHAR(100) COMMENT '發起人',
+    `return_content` CHAR(200) COMMENT '回報內容',
+    `return_count` INT COMMENT '回報數量',
+    `support_price` INT COMMENT '支援單價',
+    `freight` INT COMMENT '配送費用',
+    `order_id` INT COMMENT '訂單表的主鍵',
+    PRIMARY KEY (`id`)
+)DEFAULT CHARSET = utf8mb4;
 
 ALTER TABLE crowd_admin.t_member
     ADD CONSTRAINT t_member_UN UNIQUE KEY (loginacct);

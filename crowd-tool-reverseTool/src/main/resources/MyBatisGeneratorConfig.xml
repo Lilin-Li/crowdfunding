@@ -64,12 +64,8 @@ http://mybatis.org/generator/
         </javaClientGenerator>
 
         <!--生成此URL中所有資料庫中的所有表 -->
-        <table tableName="t_type" domainObjectName="TypePO" />
-        <table tableName="t_tag" domainObjectName="TagPO" />
-        <table tableName="t_project" domainObjectName="ProjectPO" />
-        <table tableName="t_project_item_pic" domainObjectName="ProjectItemPicPO" />
-        <table tableName="t_member_launch_info" domainObjectName="MemberLaunchInfoPO" />
-        <table tableName="t_return" domainObjectName="ReturnPO" />
-        <table tableName="t_member_confirm_info" domainObjectName="MemberConfirmInfoPO" />
+        <table tableName="t_order" domainObjectName="OrderPO" />
+        <table tableName="t_address" domainObjectName="AddressPO" />
+        <table tableName="t_order_project" domainObjectName="OrderProjectPO" />
     </context>
 </generatorConfiguration>
