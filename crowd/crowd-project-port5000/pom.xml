@@ -12,11 +12,10 @@
     <groupId>inc.lilin.crowd</groupId>
     <artifactId>crowd-project-port5000</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd-project-port5000</name>
+    <name>crowd-前台-project-port5000</name>
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
-
             <dependency>
                 <groupId>inc.lilin.crowd</groupId>
                 <artifactId>crowd-assembly-common</artifactId>

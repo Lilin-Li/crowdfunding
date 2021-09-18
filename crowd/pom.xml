@@ -22,6 +22,7 @@
         <module>crowd-project-port5000</module>
         <module>crowd-assembly-remote_api</module>
         <module>crowd-member-port4000</module>
+        <module>crowd-order-port6000</module>
     </modules>
 
 

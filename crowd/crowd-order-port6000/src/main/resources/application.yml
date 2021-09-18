@@ -1,0 +1,7 @@
+server:
+  port: 6000
+spring:
+  application:
+    name: crowd-order
+  profiles:
+    include: springmvc,springcore,database,redis,eurekaclient
