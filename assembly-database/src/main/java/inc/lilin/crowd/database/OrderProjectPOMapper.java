@@ -1,6 +1,9 @@
 package inc.lilin.crowd.database;
 
 import inc.lilin.crowd.entity.po.OrderProjectPO;
+import inc.lilin.crowd.entity.vo.OrderProjectVO;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -16,4 +19,6 @@ public interface OrderProjectPOMapper {
     List<OrderProjectPO> selectAll();
 
     int updateByPrimaryKey(OrderProjectPO record);
+
+    OrderProjectVO selectOrderProjectVO(@Param("projectId") Integer projectId, @Param("returnId") Integer returnId);
 }

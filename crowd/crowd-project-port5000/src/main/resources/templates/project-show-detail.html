@@ -209,7 +209,8 @@
 										<p th:if="${return.freight>0}">配送費用：[[${return.freight}]]</p>
 										<p>預計發放時間：專案籌款成功后的[[${return.returnDate}]]天內</p>
 										<button type="button" class="btn  btn-warning btn-lg"
-												onclick="window.location.href='pay-step-1.html'">支援</button>
+											><a th:href="${T(inc.lilin.crowd.common.core.constant.CrowdConstant).GATEWAY_URL} + '/order/confirm/return/info/'+ ${detailProjectVO.projectId}+'/'+${return.returnId}"
+												>支持</a></button>
 										<br>
 										<br>
 										<p th:text="${return.content}">感謝您的支援，在眾籌開始后，您將以79元的優惠價格獲得「遇見彩虹?」智慧插座一件（參考價208元）。</p>

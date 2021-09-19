@@ -9,10 +9,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>inc.lilin.crowd</groupId>
-    <artifactId>crowd-order-port6000</artifactId>
+    <artifactId>crowd-order-port6001</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crowd-前台-order-port6000</name>
+    <name>crowd-前台-order-port6001</name>
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
@@ -20,6 +19,12 @@
             <groupId>inc.lilin.crowd</groupId>
             <artifactId>crowd-assembly-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jettison</artifactId>
+                    <groupId>org.codehaus.jettison</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>inc.lilin.crowd</groupId>
@@ -46,7 +51,6 @@
             <artifactId>assembly-eureka-client</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
 
 
