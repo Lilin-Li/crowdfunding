@@ -1,7 +1,7 @@
 package inc.lilin.crowd.project.web;
 
 import inc.lilin.crowd.common.core.constant.CrowdConstant;
-import inc.lilin.crowd.common.thirdparty_api.CrowdUtil;
+import inc.lilin.crowd.common.oss.OssService;
 import inc.lilin.crowd.entity.vo.*;
 import inc.lilin.crowd.project.config.OSSProperties;
 import inc.lilin.crowd.project.service.ProjectServiceImpl;
@@ -51,7 +51,7 @@ public class ProjectHandler {
             return "project-launch";
         }
         // 3.如果使用者確實上傳了有內容的檔案，則執行上傳
-        ResultVO<String> uploadHeaderPicResultVO = CrowdUtil.uploadFileToOss(
+        ResultVO<String> uploadHeaderPicResultVO = OssService.uploadFileToOss(
                 ossProperties.getEndPoint(),
                 ossProperties.getAccessKeyId(),
                 ossProperties.getAccessKeySecret(),
@@ -97,7 +97,7 @@ public class ProjectHandler {
             }
 
             // 6.執行上傳
-            ResultVO<String> detailUploadResultVO = CrowdUtil.uploadFileToOss(
+            ResultVO<String> detailUploadResultVO = OssService.uploadFileToOss(
                     ossProperties.getEndPoint(),
                     ossProperties.getAccessKeyId(),
                     ossProperties.getAccessKeySecret(),
@@ -137,7 +137,7 @@ public class ProjectHandler {
             @RequestParam("returnPicture") MultipartFile returnPicture) throws IOException {
 
         // 1.執行檔案上傳
-        ResultVO<String> uploadReturnPicResultVO = CrowdUtil.uploadFileToOss(
+        ResultVO<String> uploadReturnPicResultVO = OssService.uploadFileToOss(
                 ossProperties.getEndPoint(),
                 ossProperties.getAccessKeyId(),
                 ossProperties.getAccessKeySecret(),

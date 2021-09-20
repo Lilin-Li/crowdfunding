@@ -257,13 +257,13 @@
 								</div>
 								<div class="col-md-12 column" style="padding: 0 120px;">
 									<div class="radio">
-										<label> <input type="radio" name="optionsRadios1"
-													   id="optionsRadios1" value="option1" checked> 無需發票
+										<label> <input type="radio" name="invoiceRadio"
+													   id="optionsRadios1" value="0" checked> 無需發票
 										</label>
 									</div>
 									<div class="radio">
-										<label> <input type="radio" name="optionsRadios1"
-													   id="optionsRadios2" value="option2"> 需要發票
+										<label> <input type="radio" name="invoiceRadio"
+													   id="optionsRadios2" value="1"> 需要發票
 										</label>
 									</div>
 									<div
@@ -276,7 +276,7 @@
 													<div class="form-group">
 														<label class="col-sm-2 control-label">發票抬頭（*）</label>
 														<div class="col-sm-10">
-															<input type="text" class="form-control"
+															<input type="text" name="invoiceTitle" class="form-control"
 																   style="width: 200px;" placeholder="個人">
 														</div>
 													</div>
@@ -327,7 +327,7 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">備註</label>
 										<div class="col-sm-10">
-												<textarea class="form-control" rows="1"
+												<textarea class="form-control" name="remark" rows="1"
 														  placeholder="填寫關於回報或發起人希望您備註的資訊"></textarea>
 										</div>
 									</div>
@@ -429,11 +429,34 @@
 
 </div>
 <!-- /container -->
+
+<!-- 爲了收集目前頁面中的所有數據，構造空表單 -->
+<form id="summaryForm" action="pay/generate/order" method="post"></form>
+
 <script src="jquery/jquery-2.1.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="script/docs.min.js"></script>
 <script src="script/back-to-top.js"></script>
 <script>
+
+	$("#payButton").click(function(){
+
+		// 1.收集所有要提交的表單項的數據
+		var addressId = $("[name=addressId]:checked").val();
+		var invoice = $("[name=invoiceRadio]:checked").val();
+		var invoiceTitle = $.trim($("[name=invoiceTitle]").val());
+		var remark = $.trim($("[name=remark]").val());
+
+		// 2.將上面收集到的表單數據填充到空表單中並提交
+		$("#summaryForm")
+				.append("<input type='hidden' name='addressId' value='"+addressId+"'/>")
+				.append("<input type='hidden' name='invoice' value='"+invoice+"'/>")
+				.append("<input type='hidden' name='invoiceTitle' value='"+invoiceTitle+"'/>")
+				.append("<input type='hidden' name='orderRemark' value='"+remark+"'/>")
+				.submit();
+
+	});
+
 	$("#knowRoleCheckBox").click(function(){
 		var currentStatus = this.checked;
 		if(currentStatus) {

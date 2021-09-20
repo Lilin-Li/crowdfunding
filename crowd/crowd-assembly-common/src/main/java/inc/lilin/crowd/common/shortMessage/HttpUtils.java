@@ -1,4 +1,4 @@
-package inc.lilin.crowd.common.systemcall;
+package inc.lilin.crowd.common.shortMessage;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
