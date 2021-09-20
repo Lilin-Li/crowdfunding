@@ -38,4 +38,10 @@
     select id, receive_name, phone_num, address, member_id
     from t_address
   </select>
+
+  <select id="selectByMemberId" resultType="inc.lilin.crowd.entity.vo.AddressVO">
+    SELECT *
+    FROM t_address
+    WHERE member_id = #{memberId};
+  </select>
 </mapper>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<base th:href="@{/}" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/theme.css">
+	<style>
+		#footer {
+			padding: 15px 0;
+			background: #fff;
+			border-top: 1px solid #ddd;
+			text-align: center;
+		}
+
+		#topcontrol {
+			color: #fff;
+			z-index: 99;
+			width: 30px;
+			height: 30px;
+			font-size: 20px;
+			background: #222;
+			position: relative;
+			right: 14px !important;
+			bottom: 11px !important;
+			border-radius: 3px !important;
+		}
+
+		#topcontrol:after {
+			/*top: -2px;*/
+			left: 8.5px;
+			content: "\f106";
+			position: absolute;
+			text-align: center;
+			font-family: FontAwesome;
+		}
+
+		#topcontrol:hover {
+			color: #fff;
+			background: #18ba9b;
+			-webkit-transition: all 0.3s ease-in-out;
+			-moz-transition: all 0.3s ease-in-out;
+			-o-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.label-type, .label-status, .label-order {
+			background-color: #fff;
+			color: #f60;
+			padding: 5px;
+			border: 1px #f60 solid;
+		}
+
+		#typeList  :not (:first-child ) {
+			margin-top: 20px;
+		}
+
+		.label-txt {
+			margin: 10px 10px;
+			border: 1px solid #ddd;
+			padding: 4px;
+			font-size: 14px;
+		}
+
+		.panel {
+			border-radius: 0;
+		}
+
+		.progress-bar-default {
+			background-color: #ddd;
+		}
+	</style>
+</head>
+<body>
+<div class="navbar-wrapper">
+	<div class="container">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html" style="font-size: 32px;">尚籌網-創意產品眾籌平臺</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse"
+					 style="float: right;">
+					<ul class="nav navbar-nav">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+												data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
+							[[${session.loginMember.username}]]<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="member.html"><i
+										class="glyphicon glyphicon-scale"></i> 會員中心</a></li>
+								<li><a href="#"><i class="glyphicon glyphicon-comment"></i>
+									訊息</a></li>
+								<li class="divider"></li>
+								<li><a href="http://www.crowd.com/auth/member/logout"><i
+										class="glyphicon glyphicon-off"></i> 退出系統</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
+
+<div class="container theme-showcase" role="main">
+
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="panel panel-default">
+					<div class="panel-heading" style="text-align: center;">
+						<div class="container-fluid">
+							<div class="row clearfix">
+								<div class="col-md-3 column">
+									<div class="progress"
+										 style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+										<div class="progress-bar progress-bar-default"
+											 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											 aria-valuemax="100" style="width: 100%; height: 50px;">
+											<div style="font-size: 16px; margin-top: 15px;">1.
+												確認回報內容</div>
+										</div>
+									</div>
+									<div
+											style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+									</div>
+								</div>
+								<div class="col-md-3 column">
+									<div class="progress"
+										 style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+										<div class="progress-bar progress-bar-success"
+											 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											 aria-valuemax="100" style="width: 100%; height: 50px;">
+											<div style="font-size: 16px; margin-top: 15px;">2.
+												確認訂單</div>
+										</div>
+									</div>
+									<div
+											style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(92, 184, 92, 1); border-top-color: rgba(92, 184, 92, 0); border-bottom-color: rgba(92, 184, 92, 0); border-right-color: rgba(92, 184, 92, 0);">
+									</div>
+								</div>
+								<div class="col-md-3 column">
+									<div class="progress"
+										 style="height: 50px; border-radius: 0; position: absolute; width: 75%; right: 49px;">
+										<div class="progress-bar progress-bar-default"
+											 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											 aria-valuemax="100" style="width: 100%; height: 50px;">
+											<div style="font-size: 16px; margin-top: 15px;">3. 付款</div>
+										</div>
+									</div>
+									<div
+											style="right: 0; border: 10px solid #ddd; border-left-color: #88b7d5; border-width: 25px; position: absolute; border-left-color: rgba(221, 221, 221, 1); border-top-color: rgba(221, 221, 221, 0); border-bottom-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);">
+									</div>
+								</div>
+								<div class="col-md-3 column">
+									<div class="progress" style="height: 50px; border-radius: 0;">
+										<div class="progress-bar progress-bar-default"
+											 role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											 aria-valuemax="100" style="width: 100%; height: 50px;">
+											<div style="font-size: 16px; margin-top: 15px;">4. 完成</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="container-fluid">
+							<div class="row clearfix">
+								<div class="col-md-12 column">
+									<div class="alert alert-warning alert-dismissable"
+										 style="color: red;">
+										<button type="button" class="close" data-dismiss="alert"
+												aria-hidden="true">×</button>
+										<i class="glyphicon glyphicon-info-sign"></i> <strong>請在下單后15分鐘內付款，否則您的訂單會被自動關閉。</strong>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div id="address" class="container-fluid">
+							<div class="row clearfix">
+								<div class="col-md-12 column">
+									<blockquote
+											style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+										<b> 收貨地址 </b>
+									</blockquote>
+								</div>
+								<div class="col-md-12 column" style="padding: 0 120px;">
+									<div th:if="${#strings.isEmpty(session.addressVOList)}">尚未建立收貨地址</div>
+									<div th:if="${not #strings.isEmpty(session.addressVOList)}">
+										<div th:each="address : ${session.addressVOList}" class="radio">
+											<label> <input type="radio" name="addressId" th:value="${address.id}"
+														   id="optionsRadios1"/> [[${address.receiveName}]]
+												[[${address.phoneNum}]] [[${address.address}]]
+											</label>
+										</div>
+									</div>
+									<div class="radio">
+										<label> <input type="radio" name="optionsRadios"
+													   id="optionsRadios2" value="option2"> 新地址
+										</label>
+									</div>
+									<div
+											style="border: 10px solid #f60; border-bottom-color: #eceeef; border-width: 10px; width: 20px; margin-left: 20px; margin-top: -20px; border-left-color: rgba(221, 221, 221, 0); border-top-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);"></div>
+									<div class="panel panel-default"
+										 style="border-style: dashed; background-color: #eceeef">
+										<div class="panel-body">
+											<div class="col-md-12 column">
+												<form action="order/save/address" method="post" class="form-horizontal">
+													<input type="hidden" name="memberId" th:value="${session.loginMember.id}" />
+													<div class="form-group">
+														<label class="col-sm-2 control-label">收貨人（*）</label>
+														<div class="col-sm-10">
+															<input type="text" name="receiveName" class="form-control"
+																   style="width: 200px;" placeholder="姓名：xxxx">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-sm-2 control-label">手機（*）</label>
+														<div class="col-sm-10">
+															<input class="form-control" name="phoneNum" type="text"
+																   style="width: 200px;" placeholder="請填寫11位手機號碼"></input>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-sm-2 control-label">地址（*）</label>
+														<div class="col-sm-10">
+															<input class="form-control" name="address" type="text"
+																   style="width: 400px;" placeholder="請填寫11位手機號碼"></input>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="inputEmail3" class="col-sm-2 control-label"></label>
+														<div class="col-sm-10">
+															<button type="submit" class="btn btn-primary">確認配送資訊</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="container-fluid">
+							<div class="row clearfix">
+								<div class="col-md-12 column">
+									<blockquote
+											style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+										<b> 發票資訊 </b>
+									</blockquote>
+								</div>
+								<div class="col-md-12 column" style="padding: 0 120px;">
+									<div class="radio">
+										<label> <input type="radio" name="optionsRadios1"
+													   id="optionsRadios1" value="option1" checked> 無需發票
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input type="radio" name="optionsRadios1"
+													   id="optionsRadios2" value="option2"> 需要發票
+										</label>
+									</div>
+									<div
+											style="border: 10px solid #f60; border-bottom-color: #eceeef; border-width: 10px; width: 20px; margin-left: 20px; margin-top: -20px; border-left-color: rgba(221, 221, 221, 0); border-top-color: rgba(221, 221, 221, 0); border-right-color: rgba(221, 221, 221, 0);"></div>
+									<div class="panel panel-default"
+										 style="border-style: dashed; background-color: #eceeef">
+										<div class="panel-body">
+											<div class="col-md-12 column">
+												<form class="form-horizontal">
+													<div class="form-group">
+														<label class="col-sm-2 control-label">發票抬頭（*）</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control"
+																   style="width: 200px;" placeholder="個人">
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="container-fluid">
+							<div class="row clearfix">
+								<div class="col-md-12 column">
+									<blockquote
+											style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+										<b> 專案資訊 <a style="font-size: 12px;"
+													href="pay-step-1.html">修改數量</a>
+										</b>
+									</blockquote>
+								</div>
+								<div class="col-md-12 column">
+									<table class="table table-bordered"
+										   style="text-align: center;">
+										<thead>
+										<tr style="background-color: #ddd;">
+											<td>專案名稱</td>
+											<td>發起人</td>
+											<td width="300">回報內容</td>
+											<td width="80">回報數量</td>
+											<td>支援單價</td>
+											<td>配送費用</td>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td th:text="${session.orderProjectVO.projectName}">活性富氫凈水直飲機</td>
+											<td th:text="${session.orderProjectVO.launchName}">深圳市博實永道電子商務有限公司</td>
+											<td th:text="${session.orderProjectVO.returnContent}">每滿1750人抽取一臺活性富氫凈水直飲機，至少抽取一臺。抽取名額（小數點后一位四捨五入）=參與人數÷1750人，由蘇寧官方抽取。</td>
+											<td th:text="${session.orderProjectVO.returnCount}">55</td>
+											<td style="color: #F60" th:text="${session.orderProjectVO.supportPrice}">￥ 1.00</td>
+											<td th:if="${session.orderProjectVO.freight == 0}">免運費</td>
+											<td th:if="${session.orderProjectVO.freight != 0}" th:text="${session.orderProjectVO.freight}">免運費</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="col-md-12 column">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">備註</label>
+										<div class="col-sm-10">
+												<textarea class="form-control" rows="1"
+														  placeholder="填寫關於回報或發起人希望您備註的資訊"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12 column">
+									<blockquote
+											style="border-left: 5px solid #f60; color: #f60; padding: 0 0 0 20px;">
+										<b> 賬單 </b>
+									</blockquote>
+								</div>
+
+								<div class="col-md-12 column">
+									<div class="alert alert-warning alert-dismissable"
+										 style="text-align: right; border: 2px solid #ffc287;">
+										<ul style="list-style: none;">
+											<li style="margin-top: 10px;">支援金額：<span
+													style="color: red;">￥[[${session.orderProjectVO.returnCount*session.orderProjectVO.supportPrice}]]</span></li>
+											<li style="margin-top: 10px;">配送費用：<span
+													style="color: red;">￥[[${session.orderProjectVO.freight}]]</span></li>
+											<li style="margin-top: 10px; margin-bottom: 10px;"><h2>
+												支付總金額：<span style="color: red;">￥[[${session.orderProjectVO.returnCount*session.orderProjectVO.supportPrice+session.orderProjectVO.freight}]]</span>
+											</h2></li>
+											<li
+													style="margin-top: 10px; padding: 5px; border: 1px solid #F00; display: initial; background: #FFF;">
+												<i class="glyphicon glyphicon-info-sign"></i> <strong>您需要先
+												<a href="#address">設定配送資訊</a> ,再提交訂單
+											</strong>
+											</li>
+											<li style="margin-top: 10px;">
+												請在下單后15分鐘內付款，否則您的訂單會被自動關閉。</li>
+											<li style="margin-top: 10px;">
+												<button id="payButton" disabled="disabled" type="button"
+														class="btn btn-warning btn-lg"
+														onclick="window.location.href='pay-step-3.html'">
+													<i class="glyphicon glyphicon-credit-card"></i> 立即付款
+												</button>
+											</li>
+											<li style="margin-top: 10px;">
+												<div class="checkbox">
+													<label>
+														<input id="knowRoleCheckBox" type="checkbox">我已瞭解風險和規則
+													</label>
+												</div>
+											</li>
+										</ul>
+
+
+									</div>
+								</div>
+								<div class="container">
+									<div class="row clearfix">
+										<div class="col-md-12 column">
+											<blockquote>
+												<p>
+													<i class="glyphicon glyphicon-info-sign"
+													   style="color: #2a6496;"></i> 提示
+												</p>
+												<br> <span style="font-size: 12px;">1.眾籌並非商品交易，存在一定風險。支持者根據自己的判斷選擇、支援眾籌專案，與發起人共同實現夢想並獲得發起人承諾的回報。<br>
+														2.眾籌平臺僅提供平臺網路空間及技術支援等中介服務，眾籌僅存在於發起人和支持者之間，使用眾籌平臺產生的法律後果由發起人與支持者自行承擔。<br>
+														3.本專案必須在2017-06-04之前達到 ￥1000000.00
+														的目標才算成功，否則已經支援的訂單將取消。訂單取消或募集失敗的，您支援的金額將原支付路徑退回。<br>
+														4.請在支援專案后15分鐘內付款，否則您的支援請求會被自動關閉。<br>
+														5.眾籌成功後由發起人統一進行發貨，售後服務由發起人統一提供；如果發生發起人無法發放回報、延遲發放回報、不提供回報後續服務等情況，您需要直接和發起人協商解決。<br>
+														6.如您不同意上述風險提示內容，您有權選擇不支援；一旦選擇支援，視為您已確認並同意以上提示內容。
+													</span>
+											</blockquote>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container" style="margin-top: 20px;">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div id="footer">
+					<div class="footerNav">
+						<a rel="nofollow" href="http://www.atguigu.com">關於我們</a> | <a
+							rel="nofollow" href="http://www.atguigu.com">服務條款</a> | <a
+							rel="nofollow" href="http://www.atguigu.com">免責聲明</a> | <a
+							rel="nofollow" href="http://www.atguigu.com">網站地圖</a> | <a
+							rel="nofollow" href="http://www.atguigu.com">聯繫我們</a>
+					</div>
+					<div class="copyRight">Copyright ?2010-2014atguigu.com 版權所有
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- /container -->
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
+<script src="script/back-to-top.js"></script>
+<script>
+	$("#knowRoleCheckBox").click(function(){
+		var currentStatus = this.checked;
+		if(currentStatus) {
+			$("#payButton").prop("disabled", "");
+		}else{
+			$("#payButton").prop("disabled","disabled");
+		}
+	});
+	$('#myTab a').click(function(e) {
+		e.preventDefault()
+		$(this).tab('show')
+	})
+</script>
+</body>
+</html>

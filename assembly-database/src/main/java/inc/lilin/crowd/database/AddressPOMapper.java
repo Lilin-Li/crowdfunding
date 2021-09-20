@@ -1,6 +1,9 @@
 package inc.lilin.crowd.database;
 
 import inc.lilin.crowd.entity.po.AddressPO;
+import inc.lilin.crowd.entity.vo.AddressVO;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -16,4 +19,6 @@ public interface AddressPOMapper {
     List<AddressPO> selectAll();
 
     int updateByPrimaryKey(AddressPO record);
+
+    List<AddressVO> selectByMemberId(@Param("memberId") Integer memberId);
 }
