@@ -30,4 +30,6 @@ public interface ProjectPOMapper {
     List<PortalTypeVO> selectPortalTypeVOList();
 
     DetailProjectVO selectDetailProjectVO(Integer projectId);
+
+    void updateMoneyByPrimaryKey(@Param("projectId")Integer projectId, @Param("total")Double total);
 }

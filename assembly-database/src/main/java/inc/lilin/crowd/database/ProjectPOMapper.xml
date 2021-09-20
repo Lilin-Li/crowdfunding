@@ -253,37 +253,42 @@
                 column="id"/>
     </resultMap>
     <select id="selectDetailPicturePath" resultType="string">
-        SELECT item_pic_path FROM t_project_item_pic WHERE projectid=#{id}
+        SELECT item_pic_path
+        FROM t_project_item_pic
+        WHERE projectid = #{id}
     </select>
     <select id="selectDeatailReturnVO" resultType="inc.lilin.crowd.entity.vo.DetailReturnVO">
-        select
-
-        id returnId,
-        supportmoney supportMoney,
-        content,
-        signalpurchase signalPurchase,
-        purchase,
-        freight,
-        returndate returnDate
+        select id             returnId,
+               supportmoney   supportMoney,
+               content,
+               signalpurchase signalPurchase,
+               purchase,
+               freight,
+               returndate     returnDate
         from t_return
-        where projectid=#{id}
+        where projectid = #{id}
     </select>
     <select id="selectDetailProjectVO" resultMap="loadProjectDetailResultMap">
-        select
-        id,
-        project_name,
-        project_description ,
-        money,
-        status,
-        day,
-        deploydate,
-        supportmoney,
-        supporter,
-        supportmoney/money*100 percentage,
-        follower,
-        header_picture_path
-        from
-        t_project
-        where id=#{projectId}
+        select id,
+               project_name,
+               project_description,
+               money,
+               status,
+               day,
+               deploydate,
+               supportmoney,
+               supporter,
+               supportmoney / money * 100 percentage,
+               follower,
+               header_picture_path
+        from t_project
+        where id = #{projectId}
     </select>
+
+    <update id="updateMoneyByPrimaryKey">
+        UPDATE t_project
+        SET supportmoney= t_project.supportmoney + #{total},
+        supporter = t_project.supporter + 1
+        WHERE id = #{projectId};
+    </update>
 </mapper>

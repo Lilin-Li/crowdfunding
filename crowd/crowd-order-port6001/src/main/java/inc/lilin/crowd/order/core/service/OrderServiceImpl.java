@@ -3,6 +3,7 @@ package inc.lilin.crowd.order.core.service;
 import inc.lilin.crowd.database.AddressPOMapper;
 import inc.lilin.crowd.database.OrderPOMapper;
 import inc.lilin.crowd.database.OrderProjectPOMapper;
+import inc.lilin.crowd.database.ProjectPOMapper;
 import inc.lilin.crowd.entity.po.AddressPO;
 import inc.lilin.crowd.entity.po.OrderPO;
 import inc.lilin.crowd.entity.po.OrderProjectPO;
@@ -28,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderPOMapper orderPOMapper;
 
     @Autowired
-    private Order
+    private ProjectPOMapper projectPOMapper;
 
     @Override
     public OrderProjectVO getOrderProjectVO(Integer projectId, Integer returnId) {
@@ -64,5 +65,10 @@ public class OrderServiceImpl implements OrderService {
         orderProjectPO.setOrderId(id);
 
         orderProjectPOMapper.insert(orderProjectPO);
+    }
+
+    @Override
+    public void updateProjectMoney(Integer projectId, Double total) {
+        projectPOMapper.updateMoneyByPrimaryKey(projectId, total);
     }
 }

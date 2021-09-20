@@ -1,0 +1,11 @@
+如何設定WebHook?
+
+到paypal 的My APP中
+設定WebHook指向NAT穿透的網址
+
+並把WebHOOK ID設定到 這個專案中的 PaypalConfig中
+
+---------------------------------------------------
+支付成功的event type = PAYMENT.SALE.COMPLETED
+
+

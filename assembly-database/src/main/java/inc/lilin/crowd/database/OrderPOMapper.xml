@@ -18,7 +18,7 @@
     delete from t_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.OrderPO" useGeneratedKeys="true" keyProperty="id">>
+  <insert id="insert" parameterType="inc.lilin.crowd.entity.po.OrderPO" useGeneratedKeys="true" keyProperty="id">
     insert into t_order (id, order_num, pay_order_num, 
       order_amount, invoice, invoice_title, 
       order_remark, address_id)

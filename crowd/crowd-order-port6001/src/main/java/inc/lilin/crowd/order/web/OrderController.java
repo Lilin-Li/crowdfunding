@@ -14,22 +14,26 @@ import inc.lilin.crowd.entity.vo.MemberLoginVO;
 import inc.lilin.crowd.entity.vo.OrderProjectVO;
 import inc.lilin.crowd.entity.vo.OrderVO;
 import inc.lilin.crowd.order.core.service.OrderService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
+@Log4j2
 public class OrderController {
 
     @Autowired
@@ -38,8 +42,8 @@ public class OrderController {
     @Autowired
     PaypalService paypalService;
 
-    public static final String PAYPAL_SUCCESS_URL = "paypal/success.do";
-    public static final String PAYPAL_CANCEL_URL = "paypal/cancel.do";
+    public static final String PAYPAL_SUCCESS_URL = "paypal/success";
+    public static final String PAYPAL_CANCEL_URL = "paypal/cancel";
 
     @RequestMapping("/confirm/return/info/{projectId}/{returnId}")
     public String showReturnConfirmInfo(
@@ -50,6 +54,7 @@ public class OrderController {
         OrderProjectVO orderProjectVO = orderService.getOrderProjectVO(projectId, returnId);
 
         session.setAttribute("orderProjectVO", orderProjectVO);
+        session.setAttribute("projectId", projectId);
         model.addAttribute("orderProjectVO", orderProjectVO);
 
 
@@ -62,6 +67,10 @@ public class OrderController {
             HttpSession session) {
         // 1.把接收到的回報數量合併到 Session 域
         OrderProjectVO orderProjectVO = (OrderProjectVO) session.getAttribute("orderProjectVO");
+
+        // TODO: session過期，重導回募資詳情頁面
+        // if(orderProjectVO == null)
+
         orderProjectVO.setReturnCount(returnCount);
         session.setAttribute("orderProjectVO", orderProjectVO);
 
@@ -80,15 +89,19 @@ public class OrderController {
     public String saveAddress(AddressVO addressVO, HttpSession session) {
         orderService.saveAddress(addressVO);
         OrderProjectVO orderProjectVO = (OrderProjectVO) session.getAttribute("orderProjectVO");
+        // TODO: session過期，重導回募資詳情頁面
         Integer returnCount = orderProjectVO.getReturnCount();
         return "redirect:" + CrowdConstant.GATEWAY_URL + "/order/confirm/order/" + returnCount;
     }
 
     @ResponseBody
     @RequestMapping("/generate/order")
-    public String generateOrder(HttpSession session, OrderVO orderVO, HttpServletRequest request, HttpServletResponse response) {
+    public String generateOrder(HttpSession session, OrderVO orderVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 1.從 Session 域獲取 orderProjectVO 對像
         OrderProjectVO orderProjectVO = (OrderProjectVO) session.getAttribute("orderProjectVO");
+
+        // TODO: session過期，重導回募資詳情頁面
+
         // 2.將 orderProjectVO 對像和 orderVO 對像組裝到一起
         orderVO.setOrderProjectVO(orderProjectVO);
 
@@ -110,19 +123,18 @@ public class OrderController {
                         orderProjectVO.getFreight());
         orderVO.setOrderAmount(orderAmount);
 
+        session.setAttribute("orderVO", orderVO);
 
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
 
-        // 5.呼叫專門封裝好的方法給支付寶介面發送請求
-        // return sendRequestToAliPay(
-        //         orderNum,
-        //         orderAmount,
-        //         orderProjectVO.getProjectName(),
-        //         orderProjectVO.getReturnContent());
+
+        JSONObject extraParam = new JSONObject();
+        extraParam.put("projectID",   (Integer)session.getAttribute("projectId"));
+
         try {
             Payment payment = paypalService.createPayment(
-                    null,
+                    extraParam.toJSONString(),
                     orderVO.getOrderNum(),
                     orderVO.getOrderAmount(),
                     "USD",
@@ -131,175 +143,150 @@ public class OrderController {
                     "service fee",
                     cancelUrl,
                     successUrl);
+
             for (Links links : payment.getLinks()) {
                 if (links.getRel().equals("approval_url")) {
+                    // 付款頁面
                     response.sendRedirect(links.getHref());
                 }
             }
         } catch (PayPalRESTException e) {
             System.out.println(e.getMessage());
         }
-        return;
+        return "訂單建立失敗";
     }
 
     @ResponseBody
-    @RequestMapping("/return")
-    public String returnUrlMethod(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UnsupportedEncodingException {
+    @RequestMapping("/paypal/success")
+    public String returnUrlMethod(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
-        try {
-            Payment payment = paypalService.executePayment(paymentId, payerId);
-            if(payment.getState().equals("approved")){
-                if (paySuccess(payment, request)) {
-                    request.getRequestDispatcher("/jsp/paypal/success.jsp").forward(request, response);
+
+        Payment payment = paypalService.executePayment(paymentId, payerId);
+        if (payment.getState().equals("approved")) {
+            // 交易狀態
+            String status = "";
+            for (Links links : payment.getLinks()) {
+                if (links.getRel().equals("approval_url")) {
+                    status = links.getRel();
+                    break;
+                }
+                status = links.getRel();
+            }
+            // 商戶訂單號
+            String out_trade_no = payment.getTransactions().get(0).getInvoiceNumber();
+            // paypal交易號
+            String trade_no = payment.getId();
+            // 總金額
+            Double orderAmount = Double.valueOf(
+                    payment.getTransactions()
+                            .get(0)
+                            .getAmount()
+                            .getTotal());
+
+            // 儲存到DB
+            OrderVO orderVO = (OrderVO) session.getAttribute("orderVO");
+            // TODO: session過期，重導回募資詳情頁面
+            orderVO.setPayOrderNum(trade_no);
+            orderService.saveOrder(orderVO);
+
+            return "trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + orderAmount + "<br/><a href=\"" + CrowdConstant.GATEWAY_URL + "\">返回首頁";
+
+        } else {
+            return "交易未成功";
+        }
+    }
+
+    /**
+     * 訂單撤銷
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/paypal/cancel")
+    public String cancelPay() {
+        return "訂單取消";
+    }
+
+    @PostMapping("/notify")
+    public void notifyUrlMethod(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String body = getBody(request);
+        JSONObject json = JSONObject.parseObject(body);
+        log.info("貝寶通知>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + json.toJSONString());
+
+        //驗簽
+        boolean isValid = paypalService.webhookValidate(body, request);
+
+        if (isValid) {
+            log.info("webhook數據驗證通過，event_type=" + json.getString("event_type"));
+
+            JSONObject resource = json.getJSONObject("resource");
+            // 實際驗證過程建議商戶務必新增以下校驗：
+            resource.getString("id");   //paypal訂單唯一識別號
+            // 1、需要驗證該通知數據中的out_trade_no是否為商戶系統中建立的訂單號，
+            // 2、判斷total_amount是否確實為該訂單的實際金額（即商戶訂單建立時的金額），
+            JSONObject amount = resource.getJSONObject("amount");
+            Double total = Double.valueOf(amount.getString("total"));
+
+            // resource.getString(某個取得Total金額的參數);
+            // 3、校驗通知中的seller_id（或者seller_email) 是否為out_trade_no這筆單據的對應的操作方（有的時候，一個商戶可能有多個seller_id/seller_email）
+            // 4、驗證app_id是否為該商戶本身。
+            // 5、驗證是否已處理過
+            // */
+
+            //支付狀態
+            if (resource.getString("state").equalsIgnoreCase("completed")) {
+                try {
+                    System.out.println("訂單支付完成");
+                    System.out.println("todo:改變資料庫訂單狀態、募資金額");
+
+                    String extra_common_param = resource.getString("custom");
+                    JSONObject extraParam = JSONObject.parseObject(extra_common_param);
+                    Integer projectId = Integer.valueOf(extraParam.getString("projectID"));
+                    orderService.updateProjectMoney(projectId,total);
+
+                    System.out.println("todo:通知廠商、使其安排物流");
+                    response.setStatus(200);
                     return;
-                } else {
-                    request.getRequestDispatcher("/jsp/paypal/cancel.jsp").forward(request, response);
+                } catch (Exception e) {
+                    log.warn("此支付訂單更新失敗，訂單ID=" + resource.getString("invoice_number") + ",paypal訂單唯一識別號：" + resource.getString("id"));
+                    //這裡返回500或者其他HTTP錯誤碼，即可重發
+                    response.setStatus(500);
+                    return;
                 }
             }
-        } catch (PayPalRESTException e) {
-            log.error(e.getMessage());
         }
-        return;
-
-
-        // // 獲取支付寶GET過來反饋資訊
-        // Map<String, String> params = new HashMap<String, String>();
-        // Map<String, String[]> requestParams = request.getParameterMap();
-        // for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
-        //     String name = (String) iter.next();
-        //     String[] values = (String[]) requestParams.get(name);
-        //     String valueStr = "";
-        //     for (int i = 0; i < values.length; i++) {
-        //         valueStr = (i == values.length - 1) ? valueStr + values[i]
-        //                 : valueStr + values[i] + ",";
-        //     }
-        //     // 亂碼解決，這段程式碼在出現亂碼時使用
-        //     valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-        //     params.put(name, valueStr);
-        // }
-        //
-        // boolean signVerified = AlipaySignature.rsaCheckV1(
-        //         params,
-        //         payProperties.getAlipayPublicKey(),
-        //         payProperties.getCharset(),
-        //         payProperties.getSignType()); //呼叫SDK驗證簽名
-        //
-        // // ——請在這裡編寫您的程式（以下程式碼僅作參考）——
-        // if (signVerified) {
-        //     // 商戶訂單號
-        //     String orderNum = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
-        //
-        //     // 支付寶交易號
-        //     String payOrderNum = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
-        //
-        //     // 付款金額
-        //     String orderAmount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
-        //
-        //     // 儲存到數據庫
-        //     // 1.從Session域中獲取OrderVO對像
-        //     OrderVO orderVO = (OrderVO) session.getAttribute("orderVO");
-        //
-        //     // 2.將支付寶交易號設定到OrderVO對像中
-        //     orderVO.setPayOrderNum(payOrderNum);
-        //
-        //     orderService.saveOrder(orderVO);
-        //
-        //     return "trade_no:" + payOrderNum + "<br/>out_trade_no:" + orderNum + "<br/>total_amount:" + orderAmount;
-        // } else {
-        //     // 頁面顯示資訊：驗簽失敗
-        //     return "驗簽失敗";
-        // }
-    }
-    /**
-     * 支付成功的处理逻辑
-     *
-     * @param payment
-     *            贝宝的参数信息
-     * @return
-     * @throws ServletException
-     * @throws IOException
-     */
-    public boolean paySuccess(Payment payment, HttpServletRequest request) {
-        // 交易状态
-        String status = "";
-        for(Links links : payment.getLinks()){
-            if(links.getRel().equals("approval_url")){
-                status=links.getRel();
-                break;
-            }
-            status=links.getRel();
-        }
-        // 商户订单号
-        String out_trade_no = payment.getTransactions().get(0).getInvoiceNumber();
-        // paypal交易号
-        String trade_no = payment.getId();
-        // 附加json字段，取出下单时存放的业务信息
-        String extra_common_param = payment.getTransactions().get(0).getCustom();
-        JSONObject extraParam = JSONObject.parseObject(extra_common_param);
-
-        //执行业务 此处省略
-
-        return true;
     }
 
-    @RequestMapping("/notify")
-    public void notifyUrlMethod(HttpServletRequest request) throws UnsupportedEncodingException, AlipayApiException {
+    private static String getBody(HttpServletRequest request) throws IOException {
+        String body;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
 
-        //獲取支付寶POST過來反饋資訊
-        Map<String, String> params = new HashMap<String, String>();
-        Map<String, String[]> requestParams = request.getParameterMap();
-        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
-            String name = (String) iter.next();
-            String[] values = (String[]) requestParams.get(name);
-            String valueStr = "";
-            for (int i = 0; i < values.length; i++) {
-                valueStr = (i == values.length - 1) ? valueStr + values[i]
-                        : valueStr + values[i] + ",";
+        try {
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
             }
-            //亂碼解決，這段程式碼在出現亂碼時使用
-            valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-            params.put(name, valueStr);
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
         }
 
-        boolean signVerified = AlipaySignature.rsaCheckV1(
-                params,
-                payProperties.getAlipayPublicKey(),
-                payProperties.getCharset(),
-                payProperties.getSignType()); //呼叫SDK驗證簽名
-
-        //——請在這裡編寫您的程式（以下程式碼僅作參考）——
-
-		/* 實際驗證過程建議商戶務必新增以下校驗：
-		1、需要驗證該通知數據中的out_trade_no是否為商戶系統中建立的訂單號，
-		2、判斷total_amount是否確實為該訂單的實際金額（即商戶訂單建立時的金額），
-		3、校驗通知中的seller_id（或者seller_email) 是否為out_trade_no這筆單據的對應的操作方（有的時候，一個商戶可能有多個seller_id/seller_email）
-		4、驗證app_id是否為該商戶本身。
-		*/
-        if (signVerified) {//驗證成功
-            //商戶訂單號
-            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
-
-            //支付寶交易號
-            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
-
-            //交易狀態
-            String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");
-
-            //判斷交易狀態
-            //看此交易是否處理過
-            //若未處理，執行後續物流等業務流程
-
-            logger.info("out_trade_no=" + out_trade_no);
-            logger.info("trade_no=" + trade_no);
-            logger.info("trade_status=" + trade_status);
-
-        } else {//驗證失敗
-            //除錯用，寫文字函式記錄程式執行情況是否正常
-            //String sWord = AlipaySignature.getSignCheckContentV1(params);
-            //AlipayConfig.logResult(sWord);
-
-            logger.info("驗證失敗");
-        }
-
+        body = stringBuilder.toString();
+        return body;
     }
 }
