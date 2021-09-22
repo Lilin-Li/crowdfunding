@@ -19,3 +19,5 @@ zuul:
     crowd-order:
       service-id: crowd-order
       path: /order/**
+ribbon:
+  ReadTimeout: 60000
