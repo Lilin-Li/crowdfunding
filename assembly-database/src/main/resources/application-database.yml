@@ -3,4 +3,4 @@ spring:
     username: root
     password: root
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://192.168.56.10:3306/crowd_admin   #資料庫其他設定，已移到comoon
+    url: jdbc:mysql://192.168.56.10:3306/crowd_admin   #資料庫其他設定，在各微服務內設定
